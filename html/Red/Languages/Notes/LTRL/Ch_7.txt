@@ -1,0 +1,218 @@
+Drill 61-66
+B.
+
+4. 
+iubeo_, iube_re, iussi_, iussus
+iube_s    - you order, are ordering
+iube_ba_s - you were ordering
+iube_bis  - you will order, be ordering
+iussisti_ - you ordered, have ordered
+iussera_s - you had ordered
+iusseris  - you will have ordered
+iube_ris / iube_re       - you are ordered, are being ordered
+iube_ba_ris / iube_ba_re - you were being ordered
+iube_beris / iube_bere   - you will be ordered
+iussa est  - you were ordered, you have been ordered
+iussa erat - you had been ordered
+iussa erit - you will have been ordered
+iubea_s    - pres. act. subj.
+iube_re_s  - imperf. act. subj.
+iusseris   - perf. act. subj.
+iussisse_s - pluperf. act. subj.
+iubea_ris / iubea_re     - pres. pas. subj.
+iube_re_ris / iube_re_re - imperf. pas. subj.
+iussa si_s   - perf. pas. subj.
+iussa esse_s - pluperf. pas. subj.
+iube_      - order!
+iube_te    - order! (pl)
+iube_re    - be ordered!
+iube_mini_ - be ordered! (pl)
+iube_re    - to order
+iube_ri_   - to be ordered
+11.
+eo_, i_re, ii_ / i_vi_, itum
+	i_mus    - we go
+	i_ba_mus - we were going
+	i_bimus  - we will go
+	iimus / i_mus / i_vimus - we went, have gone
+	iera_mus / i_vera_mus   - we had gone
+	ierimus / i_verimus     - we will have gone
+	ea_mus    - pres. act. subj.
+	i_re_mus  - imperf. act. subj
+	ierimus   - perf. act. subj.
+	i_sse_mus - pluperf. act. subj.
+	i_ - go!
+	i_te - go! (pl)
+	i_re - to go 
+12.
+audio_, audi_re, audi_vi_, audi_tus
+audi_mus         - we listen
+audie_ba_mus     - we were listening
+audie_mus        - we will listen
+audi_vimus       - we listened, have listened
+audi_vera_mus    - we had listened
+audi_verimus     - we will have listened
+audi_mur         - we are heard
+audie_ba_mur     - we were being heard
+audie_mur        - we will be heard
+audi_ti_ sumus   - we were heard, have been heard
+audi_ti_ era_mus - we had been heard
+audi_ti_ erim us - we will have been heard
+audia_mus        - pres. act. subj.
+audi_re_mus      - imperf. act. subj.
+audi_verimus     - perf. act. subj.
+audi_visse_mus   - pluperf. act. subj.
+audi_      - listen!
+audi_te    - listen! (pl) 
+audi_re    - be heard!
+audi_mini_ - be heard! (pl)
+audi_re    - to hear
+audi_ri_   - to be heard
+
+C.
+
+1. I love
+2. first person singular present active subjunctive
+3. third person singular imperfect passive subjunctive
+4. he/she/it is (being) shown
+5. he/she/it will lead
+6. he/she/it will have lead
+	 third person singular perfect active subjunctive
+7. second person singular present active subjunctive
+8. you live
+9. second person plural pluperfect active subjunctive
+10.second person plural pluperfect passive subjunctive
+11. I am (being) captured
+12. I will be captured
+		first person singular present passive subjunctive
+13. they say
+14. third person plural imperfect active subjunctive
+15. we will send
+16. we sent, have sent
+17. he said, has said
+18. third person singular perfect passive subjunctive
+19. first person singular perfect active subjunctive
+20. I will have gone
+21. second person singular pluperfect active subjunctive
+24. you had had
+23. second person singular present active subjunctive
+24. second person singular present passive subjunctive
+25. third person plural imperfect active subjunctive
+26. they read, have read
+27. third person plural present active subjunctive
+28. they carry
+29. he/she/it was being driven
+30. third person singular present passive subjunctive
+31. third person singular pluperfect active subjunctive
+32. he/she/it will have gone/come/yielded/withdrawn
+		third person singular perfect active subjunctive
+33. second person plural present active subjunctive
+34. second person plural pluperfect active subjunctive
+35. first person plural imperfect passive subjunctive
+36. first person plural present passive subjunctive
+37. second person singular present passive subjunctive
+38. you are perceived
+39. he/she/it will have been
+		third person singular perfect active subjunctive
+40. he/she/it was, has been
+D.
+1. cana_mus
+2. vi_ve_bat
+3. li_bera_ta si_s
+4. capitus essem
+5. le_cta erunt
+6. caruisse_tis
+7. scri_ptum est
+8. si_s
+9. interficere_mur
+10. la_ti_ erant
+11. daba_s
+12. sentiar
+13. opta_ba_ris / opta_ba_re
+14. intellegerim
+15. ductae esse_tis
+16. eant
+17. gessisti_
+18. posset
+19. po_nar
+20. ama_vae sint
+
+Drill Sentences
+1. If a great part of fortune remains to (the advantage of) us, we will win. (FMV w/ EP)
+	 If a great part of fortune should remain to (t.a.o.) us, we will win. (MF)
+	 If a great part of fortune had remained to us, we would have won. (Past CTF)
+2. If the walls should be captured, we would truly desire to flee. (FLV)
+	 If the walls were captured, we would truly desire to flee. (Present CTF)
+	 If the walls are captured, we will truly desire to flee. (FMV w/ EP)
+	 If the walls had been captured, we would truly desire to flee. 
+3. Either the boy said false things or true things.
+	 Either the boy said false things or the girl (did).
+4. After the bitter war of the citizens, part of the soldiers of Rome remained, but we fled to Athens. Friendship from the inhabitants we both sought and happily received.
+5. Why did (our) allies attack (our) country with arms and (what's more) order our city with (our) boys and girls to be handed over to their very selves? We for our part would never attack them.
+6. After there was going into the temple, the beautiful animals were killed. For you (pl) were asking for help from the gods. Not however because of gifts placed on alters but because of loyal deeds would help be given.
+7. Our troops had been sent into the province for the purpose of aid. If only the inhabitants had not fled from fear of an ambush. Now their good things are able to be carried away by the enemies without punishment.
+8. Why were the Romans going to the altar of Minerva (Athena) and seeking wisdom from the goddess? Minerva to people, as we have heard, has given skills.
+9. The boy is uncertain. Now he feels love, now hatred. Love is winning, as it seems.
+10. Will you surrender because of enmity the cause of our allies and the fortunes of the province? Don't do this.
+11. Jupiter (Zeus) rules the sky and land with authority, but he has handed over the sea to his brother Neptune (Poseidon).
+12. The inhabitants of the islands would have remained steady in friendship if they had not been frightened by the deceptive words of the Romans.
+13. Part of the people live in the country, part in the cities.
+14. The man was walking in the street; the boy was coming behind, as a shadow.
+15. Julia is certainly beautiful in body, but not in soul.
+16. The words of Caeser make the law. He himself through the people grants rights.
+17. The king in respect to his harsh disposition is a source of fear for the people. To him a book about the nature of power would be a source of great help.
+18. Let us love (our) country. May (our) country never surrendered by us to (our) enemies. Let the country always be a source of love to the citizens. For my part precious is the land of Italy.
+19. Our poet, if he were not a Roman citizen, would now be rewarded by the people with citizenship. Old men have even accepted enemies into the the state.
+20. Ten of the sailors were sent to the island. If only I had set sail with these happy men!
+21. If you should wage war and (what's more) will have this intention, great king, we would ask not for reasons but arms. We would say with a great voice, "War indeed on behalf of our state will be waged!"
+22. The father to his sons: "My life would be accomplished well should you be moved by my words and deeds to the pursuit of wisdom and virtue. Remember: not I to you but my shadow after death will come."
+23. Let us return to the forum and listen to Cato. Cato indeed with an abundance of words is pleading the case well on behalf of the people. He himself on behalf of me will speak if ever I should be called into court.
+24. Father might give a precious book either to me or (my) brother for the purpose of a gift. I am in uncertainty.
+25. The words of the allies seemed deceptive to a great part of the senators. A few men also perceived treachery.
+26. When many of us out of battle were fleeing, your son not only himself went quickly to the enemies but also led his terrified men (to them). In this way to us the courage of your son was a source of great good.
+27. Why to him was a miserable fate? He was killed by the guile of his disloyal brothers. And indeed after death, when the shadow of he himself was seen in the town, his brother was terrified.
+28. Because there has been coming to the temple of Jupiter, let us dutifully place gifts to the great god on (his) altars. For in fact by means of gifts is overcome the enmity of the gods.
+29. Not (so me the gods would love) the bad words written by Catullus to Caesar I understood. I will never understand those words.
+30. You on accout of your talent and wisdom could write a beautiful poem. I certainly couldn't.
+31. "Our king through treachery could have been killed."
+		"Don't, if you love me, tell me this. Don't let me hear harsh things from you."
+32. Venus (Aphrodite) is pondering new plans in (her) mind, new women for (the purpose of) (her) tricks. She sends Carthage Love, and orders (him) to create an ambush for (the disadvantage of) the queen. Love attacks the queen when he sees (her).
+33. If Marcus because of his disposition should fight with me, if he should fight even by means of a trick, I will certainly overcome him.
+34. Although I was desiring to depart out of the temple, neither was I able to dutifully do this nor rightly. So I was remaining in the temple as before.
+35. After the bitter war I could not have praised you, not for my part. For you fled and it is not a good thing to be frightened by enemies. Go away from the country!
+36. Uncertain are the pursuits of the citizens, great my fears. I will go with you (pl) to the countryside if I should live. If only a person or god would soon serve as (be for the purpose of) help to me!
+37. Although you differ from me in respect to many opinions, you are nevertheless a dear friend to me. Because of your love of me however many good men hate you. If only I were not a cause of bad things for you(r disadvantage).
+38. Death says "Live" to us, "I am coming." If only because of his words you (pl) would be frightened or certainly moved! As to death are owed us and our things, so let us live well.
+39. Aeneas after the harsh war fled from Troy and on account of the anger of Juno (Hera) was wandering through the deep sea. For he was seeking a new country.
+40. There lived for sure after Catullus many great poets in respect to talent. And indeed Horace, as to me at least it seems, surpassed Catullus both in talent and skill. Certain about the reason in my opinion I will remain although many differ from me. 
+41. Deeds differ much from words, Marcus Licinus. If to you were not only courage but also physical strength, you would not flee miserably out of battle. Unless without delay you should return, you will for sure pay the punishment.
+42. The disloyal soldier, after he surrendered our city to the enemies, with himself to be and with himself, as is said, to live was not able, and he killed himself with his own sword.
+43.  "Many people, if with care they read your poems, will desire your arts for themselves, oh poet." "If only you were telling a true thought to me from (out of) your soul."
+44. A man precious to me went to a bitter death. Indeed he took away with him my feelings of love. Even now his shadow returns and his voice I seem to hear. He is saying, "Remember me. For I myself will never return."
+45. I would have been terrified if I had ever seen a harsh battle. For I feared (repeatedly) even my shadow without reason.
+46. A loyal soul would be free from anxiety. Loyal men would always be praised by us. If we take gold impiously from the temple of the gods, we will certainly pay the punishment.
+47. Hear, Jupiter, my words: "Send aid to our troops! For the state of the Roman people might be conquered by an ambush of enemies."
+48. We might go away because we were frightened by the shadows in the streets. The women, although they desire to flee, might remain.
+49. Listen, o citizens, to the voice of our great king: "I was suffering the treachery of my enemies. Now they have rightly paid the penalty. They lived."
+50. To my brother before was a clear mind and healthy body. But after the war the man seemed to be without strength, without (intellectual) virtue.
+51. Not only the soul of man is dear to the gods, but also the body. The soul however won't always remain in the body.
+52. I for my part am uncertain about the nature of the gods. Not, if the deeds of the gods are good, are also they also bad. To you however is great power of ability; tell (to) me your opinion.
+53. Unless help were being sent by (our) allies, to the alters we would be going and asking for fortune from the gods.
+54. You are deceptive, Marc Antony, and evil in disposition. You neither say nor do true things. Thus death and bad fates await you and your men (people). If only you were moved by (because of) the words of your friend.
+55. Because the soldiers were differing among themselves, the king before the battle called the troops to himself: "We both have and will say many things about the treachery of the Romans. Now however, oh allies, either fight for (your) country or be killed without glory."
+56. The Romans truly await bad death on acount of there treachery. For when their forces fled out of the province, their allies were put in great danger.
+57. After the soldiers were overcome and driven out of the city, their spirits were carried away (along) with their arms. If only they had not been conquered!
+58. Hear me, senators. If Crassus had deceptively handed over the country to wicked men, we would now consider him an enemy.
+---
+1. Si_ Caesar captam esse victamque urbem iubeat, (no_s) ab amo_re glo_riae movea_mus ac sine timo_re ad moenia acce_da_mus.
+2. Si_ homine_s a_ sapientia_ et virtu_te semper regerentur, multum ab anima_libus differrent.
+3. Ubi ex a_ri_s templi_sque discessum est, ci_ve_s de_ vi_ deo_rum inter se_se_ differe_bant. Nam pauci_ nostrum, ut (id) vide_tur, na_tu_ram eo_rum ve_re_ intellegimus.
+4. Si_ ci_vita_s socii_s impii_s umquam tra_dita esset, ci_ve_s nostri_ no_n so_lum in servitu_tem dati_ essent ve_rum etiam multi_ nostrum, patre_s, interfecti_ essent.
+5. Aut in Ro_ma_ manea_mus aut ru_s cum ami_ci_s ca_ri_s fuga_mus. Ego equidem pro_ ci_vita_te interfici_ no_n cupio_.
+6. O_ fi_l_ mihi ca_rus, a_ verbi_s falsi_s inimi_co_rum ne_ terrea_ris (territus sim) (terre_). Nunc ami_cus ve_rus magno_ tibi auxilio_ sit (fuit).
+7. Pauci_ fi_lii_ ingenio_ et sapientia_ suo_s patre_s vincant (vi_cerint).
+8. No_n so_lum virtu_s tua sed etiam ingenium, Marce Tullii_, multi_s invidiae est. Ne_ autem sententii_s acerbi_s vincea_ri_s. Fa_ma enim tua certo_ mane_bit.
+9. Utinam, patre_s co_nscri_pti_, partem ci_vita_tis re_gi_ malo_ no_n tra_da_tis. Cu_r nihil de_ i_nsidii_s di_citis?
+10. Fortu_na a_ morte no_s vocet. Ita sine cu_ri_s si_mus.
+11. Ut ante bellum artem poe_tae lauda_ba_mus, ita (si_c) etiam nunc magnum (i_) ingenium (i_) eius et vo_cem (is, ae) cla_ram meminimus.
+12. Verba tua (vestra) acerbe_ fere_bam atque memineram, neque certa nec ve_ra. 

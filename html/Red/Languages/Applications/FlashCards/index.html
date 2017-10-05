@@ -1,0 +1,361 @@
+<!doctype html>
+<html>
+<head>
+		<link type="text/css" rel="stylesheet" href="js/node_modules/golden-layout/src/css/goldenlayout-base.css"/>
+		<link type="text/css" rel="stylesheet" href="js/node_modules/golden-layout/src/css/goldenlayout-light-theme.css"/>
+		<link rel="stylesheet" href="js/node_modules/font-awesome/css/font-awesome.min.css">
+		<style type="text/css">
+			@font-face {
+				font-family: brill;
+				src: url('fonts/brill_roman_2.06_051.ttf');
+			}
+			body {
+				position: relative;
+				margin: 0px;
+			}
+			body .lm_content {
+				overflow: scroll;
+				background-color: #999966;
+				/*background-color: #ccccae;*/
+				/*background-color: white;*/
+			}
+			body .lm_header {
+				background-color: #666633;
+			}
+			body .lm_header .lm_tab {
+				background-color: #666633;
+			}
+			body .lm_row {
+				background-color: #666633;
+			}
+			#layoutContainer {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+			.card {
+				position: relative;
+				font-family: brill;
+				width: 80%;
+				max-width: 475px;
+				max-height: 300px;
+				height: 50%;
+				margin: 25% 10% 10% 10%;
+				overflow: visible;
+				/*background-color: white;*/
+				/*border: 1px solid grey;*/
+				/*box-shadow: 1px 1px 1px grey;*/
+				cursor: pointer;
+					/* prevent text selection */
+				-webkit-touch-callout: none; /* iOS Safari */
+  			-webkit-user-select: none;   /* Chrome/Safari/Opera */
+  			-khtml-user-select: none;    /* Konqueror */
+  			-moz-user-select: none;      /* Firefox */
+  			-ms-user-select: none;       /* IE/Edge */
+  			user-select: none;
+			}
+			.controls {
+				height: 15%;
+				overflow: visible;
+			}
+			.statement {
+				position: relative;
+				font-size: 32px;
+				font-family: brill;
+				width: 100%;
+				/*position: absolute;*/
+				text-align: center;
+				top: 50%;
+				transform: translate(0, -50%);
+			}
+			.definition {
+				position: relative;
+				font-size: 24px;
+				font-family: sans-serif;
+				width: 100%;
+				/*position: absolute;*/
+				text-align: center;
+				top: 50%;
+				transform: translate(0, -50%);
+			}
+			.decks ul {
+				list-style-type: none;
+				list-style-position: outside;
+				white-space: nowrap;
+			}
+			.decks ul li {
+				margin: 5px 0px;
+				margin-left: -30px;
+			}
+			i.fa-align-justify {
+				vertical-align: middle;
+			}
+			.Latin {
+				font-family: brill;
+			}
+			.morphology {
+				font-family: brill;
+			}
+			.morphologyTable {
+				/*border: 1px solid #999966;*/
+				/*border-collapse: collapse;*/
+			}
+			.morphologyTable th {
+				/*border: 1px solid gray;*/
+			}
+			.morphologyTable td {
+				/*border: 1px solid gray;*/
+			}
+			.specialSyntax {
+				color: #800000;
+			}
+			.deck:hover {
+				color: lightgrey;
+				cursor: pointer;
+				background-color: black;
+			}
+		</style>
+</head>
+<body>
+	<script type="text/javascript" src="js/node_modules/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="js/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/node_modules/golden-layout/dist/goldenlayout.js"></script>
+	<script type="text/javascript" src="js/bin/LatinWords.js"></script>
+
+	<div id="layoutContainer"></div>
+
+	<script type="text/javascript">
+
+	// CONFIGURE GOLDEN LAYOUT
+	var config = config();
+	var myLayout = new window.GoldenLayout( config, $('#layoutContainer') );
+	registerComponents();
+
+	// DECLARE VARIABLES
+	// data
+	var DECK, DECK_INDEX, WORD, FLIP_ORDER; // FLIP_ALGORITHM, ...
+	// html elements (initialized on page load)
+	var CARD, NOTES, MORPHOLOGY, DECK_LIST, SEARCH_INPUT, SEARCH_RESULTS;
+
+	// DEFINE VARIABLES
+	DECK       = decks.verbs.deck;
+	DECK_INDEX = 0; // 0, Math.floor(Math.random() * DECK.LENGTH), ...
+	WORD       = DECK[DECK_INDEX];
+	FLIP_ORDER = {
+		back: {
+			notes: true,
+			morphology: true,
+			card: 'statement'
+		},
+		front: {
+			notes: false,
+			morphology: false,
+			card: 'definition'
+		}
+	};
+
+	// ONLOAD EVENT
+	window.onload = onLoad;
+
+	// ONRESIZE EVENT
+	window.onresize = onResize;
+
+	// -----------------------------
+	// -----------------------------
+	// FUNCTIONS USED ABOVE
+	function config() {
+		return {
+			settings:{
+        // // hasHeaders: true,
+        // constrainDragToContainer: true,
+        // reorderEnabled: true,
+        selectionEnabled: true,
+        popoutWholeStack: true,
+        blockedPopoutsThrowError: true,
+        closePopoutsOnUnload: false,
+        showPopoutIcon: true,
+        showMaximiseIcon: true,
+        showCloseIcon: true
+    	},
+	    content: [{
+	      type: 'row',
+	      content: [{
+	       	 type:'component',
+	       	 width: 14,
+	       	 componentName: 'Decks',
+	       	 componentState: { text: 'Decks and Navigation' }
+	    		}, {
+	      	type: 'column',
+	      	width: 26,
+	      	content: [{
+	        	type:'component',
+	        	height: 15,
+	        	componentName: 'example',
+	        	componentState: { text: 'Title' }
+	    		}, {
+	        	type:'component',
+	        	height: 52,
+	        	componentName: 'Flashcard',
+	        	componentState: { text: 'Flashcard' }
+	    		}, {
+	       	 type:'component',
+	       	 height: 33,
+	       	 componentName: 'Notes',
+	       	 componentState: { text: 'Notes' }
+	    		}]
+	    	}, {
+	      	type: 'column',
+	      	width: 60,
+	      	content: [{
+	        	type:'component',
+	        	height: 50,
+	        	componentName: 'Search',
+	        	componentState: { text: 'Controls' }
+	    		}, {
+	       	 type:'component',
+	       	 height: 50,
+	       	 componentName: 'Morphology',
+	       	 componentState: { text: '' }
+	    		}]}]
+	  	}]
+		};
+	}
+	function registerComponents() {
+		myLayout.registerComponent( 'Flashcard', function(container, state) {
+	    container.
+	    	getElement().
+	    	html('<div class="card"><p></p></div><div class="controls"><h1 style="text-align: center;"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> <i class="fa fa-times-circle-o" aria-hidden="true"></i> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></h1></div>');
+		});
+		myLayout.registerComponent( 'example', function(container, state) {
+		  container.
+		  	getElement().
+		  	html( '');
+		});
+		myLayout.registerComponent( 'Notes', function(container, state) {
+		  container.
+		  	getElement().
+		  	html( '<p class="notes"></p>');
+		});
+		myLayout.registerComponent( 'Morphology', function(container, state) {
+		  container.
+		  	getElement().
+		  	html( '<div class="morphology"></div>');
+		});
+		myLayout.registerComponent( 'Decks', function(container, state) {
+		  container.
+		  	getElement().
+		  	html( '<h2>Decks</h2><div class="decks"></div>');
+		});
+		myLayout.registerComponent( 'Search', function(container, state) {
+		  container.
+		  	getElement().
+		  	html( '<input class="searchInput" type="search" style="font-size: 20px; margin: 5px;"><div class="searchResults" style="padding: 5px;"></div>');
+		});
+	}
+	function onLoad() {
+
+		// set container dimensions
+		document.getElementById('layoutContainer').style.width = window.innerWidth - 5 + 'px';
+		document.getElementById('layoutContainer').style.height = window.innerHeight - 5 + 'px';
+
+		// initialize layout contents
+		myLayout.init();
+
+		// get html elements
+		CARD           = document.querySelector('.card p');
+		NOTES          = document.querySelector('.notes');
+		MORPHOLOGY     = document.querySelector('.morphology');
+		DECK_LIST      = document.querySelector('.decks');
+		SEARCH_INPUT   = document.querySelector('.searchInput');
+		SEARCH_RESULTS = document.querySelector('.searchResults');
+
+		// edit html elements with data
+		CARD.className       = FLIP_ORDER.front.card
+		CARD.textContent     = _(WORD[FLIP_ORDER.front.card]);
+		NOTES.innerHTML      = _(FLIP_ORDER.front.notes ? WORD.notes : '');
+		MORPHOLOGY.innerHTML = _(FLIP_ORDER.front.morphology ? MorphologyTable(WORD) : '');
+		DECK_LIST.innerHTML  = makeDeckList(decks);
+
+		// assign event listeners to the html elements
+		assignEventListeners();
+
+		// ----------------------------------------
+		// helper functions
+		function makeDeckList(decks) {
+			var ret = '';
+			ret += '<ul>';
+			for (var deckName in decks)
+				ret += '<li class="deck ' + deckName + '""><i class="fa fa-align-justify" aria-hidden="true"></i> ' + decks[deckName].title + '</li>';
+			ret += '</ul>'
+			return ret;
+		}
+
+	}
+	function assignEventListeners() {
+		// give click event to deck names in list
+		for (let deckName in decks) {
+			document.querySelector('.deck.' + deckName).onclick = function() {
+			 	// get new deck
+				DECK = decks[deckName].deck;
+				DECK_INDEX = 0;
+				WORD = DECK[DECK_INDEX];
+				// edit html elements with data
+				CARD.className       = FLIP_ORDER.front.card;
+				CARD.textContent     = _(WORD[FLIP_ORDER.front.card]);
+				NOTES.innerHTML      = _(FLIP_ORDER.front.notes && WORD.notes ? WORD.notes : '');
+				MORPHOLOGY.innerHTML = FLIP_ORDER.front.morphology ? MorphologyTable(WORD) : '';
+			}
+		}
+		// give click event to card
+		document.querySelector('.card').onclick = function() {
+			if (CARD.className === FLIP_ORDER.front.card) {
+				CARD.className       = FLIP_ORDER.back.card;
+				CARD.textContent     = _(WORD[FLIP_ORDER.back.card]);
+				NOTES.innerHTML      = _(FLIP_ORDER.back.notes && WORD.notes ? WORD.notes : '');
+				MORPHOLOGY.innerHTML = _(FLIP_ORDER.back.morphology ? MorphologyTable(WORD) : '');
+			} else {
+				DECK_INDEX = (DECK_INDEX + 1) % DECK.length;
+				WORD = DECK[DECK_INDEX];
+				CARD.className       = FLIP_ORDER.front.card;
+				CARD.textContent     = _(WORD[FLIP_ORDER.front.card]);
+				NOTES.innerHTML      = _(FLIP_ORDER.front.notes && WORD.notes ? WORD.notes : '');
+				MORPHOLOGY.innerHTML = _(FLIP_ORDER.front.morphology ? MorphologyTable(WORD) : '');
+			}
+		};
+
+		// // give Search event to search input
+		document.querySelector('.searchInput').oninput = function(e) {
+			var matchingWords = Search(e.target.value);
+			var innerHTML = '';
+			for (var i = 0; i < matchingWords.length; i++) {
+				var word = matchingWords[i];
+				innerHTML += '<h2 style="margin-bottom: 5px;"><b class="Latin">' + _(word.statement) + '</b></h2>';
+				innerHTML += '<i style="margin-left: 5px;">' + word.definition + '</i>';
+				innerHTML += word.notes ? _(word.notes) : '';
+				innerHTML += MorphologyTable(word);
+			}
+			document.querySelector('.searchResults').innerHTML = innerHTML;
+		};
+	}
+	function onResize() {
+		document.getElementById('layoutContainer').style.width = window.innerWidth - 5 + 'px';
+		document.getElementById('layoutContainer').style.height = window.innerHeight - 5 + 'px';
+		myLayout.updateSize();
+	}
+
+			// document.querySelector('.card').onclick = function() {
+			// 	var cardText = document.querySelector('.card p');
+			// 	if (cardText.className === 'cardTextFront') {
+			// 		cardText.className   = 'cardTextBack';
+			// 		cardText.textContent = decks.nouns[i].definition;
+			// 	}
+			// 	else {
+			// 		i = (i + 1) % l;
+			// 		cardText.className   = 'cardTextFront';
+			// 		cardText.textContent = _(decks.nouns[i].statement);
+			// 	}
+			// 	cardText = null;
+			// }
+	</script>
+</body>
+</html>
