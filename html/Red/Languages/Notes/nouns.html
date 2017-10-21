@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+  <style>
+  	@font-face {
+			font-family: brill;
+			src: url('fonts/brill_roman_2.06_051.ttf');
+		}
+		.Latin {
+			font-family: brill;
+			font-size: 14px;
+		}
+
+		.Spanish {
+			font-family: brill;
+			font-size: 14px;
+		}
+
+		.char_cell {
+			font-size: 24px;
+		}
+
+		.morphologyTable {
+			border: 1px solid black;
+		}
+
+		.morphologyTable td {
+			border: 1px solid black;
+			font-family: brill;
+			font-size: 24px;
+		}
+
+		.morphologyTable th {
+			border: 1px solid black;
+			font-size: 14px;
+		}
+		
+  </style>
+</head>
+<body>
+	<h1>Nouns</h1>
+
+	<h2>Latin</h2>
+
+	<h3>Declension I</h3>
+
+		<div id="declension_table_1"></div>
+
+	<h3>Declension II</h3>
+
+		<div id="declension_table_2"></div>
+		<div id="declension_table_2n"></div>
+
+	<h3>Declension III</h3>
+
+		<div id="declension_table_3"></div>
+		<div id="declension_table_3n"></div>
+		<div id="declension_table_3i"></div>
+		<div id="declension_table_3in"></div>
+
+	<h3>Declension IV</h3>
+
+		<div id="declension_table_4"></div>
+
+	<h3>Declension V</h3>
+
+		<div id="declension_table_5"></div>
+
+	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
+	<script>
+  	
+  	// ---
+
+  	for (var i = 0; i < 5; i++)
+	  	document.getElementById('declension_table_' + (i + 1)).
+	  		innerHTML = MorphologyTable(V.nouns['-' + (i + 1)]);
+  	document.getElementById('declension_table_2n').
+  		innerHTML = MorphologyTable(V.nouns['-2n']);
+  	document.getElementById('declension_table_3n').
+  		innerHTML = MorphologyTable(V.nouns['-3n']);
+  	document.getElementById('declension_table_3i').
+  		innerHTML = MorphologyTable(V.nouns['-3i']);
+  		document.getElementById('declension_table_3in').
+  		innerHTML = MorphologyTable(V.nouns['-3in']);
+
+  	// ---
+
+  	// replace _ with macrons in Latin Text
+  	var LatinElements = document.getElementsByClassName('Latin');
+  	for (var i = 0; i < LatinElements.length; i++)
+  		LatinElements[i].textContent = _(LatinElements[i].textContent);
+
+  </script>
+</body>
+</html>

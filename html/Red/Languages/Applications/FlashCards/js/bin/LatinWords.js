@@ -1,3 +1,4 @@
+
 // --- Latin Vocabulary ---
 
 var _ = str => str.replace(/_/g, String.fromCharCode(0x304));
@@ -18,5960 +19,77 @@ class Word {
 		if (this.type.slice(0, 4) === 'noun' || this.type.slice(0, 9) === 'adjective' || this.type.slice(0, 7) === 'pronoun') return decline(this);else return null;
 	}
 }
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//XXX conjugate and decline can be greatly reworked!!! XXX
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-// Conjugate Word
-var conjugate = word => {
-
-	var conjugation;
-
-	// conjugate word
-	var st = word.statement.split(', '),
-	    syn = word.specialSyntax;
-	switch (word.type) {
-		case 'verb 1T':
-			var pr = _(st[1].slice(0, -2)),
-			    pf = _(st[2].slice(0, -2)),
-			    pfp = _(st[3]);
-			// special
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: word.statement === 'do_, dare, dedi_, datus' ? pr.slice(0, -1) + _('o_') : pr.slice(0, -2) + _('o_'),
-								second: pr + 's',
-								third: word.statement === 'do_, dare, dedi_, datus' ? pr + 't' : pr.slice(0, -1) + 't'
-							},
-							plural: {
-								first: pr + 'mus',
-								second: pr + 'tis',
-								third: word.statement === 'do_, dare, dedi_, datus' ? pr + 'nt' : pr.slice(0, -1) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + _('i_'),
-								second: pf + _('isti_'),
-								third: pf + 'it'
-							},
-							plural: {
-								first: pf + 'imus',
-								second: pf + 'istis',
-								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'bam',
-								second: pr + _('ba_s'),
-								third: pr + 'bat'
-							},
-							plural: {
-								first: pr + _('ba_mus'),
-								second: pr + _('ba_tis'),
-								third: pr + 'bant'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'eram',
-								second: pf + _('era_s'),
-								third: pf + 'eratt'
-							},
-							plural: {
-								first: pf + _('era_mus'),
-								second: pf + _('era_tis'),
-								third: pf + 'erant'
-							}
-						},
-						future: {
-							singular: {
-								first: pr + _('bo_'),
-								second: pr + 'bis',
-								third: pr + 'bit'
-							},
-							plural: {
-								first: pr + 'bimus',
-								second: pr + 'bitis',
-								third: pr + 'bunt'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pf + _('ero_'),
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: word.statement === 'do_, dare, dedi_, datus' ? pr.slice(0, -1) + 'or' : pr.slice(0, -2) + 'or',
-								second: pr + 'ris' + ' / ' + pr + 're',
-								third: pr + 'tur'
-							},
-							plural: {
-								first: pr + 'mur',
-								second: pr + _('mini_'),
-								third: word.statement === 'do_, dare, dedi_, datus' ? pr + 'ntur' : pr.slice(0, -1) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'bar',
-								second: pr + _('ba_ris') + ' / ' + pr + _('ba_re'),
-								third: pr + _('ba_tur')
-							},
-							plural: {
-								first: pr + _('ba_mur'),
-								second: pr + _('ba_mini_'),
-								third: pr + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr + 'bor',
-								second: pr + 'beris' + ' / ' + pr + 'bere',
-								third: pr + 'bitur'
-							},
-							plural: {
-								first: pr + 'bimur',
-								second: pr + _('bimini_'),
-								third: pr + 'buntur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + 'te',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + _('mini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + 'em',
-								second: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + _('e_s'),
-								third: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + 'et'
-							},
-							plural: {
-								first: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + _('e_mus'),
-								second: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + _('e_tis'),
-								third: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + 'ent'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'm',
-								second: _(st[1]) + _('_s'),
-								third: _(st[1]) + 't'
-							},
-							plural: {
-								first: _(st[1]) + _('_mus'),
-								second: _(st[1]) + _('_tis'),
-								third: _(st[1]) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + 'erim',
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'issem',
-								second: pf + _('isse_s'),
-								third: pf + 'isset'
-							},
-							plural: {
-								first: pf + _('isse_mus'),
-								second: pf + _('isse_tis'),
-								third: pf + 'issent'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'er',
-								second: pr.slice(0, -2) + _('e_ris') + ' / ' + pr.slice(0, -2) + _('e_re'),
-								third: pr.slice(0, -2) + _('e_tur')
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('e_mur'),
-								second: pr.slice(0, -2) + _('e_mini_'),
-								third: pr.slice(0, -2) + 'entur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'r',
-								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
-								third: _(st[1]) + _('_tur')
-							},
-							plural: {
-								first: _(st[1]) + _('_mur'),
-								second: _(st[1]) + _('_mini_'),
-								third: _(st[1]) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: pr + 're',
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: pr + _('ri_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr + 'ns, ' + _(st[1].slice(0, -3)) + 'ntis',
-						perfect: '-',
-						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
-						future: _(st[1].slice(0, -3)) + 'ndus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 1TDep':
-		case 'verb 1IDep':
-			var pr = _(st[1].slice(0, -3)),
-			    pfp = _(st[2].slice(0, -4)),
-			    sbji = pr + 're';
-			// special
-			conjugation = {
-				indicative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'or',
-								second: pr + 'ris' + ' / ' + pr + 're',
-								third: pr + 'tur'
-							},
-							plural: {
-								first: pr + 'mur',
-								second: pr + _('mini_'),
-								third: pr.slice(0, -1) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'bar',
-								second: pr + _('ba_ris') + ' / ' + pr + _('ba_re'),
-								third: pr + _('ba_tur')
-							},
-							plural: {
-								first: pr + _('ba_mur'),
-								second: pr + _('ba_mini_'),
-								third: pr + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr + 'bor',
-								second: pr + 'beris' + ' / ' + pr + 'bere',
-								third: pr + 'bitur'
-							},
-							plural: {
-								first: pr + 'bimur',
-								second: pr + _('bimini_'),
-								third: pr + 'buntur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + _('mini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'er',
-								second: pr.slice(0, -2) + _('e_ris') + ' / ' + pr.slice(0, -2) + _('e_re'),
-								third: pr.slice(0, -2) + _('e_tur')
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('e_mur'),
-								second: pr.slice(0, -2) + _('e_mini_'),
-								third: pr.slice(0, -2) + 'entur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: sbji + 'r',
-								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
-								third: sbji + _('_tur')
-							},
-							plural: {
-								first: sbji + _('_mur'),
-								second: sbji + _('_mini_'),
-								third: sbji + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					passive: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					},
-					active: {
-						present: pr + _('ri_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr + 'ns, ' + _(st[1].slice(0, -4)) + 'ntis',
-						perfect: '-',
-						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: pfp + ', -a, -um',
-						future: _(st[1].slice(0, -4)) + 'ndus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 1I':
-			var pr = _(st[1].slice(0, -2)),
-			    pf = _(st[2].slice(0, -2)),
-			    pfp = _(st[3]);
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + _('o_'),
-								second: pr + 's',
-								third: pr.slice(0, -1) + 't'
-							},
-							plural: {
-								first: pr + 'mus',
-								second: pr + 'tis',
-								third: pr.slice(0, -1) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + _('i_'),
-								second: pf + _('isti_'),
-								third: pf + 'it'
-							},
-							plural: {
-								first: pf + 'imus',
-								second: pf + 'istis',
-								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'bam',
-								second: pr + _('ba_s'),
-								third: pr + 'bat'
-							},
-							plural: {
-								first: pr + _('ba_mus'),
-								second: pr + _('ba_tis'),
-								third: pr + 'bant'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'eram',
-								second: pf + _('era_s'),
-								third: pf + 'erat'
-							},
-							plural: {
-								first: pf + _('era_mus'),
-								second: pf + _('era_tis'),
-								third: pf + 'erant'
-							}
-						},
-						future: {
-							singular: {
-								first: pr + _('bo_'),
-								second: pr + 'bis',
-								third: pr + 'bit'
-							},
-							plural: {
-								first: pr + 'bimus',
-								second: pr + 'bitis',
-								third: pr + 'bunt'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pf + _('ero_'),
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + 'te',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'em',
-								second: pr.slice(0, -2) + _('e_s'),
-								third: pr.slice(0, -2) + 'et'
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('e_mus'),
-								second: pr.slice(0, -2) + _('e_tis'),
-								third: pr.slice(0, -2) + 'ent'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'm',
-								second: _(st[1]) + _('_s'),
-								third: _(st[1]) + 't'
-							},
-							plural: {
-								first: _(st[1]) + _('_mus'),
-								second: _(st[1]) + _('_tis'),
-								third: _(st[1]) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + 'erim',
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'issem',
-								second: pf + _('isse_s'),
-								third: pf + 'isset'
-							},
-							plural: {
-								first: pf + _('isse_mus'),
-								second: pf + _('isse_tis'),
-								third: pf + 'issent'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: pr + 're',
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr + 'ns, ' + _(st[1].slice(0, -3)) + 'ntis',
-						perfect: '-',
-						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
-						future: _(st[1].slice(0, -3)) + 'ndus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 2':
-			var pr = _(st[1].slice(0, -2)),
-			    pf = _(st[2].slice(0, -2)),
-			    pfp = _(st[3]);
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + _('o_'),
-								second: pr + 's',
-								third: pr.slice(0, -1) + 't'
-							},
-							plural: {
-								first: pr + 'mus',
-								second: pr + 'tis',
-								third: pr.slice(0, -1) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + _('i_'),
-								second: pf + _('isti_'),
-								third: pf + 'it'
-							},
-							plural: {
-								first: pf + 'imus',
-								second: pf + 'istis',
-								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'bam',
-								second: pr + _('ba_s'),
-								third: pr + 'bat'
-							},
-							plural: {
-								first: pr + _('ba_mus'),
-								second: pr + _('ba_tis'),
-								third: pr + 'bant'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'eram',
-								second: pf + _('era_s'),
-								third: pf + 'erat'
-							},
-							plural: {
-								first: pf + _('era_mus'),
-								second: pf + _('era_tis'),
-								third: pf + 'erant'
-							}
-						},
-						future: {
-							singular: {
-								first: pr + _('bo_'),
-								second: pr + 'bis',
-								third: pr + 'bit'
-							},
-							plural: {
-								first: pr + 'bimus',
-								second: pr + 'bitis',
-								third: pr + 'bunt'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pf + _('ero_'),
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'or',
-								second: pr + 'ris' + ' / ' + pr + 're',
-								third: pr + 'tur'
-							},
-							plural: {
-								first: pr + 'mur',
-								second: pr + _('mini_'),
-								third: pr.slice(0, -1) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'bar',
-								second: pr + _('ba_ris') + ' / ' + pr + _('ba_re'),
-								third: pr + _('ba_tur')
-							},
-							plural: {
-								first: pr + _('ba_mur'),
-								second: pr + _('ba_mini_'),
-								third: pr + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr + 'bor',
-								second: pr + 'beris' + ' / ' + pr + 'bere',
-								third: pr + 'bitur'
-							},
-							plural: {
-								first: pr + 'bimur',
-								second: pr + _('bimini_'),
-								third: pr + 'buntur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + 'te',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + _('mini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'eam',
-								second: pr.slice(0, -2) + _('ea_s'),
-								third: pr.slice(0, -2) + 'eat'
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ea_mus'),
-								second: pr.slice(0, -2) + _('ea_tis'),
-								third: pr.slice(0, -2) + 'eant'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'm',
-								second: _(st[1]) + _('_s'),
-								third: _(st[1]) + 't'
-							},
-							plural: {
-								first: _(st[1]) + _('_mus'),
-								second: _(st[1]) + _('_tis'),
-								third: _(st[1]) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + 'erim',
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'issem',
-								second: pf + _('isse_s'),
-								third: pf + 'isset'
-							},
-							plural: {
-								first: pf + _('isse_mus'),
-								second: pf + _('isse_tis'),
-								third: pf + 'issent'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'ear',
-								second: pr.slice(0, -2) + _('ea_ris') + ' / ' + pr.slice(0, -2) + _('ea_re'),
-								third: pr.slice(0, -2) + _('ea_tur')
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ea_mur'),
-								second: pr.slice(0, -2) + _('ea_mini_'),
-								third: pr.slice(0, -2) + 'eantur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'r',
-								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
-								third: _(st[1]) + _('_tur')
-							},
-							plural: {
-								first: _(st[1]) + _('_mur'),
-								second: _(st[1]) + _('_mini_'),
-								third: _(st[1]) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: pr + 're',
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: pr + _('ri_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr + 'ns, ' + _(st[1].slice(0, -3)) + 'ntis',
-						perfect: '-',
-						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
-						future: _(st[1].slice(0, -3)) + 'ndus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 2Dep':
-			var pr = _(st[1].slice(0, -3)),
-			    pfp = _(st[2].slice(0, -4)),
-			    sbji = pr + 're';
-			conjugation = {
-				indicative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'or',
-								second: pr + 'ris' + ' / ' + pr + 're',
-								third: pr + 'tur'
-							},
-							plural: {
-								first: pr + 'mur',
-								second: pr + _('mini_'),
-								third: pr.slice(0, -1) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'bar',
-								second: pr + _('ba_ris') + ' / ' + pr + _('ba_re'),
-								third: pr + _('ba_tur')
-							},
-							plural: {
-								first: pr + _('ba_mur'),
-								second: pr + _('ba_mini_'),
-								third: pr + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr + 'bor',
-								second: pr + 'beris' + ' / ' + pr + 'bere',
-								third: pr + 'bitur'
-							},
-							plural: {
-								first: pr + 'bimur',
-								second: pr + _('bimini_'),
-								third: pr + 'buntur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + _('mini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'ear',
-								second: pr.slice(0, -2) + _('ea_ris') + ' / ' + pr.slice(0, -2) + _('ea_re'),
-								third: pr.slice(0, -2) + _('ea_tur')
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ea_mur'),
-								second: pr.slice(0, -2) + _('ea_mini_'),
-								third: pr.slice(0, -2) + 'eantur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: sbji + 'r',
-								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
-								third: sbji + _('_tur')
-							},
-							plural: {
-								first: sbji + _('_mur'),
-								second: sbji + _('_mini_'),
-								third: sbji + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					passive: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					},
-					active: {
-						present: pr + _('ri_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr + 'ns, ' + _(st[1].slice(0, -4)) + 'ntis',
-						perfect: '-',
-						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: pfp + ', -a, -um',
-						future: _(st[1].slice(0, -4)) + 'ndus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 2SemiDep':
-			var pr = _(st[1].slice(0, -2)),
-			    pfp = _(st[2].slice(0, -4)),
-			    sbji = pr + 're';
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + _('o_'),
-								second: pr + 's',
-								third: pr.slice(0, -1) + 't'
-							},
-							plural: {
-								first: pr + 'mus',
-								second: pr + 'tis',
-								third: pr.slice(0, -1) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'bam',
-								second: pr + _('ba_s'),
-								third: pr + 'bat'
-							},
-							plural: {
-								first: pr + _('ba_mus'),
-								second: pr + _('ba_tis'),
-								third: pr + 'bant'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr + _('bo_'),
-								second: pr + 'bis',
-								third: pr + 'bit'
-							},
-							plural: {
-								first: pr + 'bimus',
-								second: pr + 'bitis',
-								third: pr + 'bunt'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						} },
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + 'te',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'eam',
-								second: pr.slice(0, -2) + _('ea_s'),
-								third: pr.slice(0, -2) + 'eat'
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ea_mus'),
-								second: pr.slice(0, -2) + _('ea_tis'),
-								third: pr.slice(0, -2) + 'eant'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: sbji + 'm',
-								second: sbji + _('_s'),
-								third: sbji + 't'
-							},
-							plural: {
-								first: sbji + _('_mus'),
-								second: sbji + _('_tis'),
-								third: sbji + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: pr + 're',
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr + 'ns, ' + _(st[1].slice(0, -3)) + 'ntis',
-						perfect: '-',
-						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: pfp + ', -a, -um',
-						future: _(st[1].slice(0, -3)) + 'ndus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 3':
-			var pr = _(st[1].slice(0, -2)),
-			    pf = _(st[2].slice(0, -2)),
-			    pfp = _(st[3]);
-			// fix for fero_
-			if (['fer', 'aufer', 'differ', 'perfer', 'refer'].indexOf(pr) !== -1) pr += 'e';
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + _('o_'),
-								second: pr.slice(0, -1) + 'is',
-								third: pr.slice(0, -1) + 'it'
-							},
-							plural: {
-								first: pr.slice(0, -1) + 'imus',
-								second: pr.slice(0, -1) + 'itis',
-								third: pr.slice(0, -1) + 'unt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + _('i_'),
-								second: pf + _('isti_'),
-								third: pf + 'it'
-							},
-							plural: {
-								first: pf + 'imus',
-								second: pf + 'istis',
-								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -1) + _('e_') + 'bam',
-								second: pr.slice(0, -1) + _('e_') + _('ba_s'),
-								third: pr.slice(0, -1) + _('e_') + 'bat'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('e_') + _('ba_mus'),
-								second: pr.slice(0, -1) + _('e_') + _('ba_tis'),
-								third: pr.slice(0, -1) + _('e_') + 'bant'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'eram',
-								second: pf + _('era_s'),
-								third: pf + 'erat'
-							},
-							plural: {
-								first: pf + _('era_mus'),
-								second: pf + _('era_tis'),
-								third: pf + 'erant'
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -1) + 'am',
-								second: pr.slice(0, -1) + _('e_') + 's',
-								third: pr + 't'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('e_') + 'mus',
-								second: pr.slice(0, -1) + _('e_') + 'tis',
-								third: pr + 'nt'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pf + _('ero_'),
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'or',
-								second: pr.slice(0, -1) + 'eris' + ' / ' + pr.slice(0, -1) + 'ere',
-								third: pr.slice(0, -1) + 'itur'
-							},
-							plural: {
-								first: pr.slice(0, -1) + 'imur',
-								second: pr.slice(0, -1) + _('imini_'),
-								third: pr.slice(0, -1) + 'untur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -1) + _('e_') + 'bar',
-								second: pr.slice(0, -1) + _('e_') + _('ba_ris') + ' / ' + pr.slice(0, -1) + _('e_') + _('ba_re'),
-								third: pr.slice(0, -1) + _('e_') + _('ba_tur')
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('e_') + _('ba_mur'),
-								second: pr.slice(0, -1) + _('e_') + _('ba_mini_'),
-								third: pr.slice(0, -1) + _('e_') + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -1) + 'ar',
-								second: pr.slice(0, -1) + _('e_') + 'ris' + ' / ' + pr.slice(0, -1) + _('e_') + 're',
-								third: pr.slice(0, -1) + _('e_') + 'tur'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('e_') + 'mur',
-								second: pr.slice(0, -1) + _('e_') + _('mini_'),
-								third: pr + 'ntur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr.slice(0, -1) + 'ite',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr.slice(0, -1) + _('imini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'am',
-								second: pr.slice(0, -1) + _('a_s'),
-								third: pr.slice(0, -1) + 'at'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('a_mus'),
-								second: pr.slice(0, -1) + _('a_tis'),
-								third: pr.slice(0, -1) + 'ant'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'm',
-								second: _(st[1]) + _('_s'),
-								third: _(st[1]) + 't'
-							},
-							plural: {
-								first: _(st[1]) + _('_mus'),
-								second: _(st[1]) + _('_tis'),
-								third: _(st[1]) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + 'erim',
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'issem',
-								second: pf + _('isse_s'),
-								third: pf + 'isset'
-							},
-							plural: {
-								first: pf + _('isse_mus'),
-								second: pf + _('isse_tis'),
-								third: pf + 'issent'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'ar',
-								second: pr.slice(0, -1) + _('a_ris') + ' / ' + pr.slice(0, -1) + _('a_re'),
-								third: pr.slice(0, -1) + _('a_tur')
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('a_mur'),
-								second: pr.slice(0, -1) + _('a_mini_'),
-								third: pr.slice(0, -1) + 'antur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'r',
-								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
-								third: _(st[1]) + _('_tur')
-							},
-							plural: {
-								first: _(st[1]) + _('_mur'),
-								second: _(st[1]) + _('_mini_'),
-								third: _(st[1]) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: pr + 're',
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: pr.slice(0, -1) + _('i_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr + _('_ns, ') + pr + 'ntis',
-						perfect: '-',
-						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
-						future: pr + 'ndus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 3Dep':
-			var pr = _(st[1].slice(0, -2)) + 'e',
-			    pfp = _(st[2].slice(0, -4)),
-			    sbji = pr + 're';
-			conjugation = {
-				indicative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'or',
-								second: pr.slice(0, -1) + 'eris' + ' / ' + pr.slice(0, -1) + 'ere',
-								third: pr.slice(0, -1) + 'itur'
-							},
-							plural: {
-								first: pr.slice(0, -1) + 'imur',
-								second: pr.slice(0, -1) + _('imini_'),
-								third: pr.slice(0, -1) + 'untur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -1) + _('e_') + 'bar',
-								second: pr.slice(0, -1) + _('e_') + _('ba_ris') + ' / ' + pr.slice(0, -1) + _('e_') + _('ba_re'),
-								third: pr.slice(0, -1) + _('e_') + _('ba_tur')
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('e_') + _('ba_mur'),
-								second: pr.slice(0, -1) + _('e_') + _('ba_mini_'),
-								third: pr.slice(0, -1) + _('e_') + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -1) + 'ar',
-								second: pr.slice(0, -1) + _('e_') + 'ris' + ' / ' + pr.slice(0, -1) + _('e_') + 're',
-								third: pr.slice(0, -1) + _('e_') + 'tur'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('e_') + 'mur',
-								second: pr.slice(0, -1) + _('e_') + _('mini_'),
-								third: pr + 'ntur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr.slice(0, -1) + _('imini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'ar',
-								second: pr.slice(0, -1) + _('a_ris') + ' / ' + pr.slice(0, -1) + _('a_re'),
-								third: pr.slice(0, -1) + _('a_tur')
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('a_mur'),
-								second: pr.slice(0, -1) + _('a_mini_'),
-								third: pr.slice(0, -1) + 'antur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: sbji + 'r',
-								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
-								third: sbji + _('_tur')
-							},
-							plural: {
-								first: sbji + _('_mur'),
-								second: sbji + _('_mini_'),
-								third: sbji + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					passive: {
-						present: pr + 're',
-						perfect: '-',
-						future: '-'
-					},
-					active: {
-						present: pr.slice(0, -1) + _('i_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr + _('_ns, ') + pr + 'ntis',
-						perfect: '-',
-						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: pfp + ', -a, -um',
-						future: pr + 'ndus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 3i':
-			var pr = _(st[1].slice(0, -2)),
-			    pf = _(st[2].slice(0, -2)),
-			    pfp = _(st[3]);
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + _('io_'),
-								second: pr.slice(0, -1) + 'is',
-								third: pr.slice(0, -1) + 'it'
-							},
-							plural: {
-								first: pr.slice(0, -1) + 'imus',
-								second: pr.slice(0, -1) + 'itis',
-								third: pr.slice(0, -1) + 'iunt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + _('i_'),
-								second: pf + _('isti_'),
-								third: pf + 'it'
-							},
-							plural: {
-								first: pf + 'imus',
-								second: pf + 'istis',
-								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -1) + _('ie_') + 'bam',
-								second: pr.slice(0, -1) + _('ie_') + _('ba_s'),
-								third: pr.slice(0, -1) + _('ie_') + 'bat'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ie_') + _('ba_mus'),
-								second: pr.slice(0, -1) + _('ie_') + _('ba_tis'),
-								third: pr.slice(0, -1) + _('ie_') + 'bant'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'eram',
-								second: pf + _('era_s'),
-								third: pf + 'erat'
-							},
-							plural: {
-								first: pf + _('era_mus'),
-								second: pf + _('era_tis'),
-								third: pf + 'erant'
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -1) + 'iam',
-								second: pr.slice(0, -1) + _('ie_') + 's',
-								third: pr.slice(0, -1) + 'iet'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ie_') + 'mus',
-								second: pr.slice(0, -1) + _('ie_') + 'tis',
-								third: pr.slice(0, -1) + 'ient'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pf + _('ero_'),
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'ior',
-								second: pr.slice(0, -1) + 'eris' + ' / ' + pr.slice(0, -1) + 'ere',
-								third: pr.slice(0, -1) + 'itur'
-							},
-							plural: {
-								first: pr.slice(0, -1) + 'imur',
-								second: pr.slice(0, -1) + _('imini_'),
-								third: pr.slice(0, -1) + 'iuntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -1) + _('ie_') + 'bar',
-								second: pr.slice(0, -1) + _('ie_') + _('ba_ris') + ' / ' + pr.slice(0, -1) + _('ie_') + _('ba_re'),
-								third: pr.slice(0, -1) + _('ie_') + _('ba_tur')
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ie_') + _('ba_mur'),
-								second: pr.slice(0, -1) + _('ie_') + _('ba_mini_'),
-								third: pr.slice(0, -1) + _('ie_') + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -1) + 'iar',
-								second: pr.slice(0, -1) + _('ie_') + 'ris' + ' / ' + pr.slice(0, -1) + _('ie_') + 're',
-								third: pr.slice(0, -1) + _('ie_') + 'tur'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ie_') + 'mur',
-								second: pr.slice(0, -1) + _('ie_') + _('mini_'),
-								third: pr.slice(0, -1) + 'ientur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr.slice(0, -1) + 'ite',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr.slice(0, -1) + _('imini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'iam',
-								second: pr.slice(0, -1) + _('ia_s'),
-								third: pr.slice(0, -1) + 'iat'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ia_mus'),
-								second: pr.slice(0, -1) + _('ia_tis'),
-								third: pr.slice(0, -1) + 'iant'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'm',
-								second: _(st[1]) + _('_s'),
-								third: _(st[1]) + 't'
-							},
-							plural: {
-								first: _(st[1]) + _('_mus'),
-								second: _(st[1]) + _('_tis'),
-								third: _(st[1]) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + 'erim',
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'issem',
-								second: pf + _('isse_s'),
-								third: pf + 'isset'
-							},
-							plural: {
-								first: pf + _('isse_mus'),
-								second: pf + _('isse_tis'),
-								third: pf + 'issent'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'iar',
-								second: pr.slice(0, -1) + _('ia_ris') + ' / ' + pr.slice(0, -1) + _('ia_re'),
-								third: pr.slice(0, -1) + _('ia_tur')
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ia_mur'),
-								second: pr.slice(0, -1) + _('ia_mini_'),
-								third: pr.slice(0, -1) + 'iantur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'r',
-								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
-								third: _(st[1]) + _('_tur')
-							},
-							plural: {
-								first: _(st[1]) + _('_mur'),
-								second: _(st[1]) + _('_mini_'),
-								third: _(st[1]) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: pr + 're',
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: pr.slice(0, -1) + _('i_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr.slice(0, -1) + _('ie_ns, ') + pr.slice(0, -1) + 'ientis',
-						perfect: '-',
-						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
-						future: pr.slice(0, -1) + 'iendus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 3iDep':
-			var pr = _(st[1].slice(0, -2)) + 'e',
-			    pfp = _(st[2].slice(0, -4)),
-			    sbji = pr + 're';
-			conjugation = {
-				indicative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'ior',
-								second: pr.slice(0, -1) + 'eris' + ' / ' + pr.slice(0, -1) + 'ere',
-								third: pr.slice(0, -1) + 'itur'
-							},
-							plural: {
-								first: pr.slice(0, -1) + 'imur',
-								second: pr.slice(0, -1) + _('imini_'),
-								third: pr.slice(0, -1) + 'iuntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -1) + _('ie_') + 'bar',
-								second: pr.slice(0, -1) + _('ie_') + _('ba_ris') + ' / ' + pr.slice(0, -1) + _('ie_') + _('ba_re'),
-								third: pr.slice(0, -1) + _('ie_') + _('ba_tur')
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ie_') + _('ba_mur'),
-								second: pr.slice(0, -1) + _('ie_') + _('ba_mini_'),
-								third: pr.slice(0, -1) + _('ie_') + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -1) + 'iar',
-								second: pr.slice(0, -1) + _('ie_') + 'ris' + ' / ' + pr.slice(0, -1) + _('ie_') + 're',
-								third: pr.slice(0, -1) + _('ie_') + 'tur'
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ie_') + 'mur',
-								second: pr.slice(0, -1) + _('ie_') + _('mini_'),
-								third: pr.slice(0, -1) + 'ientur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr.slice(0, -1) + _('imini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -1) + 'iar',
-								second: pr.slice(0, -1) + _('ia_ris') + ' / ' + pr.slice(0, -1) + _('ia_re'),
-								third: pr.slice(0, -1) + _('ia_tur')
-							},
-							plural: {
-								first: pr.slice(0, -1) + _('ia_mur'),
-								second: pr.slice(0, -1) + _('ia_mini_'),
-								third: pr.slice(0, -1) + 'iantur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: sbji + 'r',
-								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
-								third: sbji + _('_tur')
-							},
-							plural: {
-								first: sbji + _('_mur'),
-								second: sbji + _('_mini_'),
-								third: sbji + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					passive: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					},
-					active: {
-						present: pr.slice(0, -1) + _('i_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: pr.slice(0, -1) + _('ie_ns, ') + pr.slice(0, -1) + 'ientis',
-						perfect: '-',
-						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: pfp + ', -a, -um',
-						future: pr.slice(0, -1) + 'iendus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 4':
-			var pr = _(st[1].slice(0, -2)),
-			    pf = _(st[2].slice(0, -2)),
-			    pfp = _(st[3]);
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + _('io_'),
-								second: pr + 's',
-								third: pr.slice(0, -2) + 'it'
-							},
-							plural: {
-								first: pr + 'mus',
-								second: pr + 'tis',
-								third: pr.slice(0, -2) + 'iunt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + _('i_'),
-								second: pf + _('isti_'),
-								third: pf + 'it'
-							},
-							plural: {
-								first: pf + 'imus',
-								second: pf + 'istis',
-								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -2) + _('ie_') + 'bam',
-								second: pr.slice(0, -2) + _('ie_') + _('ba_s'),
-								third: pr.slice(0, -2) + _('ie_') + 'bat'
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ie_') + _('ba_mus'),
-								second: pr.slice(0, -2) + _('ie_') + _('ba_tis'),
-								third: pr.slice(0, -2) + _('ie_') + 'bant'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'eram',
-								second: pf + _('era_s'),
-								third: pf + 'erat'
-							},
-							plural: {
-								first: pf + _('era_mus'),
-								second: pf + _('era_tis'),
-								third: pf + 'erant'
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -2) + 'iam',
-								second: pr.slice(0, -2) + _('ie_') + 's',
-								third: pr.slice(0, -2) + 'iet'
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ie_') + 'mus',
-								second: pr.slice(0, -2) + _('ie_') + 'tis',
-								third: pr.slice(0, -2) + 'ient'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pf + _('ero_'),
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'ior',
-								second: pr + 'ris' + ' / ' + pr + 're',
-								third: pr + 'tur'
-							},
-							plural: {
-								first: pr + 'mur',
-								second: pr + _('mini_'),
-								third: pr.slice(0, -2) + 'iuntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -2) + _('ie_') + 'bar',
-								second: pr.slice(0, -2) + _('ie_') + _('ba_ris') + ' / ' + pr.slice(0, -2) + _('ie_') + _('ba_re'),
-								third: pr.slice(0, -2) + _('ie_') + _('ba_tur')
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ie_') + _('ba_mur'),
-								second: pr.slice(0, -2) + _('ie_') + _('ba_mini_'),
-								third: pr.slice(0, -2) + _('ie_') + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -2) + 'iar',
-								second: pr.slice(0, -2) + _('ie_') + 'ris' + ' / ' + pr.slice(0, -2) + _('ie_') + 're',
-								third: pr.slice(0, -2) + _('ie_') + 'tur'
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ie_') + 'mur',
-								second: pr.slice(0, -2) + _('ie_') + _('mini_'),
-								third: pr.slice(0, -2) + 'ientur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + 'te',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + _('mini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'iam',
-								second: pr.slice(0, -2) + _('ia_s'),
-								third: pr.slice(0, -2) + 'iat'
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ia_mus'),
-								second: pr.slice(0, -2) + _('ia_tis'),
-								third: pr.slice(0, -2) + 'iant'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'm',
-								second: _(st[1]) + _('_s'),
-								third: _(st[1]) + 't'
-							},
-							plural: {
-								first: _(st[1]) + _('_mus'),
-								second: _(st[1]) + _('_tis'),
-								third: _(st[1]) + 'nt'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pf + 'erim',
-								second: pf + 'eris',
-								third: pf + 'erit'
-							},
-							plural: {
-								first: pf + 'erimus',
-								second: pf + 'eritis',
-								third: pf + 'erint'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pf + 'issem',
-								second: pf + _('isse_s'),
-								third: pf + 'isset'
-							},
-							plural: {
-								first: pf + _('isse_mus'),
-								second: pf + _('isse_tis'),
-								third: pf + 'issent'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'iar',
-								second: pr.slice(0, -2) + _('ia_ris') + ' / ' + pr.slice(0, -2) + _('ia_re'),
-								third: pr.slice(0, -2) + _('ia_tur')
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ia_mur'),
-								second: pr.slice(0, -2) + _('ia_mini_'),
-								third: pr.slice(0, -2) + 'iantur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: _(st[1]) + 'r',
-								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
-								third: _(st[1]) + _('_tur')
-							},
-							plural: {
-								first: _(st[1]) + _('_mur'),
-								second: _(st[1]) + _('_mini_'),
-								third: _(st[1]) + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: pr + 're',
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: pr + _('ri_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: _(st[1].slice(0, -3)) + _('e_ns, ') + _(st[1].slice(0, -3)) + 'entis',
-						perfect: '-',
-						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
-						future: _(st[1].slice(0, -3)) + 'endus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb 4Dep':
-			var pr = _(st[1].slice(0, -3)),
-			    pfp = _(st[2].slice(0, -4)),
-			    sbji = pr + 're';
-			conjugation = {
-				indicative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'ior',
-								second: pr + 'ris' + ' / ' + pr + 're',
-								third: pr + 'tur'
-							},
-							plural: {
-								first: pr + 'mur',
-								second: pr + _('mini_'),
-								third: pr.slice(0, -2) + 'iuntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sum',
-								second: pfp + ', -a, -um es',
-								third: pfp + ', -a, -um est'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr.slice(0, -2) + _('ie_') + 'bar',
-								second: pr.slice(0, -2) + _('ie_') + _('ba_ris') + ' / ' + pr.slice(0, -2) + _('ie_') + _('ba_re'),
-								third: pr.slice(0, -2) + _('ie_') + _('ba_tur')
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ie_') + _('ba_mur'),
-								second: pr.slice(0, -2) + _('ie_') + _('ba_mini_'),
-								third: pr.slice(0, -2) + _('ie_') + 'bantur'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um eram',
-								second: pfp + _(', -a, -um era_s'),
-								third: pfp + ', -a, -um erat'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
-							}
-						},
-						future: {
-							singular: {
-								first: pr.slice(0, -2) + 'iar',
-								second: pr.slice(0, -2) + _('ie_') + 'ris' + ' / ' + pr.slice(0, -2) + _('ie_') + 're',
-								third: pr.slice(0, -2) + _('ie_') + 'tur'
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ie_') + 'mur',
-								second: pr.slice(0, -2) + _('ie_') + _('mini_'),
-								third: pr.slice(0, -2) + 'ientur'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: pfp + _(', -a, -um ero_'),
-								second: pfp + ', -a, -um eris',
-								third: pfp + ', -a, -um erit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
-							}
-						}
-					}
-				},
-				imperative: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: pr + 're',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: pr + _('mini_'),
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					active: {
-						present: {
-							singular: {
-								first: pr.slice(0, -2) + 'iar',
-								second: pr.slice(0, -2) + _('ia_ris') + ' / ' + pr.slice(0, -2) + _('ia_re'),
-								third: pr.slice(0, -2) + _('ia_tur')
-							},
-							plural: {
-								first: pr.slice(0, -2) + _('ia_mur'),
-								second: pr.slice(0, -2) + _('ia_mini_'),
-								third: pr.slice(0, -2) + 'iantur'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: sbji + 'r',
-								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
-								third: sbji + _('_tur')
-							},
-							plural: {
-								first: sbji + _('_mur'),
-								second: sbji + _('_mini_'),
-								third: sbji + 'ntur'
-							}
-						},
-						perfect: {
-							singular: {
-								first: pfp + ', -a, -um sim',
-								second: pfp + _(', -a, -um si_s'),
-								third: pfp + ', -a, -um sit'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: pfp + ', -a, -um essem',
-								second: pfp + _(', -a, -um esse_s'),
-								third: pfp + ', -a, -um esset'
-							},
-							plural: {
-								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
-								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
-								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
-							}
-						}
-					}
-				},
-				infinitive: {
-					passive: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					},
-					active: {
-						present: pr + _('ri_'),
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: _(st[1].slice(0, -4)) + _('e_ns, ') + _(st[1].slice(0, -4)) + 'entis',
-						perfect: '-',
-						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
-					},
-					passive: {
-						present: '-',
-						perfect: pfp + ', -a, -um',
-						future: _(st[1].slice(0, -4)) + 'endus, -a, -um'
-					}
-				}
-			};
-			break;
-
-		case 'verb Irr':
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: syn.indicative.active.present.singular.first,
-								second: syn.indicative.active.present.singular.second,
-								third: syn.indicative.active.present.singular.third
-							},
-							plural: {
-								first: syn.indicative.active.present.plural.first,
-								second: syn.indicative.active.present.plural.second,
-								third: syn.indicative.active.present.plural.third
-							}
-						},
-						perfect: {
-							singular: {
-								first: syn.indicative.active.perfect.singular.first,
-								second: syn.indicative.active.perfect.singular.second,
-								third: syn.indicative.active.perfect.singular.third
-							},
-							plural: {
-								first: syn.indicative.active.perfect.plural.first,
-								second: syn.indicative.active.perfect.plural.second,
-								third: syn.indicative.active.perfect.plural.third
-							}
-						},
-						imperfect: {
-							singular: {
-								first: syn.indicative.active.imperfect.singular.first,
-								second: syn.indicative.active.imperfect.singular.second,
-								third: syn.indicative.active.imperfect.singular.third
-							},
-							plural: {
-								first: syn.indicative.active.imperfect.plural.first,
-								second: syn.indicative.active.imperfect.plural.second,
-								third: syn.indicative.active.imperfect.plural.third
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: syn.indicative.active.pluperfect.singular.first,
-								second: syn.indicative.active.pluperfect.singular.second,
-								third: syn.indicative.active.pluperfect.singular.third
-							},
-							plural: {
-								first: syn.indicative.active.pluperfect.plural.first,
-								second: syn.indicative.active.pluperfect.plural.second,
-								third: syn.indicative.active.pluperfect.plural.third
-							}
-						},
-						future: {
-							singular: {
-								first: syn.indicative.active.future.singular.first,
-								second: syn.indicative.active.future.singular.second,
-								third: syn.indicative.active.future.singular.third
-							},
-							plural: {
-								first: syn.indicative.active.future.plural.first,
-								second: syn.indicative.active.future.plural.second,
-								third: syn.indicative.active.future.plural.third
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: syn.indicative.active.futureperfect.singular.first,
-								second: syn.indicative.active.futureperfect.singular.second,
-								third: syn.indicative.active.futureperfect.singular.third
-							},
-							plural: {
-								first: syn.indicative.active.futureperfect.plural.first,
-								second: syn.indicative.active.futureperfect.plural.second,
-								third: syn.indicative.active.futureperfect.plural.third
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: syn.indicative.passive.present.singular.first,
-								second: syn.indicative.passive.present.singular.second,
-								third: syn.indicative.passive.present.singular.third
-							},
-							plural: {
-								first: syn.indicative.passive.present.plural.first,
-								second: syn.indicative.passive.present.plural.second,
-								third: syn.indicative.passive.present.plural.third
-							}
-						},
-						perfect: {
-							singular: {
-								first: syn.indicative.passive.perfect.singular.first,
-								second: syn.indicative.passive.perfect.singular.second,
-								third: syn.indicative.passive.perfect.singular.third
-							},
-							plural: {
-								first: syn.indicative.passive.perfect.plural.first,
-								second: syn.indicative.passive.perfect.plural.second,
-								third: syn.indicative.passive.perfect.plural.third
-							}
-						},
-						imperfect: {
-							singular: {
-								first: syn.indicative.passive.imperfect.singular.first,
-								second: syn.indicative.passive.imperfect.singular.second,
-								third: syn.indicative.passive.imperfect.singular.third
-							},
-							plural: {
-								first: syn.indicative.passive.imperfect.plural.first,
-								second: syn.indicative.passive.imperfect.plural.second,
-								third: syn.indicative.passive.imperfect.plural.third
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: syn.indicative.passive.pluperfect.singular.first,
-								second: syn.indicative.passive.pluperfect.singular.second,
-								third: syn.indicative.passive.pluperfect.singular.third
-							},
-							plural: {
-								first: syn.indicative.passive.pluperfect.plural.first,
-								second: syn.indicative.passive.pluperfect.plural.second,
-								third: syn.indicative.passive.pluperfect.plural.third
-							}
-						},
-						future: {
-							singular: {
-								first: syn.indicative.passive.future.singular.first,
-								second: syn.indicative.passive.future.singular.second,
-								third: syn.indicative.passive.future.singular.third
-							},
-							plural: {
-								first: syn.indicative.passive.future.plural.first,
-								second: syn.indicative.passive.future.plural.second,
-								third: syn.indicative.passive.future.plural.third
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: syn.indicative.passive.futureperfect.singular.first,
-								second: syn.indicative.passive.futureperfect.singular.second,
-								third: syn.indicative.passive.futureperfect.singular.third
-							},
-							plural: {
-								first: syn.indicative.passive.futureperfect.plural.first,
-								second: syn.indicative.passive.futureperfect.plural.second,
-								third: syn.indicative.passive.futureperfect.plural.third
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: syn.imperative.active.present.singular.second,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: syn.imperative.active.present.plural.second,
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: syn.imperative.passive.present.singular.second,
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: syn.imperative.passive.present.plural.second,
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: syn.subjunctive.active.present,
-								second: syn.subjunctive.active.present,
-								third: syn.subjunctive.active.present
-							},
-							plural: {
-								first: syn.subjunctive.active.present,
-								second: syn.subjunctive.active.present,
-								third: syn.subjunctive.active.present
-							}
-						},
-						imperfect: {
-							singular: {
-								first: syn.subjunctive.active.imperfect,
-								second: syn.subjunctive.active.imperfect,
-								third: syn.subjunctive.active.imperfect
-							},
-							plural: {
-								first: syn.subjunctive.active.imperfect,
-								second: syn.subjunctive.active.imperfect,
-								third: syn.subjunctive.active.imperfect
-							}
-						},
-						perfect: {
-							singular: {
-								first: syn.subjunctive.active.perfect,
-								second: syn.subjunctive.active.perfect,
-								third: syn.subjunctive.active.perfect
-							},
-							plural: {
-								first: syn.subjunctive.active.perfect,
-								second: syn.subjunctive.active.perfect,
-								third: syn.subjunctive.active.perfect
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: syn.subjunctive.active.pluperfect,
-								second: syn.subjunctive.active.pluperfect,
-								third: syn.subjunctive.active.pluperfect
-							},
-							plural: {
-								first: syn.subjunctive.active.pluperfect,
-								second: syn.subjunctive.active.pluperfect,
-								third: syn.subjunctive.active.pluperfect
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: syn.subjunctive.passive.present,
-								second: syn.subjunctive.passive.present,
-								third: syn.subjunctive.passive.present
-							},
-							plural: {
-								first: syn.subjunctive.passive.present,
-								second: syn.subjunctive.passive.present,
-								third: syn.subjunctive.passive.present
-							}
-						},
-						imperfect: {
-							singular: {
-								first: syn.subjunctive.passive.imperfect,
-								second: syn.subjunctive.passive.imperfect,
-								third: syn.subjunctive.passive.imperfect
-							},
-							plural: {
-								first: syn.subjunctive.passive.imperfect,
-								second: syn.subjunctive.passive.imperfect,
-								third: syn.subjunctive.passive.imperfect
-							}
-						},
-						perfect: {
-							singular: {
-								first: syn.subjunctive.passive.perfect,
-								second: syn.subjunctive.passive.perfect,
-								third: syn.subjunctive.passive.perfect
-							},
-							plural: {
-								first: syn.subjunctive.passive.perfect,
-								second: syn.subjunctive.passive.perfect,
-								third: syn.subjunctive.passive.perfect
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: syn.subjunctive.passive.pluperfect,
-								second: syn.subjunctive.passive.pluperfect,
-								third: syn.subjunctive.passive.pluperfect
-							},
-							plural: {
-								first: syn.subjunctive.passive.pluperfect,
-								second: syn.subjunctive.passive.pluperfect,
-								third: syn.subjunctive.passive.pluperfect
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: syn.infinitive.active.present,
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: syn.infinitive.passive.present,
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: syn.participle.active.present,
-						perfect: '-',
-						future: syn.participle.active.future
-					},
-					passive: {
-						present: '-',
-						perfect: syn.participle.passive.perfect,
-						future: syn.participle.passive.future
-					}
-				}
-			};
-			break;
-
-		case 'verb Def':
-			var pr = _(st[0].slice(0, -2));
-			conjugation = {
-				indicative: {
-					active: {
-						present: {
-							singular: {
-								first: pr + _('i_'),
-								second: pr + _('isti_'),
-								third: pr + 'it'
-							},
-							plural: {
-								first: pr + 'imus',
-								second: pr + 'istis',
-								third: pr + _('e_runt') + ' / ' + pr + _('e_re')
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: pr + 'eram',
-								second: pr + _('era_s'),
-								third: pr + 'erat'
-							},
-							plural: {
-								first: pr + _('era_mus'),
-								second: pr + _('era_tis'),
-								third: pr + 'erant'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: pr + _('ero_'),
-								second: pr + 'eris',
-								third: pr + 'erit'
-							},
-							plural: {
-								first: pr + 'erimus',
-								second: pr + 'eritis',
-								third: pr + 'erint'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						future: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						futureperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				subjunctive: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						imperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						perfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						},
-						pluperfect: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				imperative: {
-					active: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					},
-					passive: {
-						present: {
-							singular: {
-								first: '-',
-								second: '-',
-								third: '-'
-							},
-							plural: {
-								first: '-',
-								second: '-',
-								third: '-'
-							}
-						}
-					}
-				},
-				infinitive: {
-					active: {
-						present: _(st[1]),
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					}
-				},
-				participle: {
-					active: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					},
-					passive: {
-						present: '-',
-						perfect: '-',
-						future: '-'
-					}
-				}
-
-			};
-			break;
-
-		default:
-			console.log('ERROR: Unexpected verb type.');
-			return null;
-	}
-
-	// edit conjugation with special syntax
-	if (syn && word.type !== 'verb Irr') {
-		if (syn.indicative) {
-			for (var voice in syn.indicative) {
-				for (var tense in syn.indicative[voice]) {
-					for (var number in syn.indicative[voice][tense]) {
-						for (var person in syn.indicative[voice][tense][number]) {
-							if (syn.indicative[voice][tense][number][person]) conjugation.indicative[voice][tense][number][person] = syn.indicative[voice][tense][number][person];
-						}
-					}
-				}
-			}
-		}
-		if (syn.imperative) {
-			for (var voice in syn.imperative) {
-				for (var tense in syn.imperative[voice]) {
-					for (var number in syn.imperative[voice][tense]) {
-						// if (syn.imperative[voice][tense][number])
-						for (var person in syn.imperative[voice][tense][number]) if (syn.imperative[voice][tense][number][person]) conjugation.imperative[voice][tense][number][person] = syn.imperative[voice][tense][number][person];
-					}
-				}
-			}
-		}
-		if (syn.infinitive) {
-			for (var voice in syn.infinitive) {
-				for (var tense in syn.infinitive[voice]) {
-					if (syn.infinitive[voice][tense]) {
-						conjugation.infinitive[voice][tense] = syn.infinitive[voice][tense];
-					}
-				}
-			}
-		}
-	}
-
-	// return conjugation
-	syn = null;
-	return conjugation;
-};
-
-// Decline Word
-var decline = word => {
-
-	var declension;
-
-	// decline word
-	var st = word.statement.split(', ');
-	switch (word.type) {
-
-		case 'noun indeclinable':
-		case 'adjective indeclinable':
-			break;
-
-		case 'noun 1':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: s + 'a',
-					plural: s + 'ae'
-				},
-				genitive: {
-					singular: s + 'ae',
-					plural: s + _('a_rum')
-				},
-				dative: {
-					singular: s + 'ae',
-					plural: s + _('i_s')
-				},
-				accusative: {
-					singular: s + 'am',
-					plural: s + _('a_s')
-				},
-				ablative: {
-					singular: s + _('a_'),
-					plural: s + _('i_s')
-				},
-				vocative: {
-					singular: s + 'a',
-					plural: s + 'ae'
-				}
-			};
-			break;
-
-		case 'noun 1Pl':
-			var s = _(st[1].slice(0, -5));
-			declension = {
-				nominative: {
-					singular: '-',
-					plural: s + 'ae'
-				},
-				genitive: {
-					singular: '-',
-					plural: s + _('a_rum')
-				},
-				dative: {
-					singular: '-',
-					plural: s + _('i_s')
-				},
-				accusative: {
-					singular: '-',
-					plural: s + _('a_s')
-				},
-				ablative: {
-					singular: '-',
-					plural: s + _('i_s')
-				},
-				vocative: {
-					singular: '-',
-					plural: s + 'ae'
-				}
-			};
-			break;
-
-		case 'noun 2':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: st[0].slice(-2) === 'us' ? s + 'us' : _(st[0]),
-					plural: s + _('i_')
-				},
-				genitive: {
-					singular: s + _('i_'),
-					plural: s + _('o_rum')
-				},
-				dative: {
-					singular: s + _('o_'),
-					plural: s + _('i_s')
-				},
-				accusative: {
-					singular: s + 'um',
-					plural: s + _('o_s')
-				},
-				ablative: {
-					singular: s + _('o_'),
-					plural: s + _('i_s')
-				},
-				vocative: {
-					singular: st[0].slice(-2) === 'us' ? s + 'e' : _(st[0]),
-					plural: s + _('i_')
-				}
-			};
-			break;
-
-		case 'noun 2Pl':
-			var s = _(st[1].slice(0, -5));
-			declension = {
-				nominative: {
-					singular: '-',
-					plural: s + 'i_'
-				},
-				genitive: {
-					singular: '-',
-					plural: s + _('o_rum')
-				},
-				dative: {
-					singular: '-',
-					plural: s + _('i_s')
-				},
-				accusative: {
-					singular: '-',
-					plural: s + _('o_s')
-				},
-				ablative: {
-					singular: '-',
-					plural: s + _('i_s')
-				},
-				vocative: {
-					singular: '-',
-					plural: s + _('i_')
-				}
-			};
-			break;
-
-		case 'noun 2n':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: s + 'um',
-					plural: s + 'a'
-				},
-				genitive: {
-					singular: s + _('i_'),
-					plural: s + _('o_rum')
-				},
-				dative: {
-					singular: s + _('o_'),
-					plural: s + _('i_s')
-				},
-				accusative: {
-					singular: s + 'um',
-					plural: s + 'a'
-				},
-				ablative: {
-					singular: s + _('o_'),
-					plural: s + _('i_s')
-				},
-				vocative: {
-					singular: s + 'um',
-					plural: s + 'a'
-				}
-			};
-			break;
-
-		case 'noun 2nPl':
-			var s = _(st[1].slice(0, -5));
-			declension = {
-				nominative: {
-					singular: '-',
-					plural: s + 'a'
-				},
-				genitive: {
-					singular: '-',
-					plural: s + _('o_rum')
-				},
-				dative: {
-					singular: '-',
-					plural: s + _('i_s')
-				},
-				accusative: {
-					singular: '-',
-					plural: s + 'a'
-				},
-				ablative: {
-					singular: '-',
-					plural: s + _('i_s')
-				},
-				vocative: {
-					singular: '-',
-					plural: s + 'a'
-				}
-			};
-			break;
-
-		case 'noun 3':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: _(st[0]),
-					plural: s + _('e_s')
-				},
-				genitive: {
-					singular: s + 'is',
-					plural: s + 'um'
-				},
-				dative: {
-					singular: s + _('i_'),
-					plural: s + 'ibus'
-				},
-				accusative: {
-					singular: s + 'em',
-					plural: s + _('e_s')
-				},
-				ablative: {
-					singular: s + 'e',
-					plural: s + 'ibus'
-				},
-				vocative: {
-					singular: _(st[0]),
-					plural: s + _('e_s')
-				}
-			};
-			break;
-
-		case 'noun 3Pl':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: '-',
-					plural: s + _('e_s')
-				},
-				genitive: {
-					singular: '-',
-					plural: s + 'um'
-				},
-				dative: {
-					singular: '-',
-					plural: s + 'ibus'
-				},
-				accusative: {
-					singular: '-',
-					plural: s + _('e_s')
-				},
-				ablative: {
-					singular: '-',
-					plural: s + 'ibus'
-				},
-				vocative: {
-					singular: '-',
-					plural: s + _('e_s')
-				}
-			};
-			break;
-
-		case 'noun 3n':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: _(st[0]),
-					plural: s + 'a'
-				},
-				genitive: {
-					singular: s + 'is',
-					plural: s + 'um'
-				},
-				dative: {
-					singular: s + _('i_'),
-					plural: s + 'ibus'
-				},
-				accusative: {
-					singular: _(st[0]),
-					plural: s + 'a'
-				},
-				ablative: {
-					singular: s + 'e',
-					plural: s + 'ibus'
-				},
-				vocative: {
-					singular: _(st[0]),
-					plural: s + 'a'
-				}
-			};
-			break;
-
-		case 'noun 3i':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: _(st[0]),
-					plural: s + _('e_s')
-				},
-				genitive: {
-					singular: s + 'is',
-					plural: s + 'ium'
-				},
-				dative: {
-					singular: s + _('i_'),
-					plural: s + 'ibus'
-				},
-				accusative: {
-					singular: s + 'em',
-					plural: s + _('e_s') + ' / ' + s + _('i_s')
-				},
-				ablative: {
-					singular: s + 'e',
-					plural: s + 'ibus'
-				},
-				vocative: {
-					singular: _(st[0]),
-					plural: s + _('e_s')
-				}
-			};
-			break;
-
-		case 'noun 3in':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: _(st[0]),
-					plural: s + 'ia'
-				},
-				genitive: {
-					singular: s + 'is',
-					plural: s + 'ium'
-				},
-				dative: {
-					singular: s + _('i_'),
-					plural: s + 'ibus'
-				},
-				accusative: {
-					singular: _(st[0]),
-					plural: s + 'ia'
-				},
-				ablative: {
-					singular: s + _('i_'),
-					plural: s + 'ibus'
-				},
-				vocative: {
-					singular: _(st[0]),
-					plural: s + 'ia'
-				}
-			};
-			break;
-
-		case 'noun 3nPl':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: '-',
-					plural: s + 'a'
-				},
-				genitive: {
-					singular: '-',
-					plural: s + 'um'
-				},
-				dative: {
-					singular: '-',
-					plural: s + 'ibus'
-				},
-				accusative: {
-					singular: '-',
-					plural: s + 'a'
-				},
-				ablative: {
-					singular: '-',
-					plural: s + 'ibus'
-				},
-				vocative: {
-					singular: '-',
-					plural: s + 'a'
-				}
-			};
-			break;
-
-		case 'noun 3inPl':
-			var s = _(st[1].slice(0, -3));
-			declension = {
-				nominative: {
-					singular: '-',
-					plural: s + 'ia'
-				},
-				genitive: {
-					singular: '-',
-					plural: s + 'ium'
-				},
-				dative: {
-					singular: '-',
-					plural: s + 'ibus'
-				},
-				accusative: {
-					singular: '-',
-					plural: s + 'ia'
-				},
-				ablative: {
-					singular: '-',
-					plural: s + 'ibus'
-				},
-				vocative: {
-					singular: '-',
-					plural: s + 'ia'
-				}
-			};
-			break;
-
-		case 'noun 4':
-			var s = _(st[1].slice(0, -3));
-			declension = {
-				nominative: {
-					singular: s + 'us',
-					plural: s + _('u_s')
-				},
-				genitive: {
-					singular: s + _('u_s'),
-					plural: s + 'uum'
-				},
-				dative: {
-					singular: s + _('ui_') + ' / ' + s + _('u_'),
-					plural: s + 'ibus'
-				},
-				accusative: {
-					singular: s + 'um',
-					plural: s + _('u_s')
-				},
-				ablative: {
-					singular: s + _('u_'),
-					plural: s + 'ibus'
-				},
-				vocative: {
-					singular: s + 'us',
-					plural: s + _('u_s')
-				}
-			};
-			break;
-
-		case 'noun 5':
-			var s = st[1][st[1].length - 3] === '_' ? _(st[1].slice(0, st[1].length - 4)) : _(st[1].slice(0, st[1].length - 3));
-			declension = {
-				nominative: {
-					singular: s + _('e_s'),
-					plural: s + _('e_s')
-				},
-				genitive: {
-					singular: s === _(st[1].slice(0, st[1].length - 4)) ? s + _('e_i_') : s + _('ei_'),
-					plural: s + _('e_rum')
-				},
-				dative: {
-					singular: s === _(st[1].slice(0, st[1].length - 4)) ? s + _('e_i_') : s + _('ei_'),
-					plural: s + _('e_bus')
-				},
-				accusative: {
-					singular: s + 'em',
-					plural: s + _('e_s')
-				},
-				ablative: {
-					singular: s + _('e_'),
-					plural: s + _('e_bus')
-				},
-				vocative: {
-					singular: s + _('e_s'),
-					plural: s + _('e_s')
-				}
-			};
-			break;
-
-		case 'pronoun personal':
-			if (st[0] === 'ego_') {
-				declension = {
-					nominative: {
-						singular: _('ego_'),
-						plural: _('no_s')
-					},
-					genitive: {
-						singular: _('mei_'),
-						plural: _('nostrum / nostri_')
-					},
-					dative: {
-						singular: 'mihi',
-						plural: _('no_bi_s')
-					},
-					accusative: {
-						singular: _('me_'),
-						plural: _('no_s')
-					},
-					ablative: {
-						singular: _('me_'),
-						plural: _('no_bi_s')
-					},
-					vocative: {
-						singular: '-',
-						plural: '-'
-					}
-				};
-			} else if (st[0] === 'tu_') {
-				declension = {
-					nominative: {
-						singular: _('tu_'),
-						plural: _('vo_s')
-					},
-					genitive: {
-						singular: _('tui_'),
-						plural: _('vestrum / vestri_')
-					},
-					dative: {
-						singular: 'tibi',
-						plural: _('vo_bi_s')
-					},
-					accusative: {
-						singular: _('te_'),
-						plural: _('vo_s')
-					},
-					ablative: {
-						singular: _('te_'),
-						plural: _('vo_bi_s')
-					},
-					vocative: {
-						singular: '-',
-						plural: '-'
-					}
-				};
-			} else if (st[0] === 'is') {
-				declension = {
-					nominative: {
-						singular: 'is',
-						plural: _('ei_ / ii_')
-					},
-					genitive: {
-						singular: 'eius',
-						plural: _('eo_rum')
-					},
-					dative: {
-						singular: _('ei_'),
-						plural: _('ei_s / ii_s')
-					},
-					accusative: {
-						singular: 'eum',
-						plural: _('eo_s')
-					},
-					ablative: {
-						singular: _('eo_'),
-						plural: _('ei_s / ii_s')
-					},
-					vocative: {
-						singular: '-',
-						plural: '-'
-					}
-				};
-			} else if (st[0] === 'ea') {
-				declension = {
-					nominative: {
-						singular: 'ea',
-						plural: 'eae'
-					},
-					genitive: {
-						singular: 'eius',
-						plural: _('ea_rum')
-					},
-					dative: {
-						singular: _('ei_'),
-						plural: _('ei_s / ii_s')
-					},
-					accusative: {
-						singular: 'eam',
-						plural: _('ea_s')
-					},
-					ablative: {
-						singular: _('ea_'),
-						plural: _('ei_s / ii_s')
-					},
-					vocative: {
-						singular: '-',
-						plural: '-'
-					}
-				};
-			} else if (st[0] === 'id') {
-				declension = {
-					nominative: {
-						singular: 'id',
-						plural: 'ea'
-					},
-					genitive: {
-						singular: 'eius',
-						plural: _('eo_rum')
-					},
-					dative: {
-						singular: _('ei_'),
-						plural: _('ei_s / ii_s')
-					},
-					accusative: {
-						singular: 'id',
-						plural: 'ea'
-					},
-					ablative: {
-						singular: _('eo_'),
-						plural: _('ei_s / ii_s')
-					},
-					vocative: {
-						singular: '-',
-						plural: '-'
-					}
-				};
-			}
-			break;
-
-		case 'pronoun reflexive':
-			console.log(st);
-			if (st[1] === 'mei_; -') {
-				declension = {
-					nominative: {
-						singular: '-',
-						plural: '-'
-					},
-					genitive: {
-						singular: _('mei_'),
-						plural: _('nostrum / nostri_')
-					},
-					dative: {
-						singular: 'mihi',
-						plural: _('no_bi_s')
-					},
-					accusative: {
-						singular: _('me_'),
-						plural: _('no_s')
-					},
-					ablative: {
-						singular: _('me_'),
-						plural: _('no_bi_s')
-					},
-					vocative: {
-						singular: '-',
-						plural: '-'
-					}
-				};
-			} else if (st[1] === 'tui_; -') {
-				declension = {
-					nominative: {
-						singular: '-',
-						plural: '-'
-					},
-					genitive: {
-						singular: _('tui_'),
-						plural: _('vestrum / vestri_')
-					},
-					dative: {
-						singular: 'tibi',
-						plural: _('vo_bi_s')
-					},
-					accusative: {
-						singular: _('te_'),
-						plural: _('vo_s')
-					},
-					ablative: {
-						singular: _('te_'),
-						plural: _('vo_bi_s')
-					},
-					vocative: {
-						singular: '-',
-						plural: '-'
-					}
-				};
-			} else if (st[1] === 'sui_') {
-				declension = {
-					nominative: {
-						singular: '-',
-						plural: '-'
-					},
-					genitive: {
-						singular: _('sui_'),
-						plural: _('sui_')
-					},
-					dative: {
-						singular: 'sibi',
-						plural: 'sibi'
-					},
-					accusative: {
-						singular: _('se_, se_se_'),
-						plural: _('se_, se_se_')
-					},
-					ablative: {
-						singular: _('se_, se_se_'),
-						plural: _('se_, se_se_')
-					},
-					vocative: {
-						singular: '-',
-						plural: '-'
-					}
-				};
-			}
-			break;
-
-		case 'adjective 1,2':
-			var s = _(st[1].slice(0, -1));
-			declension = {
-				nominative: {
-					singular: {
-						masculine: st[0].slice(-2) === 'us' ? s + 'us' : _(st[0]),
-						feminine: s + 'a',
-						neuter: s + 'um'
-					},
-					plural: {
-						masculine: s + _('i_'),
-						feminine: s + 'ae',
-						neuter: s + 'a'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: s + _('i_'),
-						feminine: s + 'ae',
-						neuter: s + _('i_')
-					},
-					plural: {
-						masculine: s + _('o_rum'),
-						feminine: s + _('a_rum'),
-						neuter: s + _('o_rum')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: s + _('o_'),
-						feminine: s + 'ae',
-						neuter: s + _('o_')
-					},
-					plural: {
-						masculine: s + _('i_s'),
-						feminine: s + _('i_s'),
-						neuter: s + _('i_s')
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: s + 'um',
-						feminine: s + 'am',
-						neuter: s + 'um'
-					},
-					plural: {
-						masculine: s + _('o_s'),
-						feminine: s + _('a_s'),
-						neuter: s + 'a'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: s + _('o_'),
-						feminine: s + _('a_'),
-						neuter: s + _('o_')
-					},
-					plural: {
-						masculine: s + _('i_s'),
-						feminine: s + _('i_s'),
-						neuter: s + _('i_s')
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: st[0].slice(-2) === 'us' ? s + 'e' : _(st[0]),
-						feminine: s + 'a',
-						neuter: s + 'um'
-					},
-					plural: {
-						masculine: s + _('i_'),
-						feminine: s + 'ae',
-						neuter: s + _('i_')
-					}
-				},
-				adverb: s + _('e_')
-			};
-			break;
-
-		case 'adjective 1,2pl':
-			var s = _(st[1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: s + _('i_'),
-						feminine: s + 'ae',
-						neuter: s + 'a'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: s + _('o_rum'),
-						feminine: s + _('a_rum'),
-						neuter: s + _('o_rum')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: s + _('i_s'),
-						feminine: s + _('i_s'),
-						neuter: s + _('i_s')
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: s + _('o_s'),
-						feminine: s + _('a_s'),
-						neuter: s + 'a'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: s + _('i_s'),
-						feminine: s + _('i_s'),
-						neuter: s + _('i_s')
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: s + _('i_'),
-						feminine: s + 'ae',
-						neuter: s + _('i_')
-					}
-				},
-				adverb: s + _('e_')
-			};
-			break;
-
-		case 'adjective 3':
-			var numSingNoms = st[2] != null ? 3 : st[1][st[1].length - 1] == 'e' ? 2 : 1;
-			var s = _(st[numSingNoms == 2 ? 0 : 1].slice(0, -2));
-			declension = {
-				nominative: {
-					singular: {
-						masculine: _(st[0]),
-						feminine: _(st[numSingNoms == 3 ? 1 : 0]),
-						neuter: _(st[numSingNoms == 3 ? 2 : numSingNoms == 2 ? 1 : 0])
-					},
-					plural: {
-						masculine: s + _('e_s'),
-						feminine: s + _('e_s'),
-						neuter: s + 'ia'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: s + 'is',
-						feminine: s + 'is',
-						neuter: s + 'is'
-					},
-					plural: {
-						masculine: s + 'ium',
-						feminine: s + 'ium',
-						neuter: s + 'ium'
-					}
-				},
-				dative: {
-					singular: {
-						masculine: s + _('i_'),
-						feminine: s + _('i_'),
-						neuter: s + _('i_')
-					},
-					plural: {
-						masculine: s + 'ibus',
-						feminine: s + 'ibus',
-						neuter: s + 'ibus'
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: s + 'em',
-						feminine: s + 'em',
-						neuter: _(st[numSingNoms == 3 ? 2 : numSingNoms == 2 ? 1 : 0])
-					},
-					plural: {
-						masculine: s + _('e_s') + ' / ' + s + _('i_s'),
-						feminine: s + _('e_s') + ' / ' + s + _('i_s'),
-						neuter: s + 'ia'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: s + _('i_'),
-						feminine: s + _('i_'),
-						neuter: s + _('i_')
-					},
-					plural: {
-						masculine: s + 'ibus',
-						feminine: s + 'ibus',
-						neuter: s + 'ibus'
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: _(st[0]),
-						feminine: _(st[numSingNoms == 3 ? 1 : 0]),
-						neuter: _(st[numSingNoms == 3 ? 2 : numSingNoms == 2 ? 1 : 0])
-					},
-					plural: {
-						masculine: s + _('e_s'),
-						feminine: s + _('e_s'),
-						neuter: s + 'ia'
-					}
-				},
-				adverb: s + 'iter'
-			};
-			break;
-
-		case 'adjective pronominal':
-			var s = _(st[1].slice(0, -1));
-			declension = {
-				nominative: {
-					singular: {
-						masculine: _(st[0]),
-						feminine: s + 'a',
-						neuter: s + 'um'
-					},
-					plural: {
-						masculine: s + _('i_'),
-						feminine: s + 'ae',
-						neuter: s + 'a'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: s + _('i_us'),
-						feminine: s + _('i_us'),
-						neuter: s + _('i_us')
-					},
-					plural: {
-						masculine: s + _('o_rum'),
-						feminine: s + _('a_rum'),
-						neuter: s + _('o_rum')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: s + _('i_'),
-						feminine: s + _('i_'),
-						neuter: s + _('i_')
-					},
-					plural: {
-						masculine: s + _('i_s'),
-						feminine: s + _('i_s'),
-						neuter: s + _('i_s')
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: s + 'um',
-						feminine: s + 'am',
-						neuter: s + 'um'
-					},
-					plural: {
-						masculine: s + _('o_s'),
-						feminine: s + _('a_s'),
-						neuter: s + 'a'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: s + _('o_'),
-						feminine: s + _('a_'),
-						neuter: s + _('o_')
-					},
-					plural: {
-						masculine: s + _('i_s'),
-						feminine: s + _('i_s'),
-						neuter: s + _('i_s')
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: st[0].slice(-2) === 'us' ? s + 'e' : _(st[0]),
-						feminine: s + 'a',
-						neuter: s + 'um'
-					},
-					plural: {
-						masculine: s + _('i_'),
-						feminine: s + 'ae',
-						neuter: s + _('i_')
-					}
-				}
-			};
-			break;
-
-		case 'adjective demonstrative':
-		case 'pronoun demonstrative':
-			var s = st[0] === 'hic' ? 0 : st[0] === 'iste' ? 1 : st[1] === 'ille' ? 2 : 2;
-			declension = {
-				nominative: {
-					singular: {
-						masculine: s == 0 ? 'hic' : s == 1 ? 'iste' : 'ille',
-						feminine: s == 0 ? 'haec' : s == 1 ? 'ista' : 'illa',
-						neuter: s == 0 ? 'hoc' : s == 1 ? 'istud' : 'illud'
-					},
-					plural: {
-						masculine: s == 0 ? _('hi_') : s == 1 ? _('isti_') : _('illi_'),
-						feminine: s == 0 ? 'hae' : s == 1 ? 'istae' : 'illae',
-						neuter: s == 0 ? 'haec' : s == 1 ? 'ista' : 'illa'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: s == 0 ? 'huius' : s == 1 ? _('isti_us') : _('illi_us'),
-						feminine: s == 0 ? 'huius' : s == 1 ? _('isti_us') : _('illi_us'),
-						neuter: s == 0 ? 'huius' : s == 1 ? _('isti_us') : _('illi_us')
-					},
-					plural: {
-						masculine: s == 0 ? _('ho_rum') : s == 1 ? _('isto_rum') : _('illo_rum'),
-						feminine: s == 0 ? _('ha_rum') : s == 1 ? _('ista_rum') : _('illa_rum'),
-						neuter: s == 0 ? _('ho_rum') : s == 1 ? _('isto_rum') : _('illo_rum')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: s == 0 ? 'huic' : s == 1 ? _('isti_') : _('illi_'),
-						feminine: s == 0 ? 'huic' : s == 1 ? _('isti_') : _('illi_'),
-						neuter: s == 0 ? 'huic' : s == 1 ? _('isti_') : _('illi_')
-					},
-					plural: {
-						masculine: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s'),
-						feminine: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s'),
-						neuter: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s')
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: s == 0 ? 'hunc' : s == 1 ? 'istum' : 'illum',
-						feminine: s == 0 ? 'hanc' : s == 1 ? 'istam' : 'illam',
-						neuter: s == 0 ? 'hoc' : s == 1 ? 'istud' : 'illud'
-					},
-					plural: {
-						masculine: s == 0 ? _('ho_s') : s == 1 ? _('isto_s') : _('illo_s'),
-						feminine: s == 0 ? _('ha_s') : s == 1 ? _('ista_s') : _('illa_s'),
-						neuter: s == 0 ? 'haec' : s == 1 ? 'ista' : 'illa'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: s == 0 ? _('ho_c') : s == 1 ? _('isto_') : _('illo_'),
-						feminine: s == 0 ? _('ha_c') : s == 1 ? _('ista_') : _('illa_'),
-						neuter: s == 0 ? _('ho_c') : s == 1 ? _('isto_') : _('illo_')
-					},
-					plural: {
-						masculine: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s'),
-						feminine: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s'),
-						neuter: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s')
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					}
-				}
-			};
-			break;
-
-		case 'pronoun relative':
-		case 'adjective interrogative':
-			declension = {
-				nominative: {
-					singular: {
-						masculine: _('qui_'),
-						feminine: 'quae',
-						neuter: 'quod'
-					},
-					plural: {
-						masculine: _('qui_'),
-						feminine: 'quae',
-						neuter: 'quae'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: 'cuius',
-						feminine: 'cuius',
-						neuter: 'cuius'
-					},
-					plural: {
-						masculine: _('quo_rum'),
-						feminine: _('qua_rum'),
-						neuter: _('quo_rum')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: 'cui',
-						feminine: 'cui',
-						neuter: 'cui'
-					},
-					plural: {
-						masculine: 'quibus',
-						feminine: 'quibus',
-						neuter: 'quibus'
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: 'quem',
-						feminine: 'quam',
-						neuter: 'quod'
-					},
-					plural: {
-						masculine: _('quo_s'),
-						feminine: _('qua_s'),
-						neuter: 'quae'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: _('quo_'),
-						feminine: _('qua_'),
-						neuter: _('quo_')
-					},
-					plural: {
-						masculine: 'quibus',
-						feminine: 'quibus',
-						neuter: 'quibus'
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					}
-				}
-			};
-			break;
-
-		case 'pronoun interrogative':
-			declension = {
-				nominative: {
-					singular: {
-						masculine: 'quis',
-						feminine: 'quis',
-						neuter: 'quid'
-					},
-					plural: {
-						masculine: _('qui_'),
-						feminine: 'quae',
-						neuter: 'quae'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: 'cuius',
-						feminine: 'cuius',
-						neuter: 'cuius'
-					},
-					plural: {
-						masculine: _('quo_rum'),
-						feminine: _('qua_rum'),
-						neuter: _('quo_rum')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: 'cui',
-						feminine: 'cui',
-						neuter: 'cui'
-					},
-					plural: {
-						masculine: 'quibus',
-						feminine: 'quibus',
-						neuter: 'quibus'
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: 'quem',
-						feminine: 'quem',
-						neuter: 'quid'
-					},
-					plural: {
-						masculine: _('quo_s'),
-						feminine: _('qua_s'),
-						neuter: 'quae'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: _('quo_'),
-						feminine: _('quo_'),
-						neuter: _('quo_')
-					},
-					plural: {
-						masculine: 'quibus',
-						feminine: 'quibus',
-						neuter: 'quibus'
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					}
-				}
-			};
-			break;
-
-		case 'pronoun indefinite':
-			declension = {
-				nominative: {
-					singular: {
-						masculine: _('qui_dam'),
-						feminine: 'quaedam',
-						neuter: 'quiddam'
-					},
-					plural: {
-						masculine: _('qui_dam'),
-						feminine: 'quaedam',
-						neuter: 'quaedam'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: 'cuiusdam',
-						feminine: 'cuiusdam',
-						neuter: 'cuiusdam'
-					},
-					plural: {
-						masculine: _('quo_rundam'),
-						feminine: _('qua_rundam'),
-						neuter: _('quo_rundam')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: 'cuidam',
-						feminine: 'cuidam',
-						neuter: 'cuidam'
-					},
-					plural: {
-						masculine: 'quibusdam',
-						feminine: 'quibusdam',
-						neuter: 'quibusdam'
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: 'quendam',
-						feminine: 'quandam',
-						neuter: 'quiddam'
-					},
-					plural: {
-						masculine: _('quo_sdam'),
-						feminine: _('qua_sdam'),
-						neuter: 'quaedam'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: _('quo_dam'),
-						feminine: _('qua_dam'),
-						neuter: _('quo_dam')
-					},
-					plural: {
-						masculine: 'quibusdam',
-						feminine: 'quibusdam',
-						neuter: 'quibusdam'
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					}
-				}
-			};
-			break;
-
-		case 'adjective indefinite':
-			declension = {
-				nominative: {
-					singular: {
-						masculine: _('qui_dam'),
-						feminine: 'quaedam',
-						neuter: 'quoddam'
-					},
-					plural: {
-						masculine: _('qui_dam'),
-						feminine: 'quaedam',
-						neuter: 'quaedam'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: 'cuiusdam',
-						feminine: 'cuiusdam',
-						neuter: 'cuiusdam'
-					},
-					plural: {
-						masculine: _('quo_rundam'),
-						feminine: _('qua_rundam'),
-						neuter: _('quo_rundam')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: 'cuidam',
-						feminine: 'cuidam',
-						neuter: 'cuidam'
-					},
-					plural: {
-						masculine: 'quibusdam',
-						feminine: 'quibusdam',
-						neuter: 'quibusdam'
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: 'quendam',
-						feminine: 'quandam',
-						neuter: 'quoddam'
-					},
-					plural: {
-						masculine: _('quo_sdam'),
-						feminine: _('qua_sdam'),
-						neuter: 'quaedam'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: _('quo_dam'),
-						feminine: _('qua_dam'),
-						neuter: _('quo_dam')
-					},
-					plural: {
-						masculine: 'quibusdam',
-						feminine: 'quibusdam',
-						neuter: 'quibusdam'
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					}
-				}
-			};
-			break;
-
-		case 'adjective idem':
-			declension = {
-				nominative: {
-					singular: {
-						masculine: _('i_dem'),
-						feminine: 'eadem',
-						neuter: 'idem'
-					},
-					plural: {
-						masculine: _('i_dem / ei_dem'),
-						feminine: 'eaedem',
-						neuter: 'eadem'
-					}
-				},
-				genitive: {
-					singular: {
-						masculine: 'eiusdem',
-						feminine: 'eiusdem',
-						neuter: 'eiusdem'
-					},
-					plural: {
-						masculine: _('eo_rundem'),
-						feminine: _('ea_rundem'),
-						neuter: _('eo_rundem')
-					}
-				},
-				dative: {
-					singular: {
-						masculine: _('ei_dem'),
-						feminine: _('ei_dem'),
-						neuter: _('ei_dem')
-					},
-					plural: {
-						masculine: _('i_sdem / ei_sdem'),
-						feminine: _('i_sdem / ei_sdem'),
-						neuter: _('i_sdem / ei_sdem')
-					}
-				},
-				accusative: {
-					singular: {
-						masculine: 'eundem',
-						feminine: 'eandem',
-						neuter: 'idem'
-					},
-					plural: {
-						masculine: _('eo_sdem'),
-						feminine: _('ea_sdem'),
-						neuter: 'eadem'
-					}
-				},
-				ablative: {
-					singular: {
-						masculine: _('eo_dem'),
-						feminine: _('ea_dem'),
-						neuter: _('eo_dem')
-					},
-					plural: {
-						masculine: _('i_sdem / ei_sdem'),
-						feminine: _('i_sdem / ei_sdem'),
-						neuter: _('i_sdem / ei_sdem')
-					}
-				},
-				vocative: {
-					singular: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					},
-					plural: {
-						masculine: '-',
-						feminine: '-',
-						neuter: '-'
-					}
-				}
-			};
-			break;
-
-		default:
-			console.log('ERROR: Unexpected noun type.');
-			return null;
-	}
-
-	// edit declension with specialSyntax
-	if (word.specialSyntax) {
-		for (var case_ in word.specialSyntax) {
-			if (case_ == 'adverb') {
-				declension.adverb = word.specialSyntax.adverb;
-				continue;
-			}
-			for (var number in word.specialSyntax[case_]) {
-				// if noun
-				if ((word.type.slice(0, 4) === 'noun' || word.type === 'pronoun personal' || word.type === 'pronoun reflexive') && word.specialSyntax[case_][number]) declension[case_][number] = word.specialSyntax[case_][number];
-				// if adjective
-				else if (word.type.slice(0, 9) === 'adjective') {
-						for (var gender in word.specialSyntax[case_][number]) {
-							if (word.specialSyntax[case_][number][gender]) declension[case_][number][gender] = word.specialSyntax[case_][number][gender];
-						}
-					}
-			}
-		}
-	}
-
-	// return declension
-	return declension;
-};
 
 // Vocabulary
 var V = {
 
 	nouns: {
+
+		// example: 
+
+		'-1': new Word({
+			statement: '-a, -ae, f.',
+			definition: '-',
+			notes: null,
+			type: 'noun 1',
+			specialSyntax: null
+		}),
+		'-2': new Word({
+			statement: '-us, -i_, m',
+			definition: '-',
+			notes: null,
+			type: 'noun 2',
+			specialSyntax: null
+		}),
+		'-2n': new Word({
+			statement: '-um, -i_, n',
+			definition: '-',
+			notes: null,
+			type: 'noun 2n',
+			specialSyntax: null
+		}),
+		'-3': new Word({
+			statement: '-, -is, m.',
+			definition: '-',
+			notes: null,
+			type: 'noun 3',
+			specialSyntax: null
+		}),
+		'-3n': new Word({
+			statement: '-, -is, n.',
+			definition: '-',
+			notes: null,
+			type: 'noun 3n',
+			specialSyntax: null
+		}),
+		'-3i': new Word({
+			statement: '-, -is, -ium, m.',
+			definition: '-',
+			notes: null,
+			type: 'noun 3i',
+			specialSyntax: null
+		}),
+		'-3in': new Word({
+			statement: '-, -is, -ium, n.',
+			definition: '-',
+			notes: null,
+			type: 'noun 3in',
+			specialSyntax: null
+		}),
+		'-4': new Word({
+			statement: '-us, -u_s, m.',
+			definition: '-',
+			notes: null,
+			type: 'noun 4',
+			specialSyntax: null
+		}),
+		'-5': new Word({
+			statement: '-e_s, -ei_, f.',
+			definition: '-',
+			notes: null,
+			type: 'noun 5',
+			specialSyntax: null
+		}),
 
 		// LTRL Ch.1
 		agricola: new Word({
@@ -12823,6 +6941,5956 @@ var decks = {
 		title: 'Irregular Verbs',
 		deck: [V.verbs.sum, V.verbs.possum, V.verbs.eo, V.verbs.fero, V.verbs.memini, V.verbs.odi]
 	}
+};
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//XXX conjugate and decline can be greatly reworked!!! XXX
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// Conjugate Word
+function conjugate(word) {
+
+	var conjugation;
+
+	// conjugate word
+	var st = word.statement.split(', '),
+	    syn = word.specialSyntax;
+	switch (word.type) {
+		case 'verb 1T':
+			var pr = _(st[1].slice(0, -2)),
+			    pf = _(st[2].slice(0, -2)),
+			    pfp = _(st[3]);
+			// special
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: word.statement === 'do_, dare, dedi_, datus' ? pr.slice(0, -1) + _('o_') : pr.slice(0, -2) + _('o_'),
+								second: pr + 's',
+								third: word.statement === 'do_, dare, dedi_, datus' ? pr + 't' : pr.slice(0, -1) + 't'
+							},
+							plural: {
+								first: pr + 'mus',
+								second: pr + 'tis',
+								third: word.statement === 'do_, dare, dedi_, datus' ? pr + 'nt' : pr.slice(0, -1) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + _('i_'),
+								second: pf + _('isti_'),
+								third: pf + 'it'
+							},
+							plural: {
+								first: pf + 'imus',
+								second: pf + 'istis',
+								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'bam',
+								second: pr + _('ba_s'),
+								third: pr + 'bat'
+							},
+							plural: {
+								first: pr + _('ba_mus'),
+								second: pr + _('ba_tis'),
+								third: pr + 'bant'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'eram',
+								second: pf + _('era_s'),
+								third: pf + 'eratt'
+							},
+							plural: {
+								first: pf + _('era_mus'),
+								second: pf + _('era_tis'),
+								third: pf + 'erant'
+							}
+						},
+						future: {
+							singular: {
+								first: pr + _('bo_'),
+								second: pr + 'bis',
+								third: pr + 'bit'
+							},
+							plural: {
+								first: pr + 'bimus',
+								second: pr + 'bitis',
+								third: pr + 'bunt'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pf + _('ero_'),
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: word.statement === 'do_, dare, dedi_, datus' ? pr.slice(0, -1) + 'or' : pr.slice(0, -2) + 'or',
+								second: pr + 'ris' + ' / ' + pr + 're',
+								third: pr + 'tur'
+							},
+							plural: {
+								first: pr + 'mur',
+								second: pr + _('mini_'),
+								third: word.statement === 'do_, dare, dedi_, datus' ? pr + 'ntur' : pr.slice(0, -1) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'bar',
+								second: pr + _('ba_ris') + ' / ' + pr + _('ba_re'),
+								third: pr + _('ba_tur')
+							},
+							plural: {
+								first: pr + _('ba_mur'),
+								second: pr + _('ba_mini_'),
+								third: pr + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr + 'bor',
+								second: pr + 'beris' + ' / ' + pr + 'bere',
+								third: pr + 'bitur'
+							},
+							plural: {
+								first: pr + 'bimur',
+								second: pr + _('bimini_'),
+								third: pr + 'buntur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + 'te',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + _('mini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + 'em',
+								second: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + _('e_s'),
+								third: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + 'et'
+							},
+							plural: {
+								first: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + _('e_mus'),
+								second: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + _('e_tis'),
+								third: pr.slice(0, word.statement === 'do_, dare, dedi_, datus' ? -1 : -2) + 'ent'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'm',
+								second: _(st[1]) + _('_s'),
+								third: _(st[1]) + 't'
+							},
+							plural: {
+								first: _(st[1]) + _('_mus'),
+								second: _(st[1]) + _('_tis'),
+								third: _(st[1]) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + 'erim',
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'issem',
+								second: pf + _('isse_s'),
+								third: pf + 'isset'
+							},
+							plural: {
+								first: pf + _('isse_mus'),
+								second: pf + _('isse_tis'),
+								third: pf + 'issent'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'er',
+								second: pr.slice(0, -2) + _('e_ris') + ' / ' + pr.slice(0, -2) + _('e_re'),
+								third: pr.slice(0, -2) + _('e_tur')
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('e_mur'),
+								second: pr.slice(0, -2) + _('e_mini_'),
+								third: pr.slice(0, -2) + 'entur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'r',
+								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
+								third: _(st[1]) + _('_tur')
+							},
+							plural: {
+								first: _(st[1]) + _('_mur'),
+								second: _(st[1]) + _('_mini_'),
+								third: _(st[1]) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: pr + 're',
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: pr + _('ri_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr + 'ns, ' + _(st[1].slice(0, -3)) + 'ntis',
+						perfect: '-',
+						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
+						future: _(st[1].slice(0, -3)) + 'ndus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 1TDep':
+		case 'verb 1IDep':
+			var pr = _(st[1].slice(0, -3)),
+			    pfp = _(st[2].slice(0, -4)),
+			    sbji = pr + 're';
+			// special
+			conjugation = {
+				indicative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'or',
+								second: pr + 'ris' + ' / ' + pr + 're',
+								third: pr + 'tur'
+							},
+							plural: {
+								first: pr + 'mur',
+								second: pr + _('mini_'),
+								third: pr.slice(0, -1) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'bar',
+								second: pr + _('ba_ris') + ' / ' + pr + _('ba_re'),
+								third: pr + _('ba_tur')
+							},
+							plural: {
+								first: pr + _('ba_mur'),
+								second: pr + _('ba_mini_'),
+								third: pr + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr + 'bor',
+								second: pr + 'beris' + ' / ' + pr + 'bere',
+								third: pr + 'bitur'
+							},
+							plural: {
+								first: pr + 'bimur',
+								second: pr + _('bimini_'),
+								third: pr + 'buntur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + _('mini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'er',
+								second: pr.slice(0, -2) + _('e_ris') + ' / ' + pr.slice(0, -2) + _('e_re'),
+								third: pr.slice(0, -2) + _('e_tur')
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('e_mur'),
+								second: pr.slice(0, -2) + _('e_mini_'),
+								third: pr.slice(0, -2) + 'entur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: sbji + 'r',
+								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
+								third: sbji + _('_tur')
+							},
+							plural: {
+								first: sbji + _('_mur'),
+								second: sbji + _('_mini_'),
+								third: sbji + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					passive: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					},
+					active: {
+						present: pr + _('ri_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr + 'ns, ' + _(st[1].slice(0, -4)) + 'ntis',
+						perfect: '-',
+						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: pfp + ', -a, -um',
+						future: _(st[1].slice(0, -4)) + 'ndus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 1I':
+			var pr = _(st[1].slice(0, -2)),
+			    pf = _(st[2].slice(0, -2)),
+			    pfp = _(st[3]);
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + _('o_'),
+								second: pr + 's',
+								third: pr.slice(0, -1) + 't'
+							},
+							plural: {
+								first: pr + 'mus',
+								second: pr + 'tis',
+								third: pr.slice(0, -1) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + _('i_'),
+								second: pf + _('isti_'),
+								third: pf + 'it'
+							},
+							plural: {
+								first: pf + 'imus',
+								second: pf + 'istis',
+								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'bam',
+								second: pr + _('ba_s'),
+								third: pr + 'bat'
+							},
+							plural: {
+								first: pr + _('ba_mus'),
+								second: pr + _('ba_tis'),
+								third: pr + 'bant'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'eram',
+								second: pf + _('era_s'),
+								third: pf + 'erat'
+							},
+							plural: {
+								first: pf + _('era_mus'),
+								second: pf + _('era_tis'),
+								third: pf + 'erant'
+							}
+						},
+						future: {
+							singular: {
+								first: pr + _('bo_'),
+								second: pr + 'bis',
+								third: pr + 'bit'
+							},
+							plural: {
+								first: pr + 'bimus',
+								second: pr + 'bitis',
+								third: pr + 'bunt'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pf + _('ero_'),
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + 'te',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'em',
+								second: pr.slice(0, -2) + _('e_s'),
+								third: pr.slice(0, -2) + 'et'
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('e_mus'),
+								second: pr.slice(0, -2) + _('e_tis'),
+								third: pr.slice(0, -2) + 'ent'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'm',
+								second: _(st[1]) + _('_s'),
+								third: _(st[1]) + 't'
+							},
+							plural: {
+								first: _(st[1]) + _('_mus'),
+								second: _(st[1]) + _('_tis'),
+								third: _(st[1]) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + 'erim',
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'issem',
+								second: pf + _('isse_s'),
+								third: pf + 'isset'
+							},
+							plural: {
+								first: pf + _('isse_mus'),
+								second: pf + _('isse_tis'),
+								third: pf + 'issent'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: pr + 're',
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr + 'ns, ' + _(st[1].slice(0, -3)) + 'ntis',
+						perfect: '-',
+						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
+						future: _(st[1].slice(0, -3)) + 'ndus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 2':
+			var pr = _(st[1].slice(0, -2)),
+			    pf = _(st[2].slice(0, -2)),
+			    pfp = _(st[3]);
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + _('o_'),
+								second: pr + 's',
+								third: pr.slice(0, -1) + 't'
+							},
+							plural: {
+								first: pr + 'mus',
+								second: pr + 'tis',
+								third: pr.slice(0, -1) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + _('i_'),
+								second: pf + _('isti_'),
+								third: pf + 'it'
+							},
+							plural: {
+								first: pf + 'imus',
+								second: pf + 'istis',
+								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'bam',
+								second: pr + _('ba_s'),
+								third: pr + 'bat'
+							},
+							plural: {
+								first: pr + _('ba_mus'),
+								second: pr + _('ba_tis'),
+								third: pr + 'bant'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'eram',
+								second: pf + _('era_s'),
+								third: pf + 'erat'
+							},
+							plural: {
+								first: pf + _('era_mus'),
+								second: pf + _('era_tis'),
+								third: pf + 'erant'
+							}
+						},
+						future: {
+							singular: {
+								first: pr + _('bo_'),
+								second: pr + 'bis',
+								third: pr + 'bit'
+							},
+							plural: {
+								first: pr + 'bimus',
+								second: pr + 'bitis',
+								third: pr + 'bunt'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pf + _('ero_'),
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'or',
+								second: pr + 'ris' + ' / ' + pr + 're',
+								third: pr + 'tur'
+							},
+							plural: {
+								first: pr + 'mur',
+								second: pr + _('mini_'),
+								third: pr.slice(0, -1) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'bar',
+								second: pr + _('ba_ris') + ' / ' + pr + _('ba_re'),
+								third: pr + _('ba_tur')
+							},
+							plural: {
+								first: pr + _('ba_mur'),
+								second: pr + _('ba_mini_'),
+								third: pr + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr + 'bor',
+								second: pr + 'beris' + ' / ' + pr + 'bere',
+								third: pr + 'bitur'
+							},
+							plural: {
+								first: pr + 'bimur',
+								second: pr + _('bimini_'),
+								third: pr + 'buntur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + 'te',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + _('mini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'eam',
+								second: pr.slice(0, -2) + _('ea_s'),
+								third: pr.slice(0, -2) + 'eat'
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ea_mus'),
+								second: pr.slice(0, -2) + _('ea_tis'),
+								third: pr.slice(0, -2) + 'eant'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'm',
+								second: _(st[1]) + _('_s'),
+								third: _(st[1]) + 't'
+							},
+							plural: {
+								first: _(st[1]) + _('_mus'),
+								second: _(st[1]) + _('_tis'),
+								third: _(st[1]) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + 'erim',
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'issem',
+								second: pf + _('isse_s'),
+								third: pf + 'isset'
+							},
+							plural: {
+								first: pf + _('isse_mus'),
+								second: pf + _('isse_tis'),
+								third: pf + 'issent'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'ear',
+								second: pr.slice(0, -2) + _('ea_ris') + ' / ' + pr.slice(0, -2) + _('ea_re'),
+								third: pr.slice(0, -2) + _('ea_tur')
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ea_mur'),
+								second: pr.slice(0, -2) + _('ea_mini_'),
+								third: pr.slice(0, -2) + 'eantur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'r',
+								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
+								third: _(st[1]) + _('_tur')
+							},
+							plural: {
+								first: _(st[1]) + _('_mur'),
+								second: _(st[1]) + _('_mini_'),
+								third: _(st[1]) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: pr + 're',
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: pr + _('ri_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr + 'ns, ' + _(st[1].slice(0, -3)) + 'ntis',
+						perfect: '-',
+						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
+						future: _(st[1].slice(0, -3)) + 'ndus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 2Dep':
+			var pr = _(st[1].slice(0, -3)),
+			    pfp = _(st[2].slice(0, -4)),
+			    sbji = pr + 're';
+			conjugation = {
+				indicative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'or',
+								second: pr + 'ris' + ' / ' + pr + 're',
+								third: pr + 'tur'
+							},
+							plural: {
+								first: pr + 'mur',
+								second: pr + _('mini_'),
+								third: pr.slice(0, -1) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'bar',
+								second: pr + _('ba_ris') + ' / ' + pr + _('ba_re'),
+								third: pr + _('ba_tur')
+							},
+							plural: {
+								first: pr + _('ba_mur'),
+								second: pr + _('ba_mini_'),
+								third: pr + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr + 'bor',
+								second: pr + 'beris' + ' / ' + pr + 'bere',
+								third: pr + 'bitur'
+							},
+							plural: {
+								first: pr + 'bimur',
+								second: pr + _('bimini_'),
+								third: pr + 'buntur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + _('mini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'ear',
+								second: pr.slice(0, -2) + _('ea_ris') + ' / ' + pr.slice(0, -2) + _('ea_re'),
+								third: pr.slice(0, -2) + _('ea_tur')
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ea_mur'),
+								second: pr.slice(0, -2) + _('ea_mini_'),
+								third: pr.slice(0, -2) + 'eantur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: sbji + 'r',
+								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
+								third: sbji + _('_tur')
+							},
+							plural: {
+								first: sbji + _('_mur'),
+								second: sbji + _('_mini_'),
+								third: sbji + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					passive: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					},
+					active: {
+						present: pr + _('ri_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr + 'ns, ' + _(st[1].slice(0, -4)) + 'ntis',
+						perfect: '-',
+						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: pfp + ', -a, -um',
+						future: _(st[1].slice(0, -4)) + 'ndus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 2SemiDep':
+			var pr = _(st[1].slice(0, -2)),
+			    pfp = _(st[2].slice(0, -4)),
+			    sbji = pr + 're';
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + _('o_'),
+								second: pr + 's',
+								third: pr.slice(0, -1) + 't'
+							},
+							plural: {
+								first: pr + 'mus',
+								second: pr + 'tis',
+								third: pr.slice(0, -1) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'bam',
+								second: pr + _('ba_s'),
+								third: pr + 'bat'
+							},
+							plural: {
+								first: pr + _('ba_mus'),
+								second: pr + _('ba_tis'),
+								third: pr + 'bant'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr + _('bo_'),
+								second: pr + 'bis',
+								third: pr + 'bit'
+							},
+							plural: {
+								first: pr + 'bimus',
+								second: pr + 'bitis',
+								third: pr + 'bunt'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						} },
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + 'te',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'eam',
+								second: pr.slice(0, -2) + _('ea_s'),
+								third: pr.slice(0, -2) + 'eat'
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ea_mus'),
+								second: pr.slice(0, -2) + _('ea_tis'),
+								third: pr.slice(0, -2) + 'eant'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: sbji + 'm',
+								second: sbji + _('_s'),
+								third: sbji + 't'
+							},
+							plural: {
+								first: sbji + _('_mus'),
+								second: sbji + _('_tis'),
+								third: sbji + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: pr + 're',
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr + 'ns, ' + _(st[1].slice(0, -3)) + 'ntis',
+						perfect: '-',
+						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: pfp + ', -a, -um',
+						future: _(st[1].slice(0, -3)) + 'ndus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 3':
+			var pr = _(st[1].slice(0, -2)),
+			    pf = _(st[2].slice(0, -2)),
+			    pfp = _(st[3]);
+			// fix for fero_
+			if (['fer', 'aufer', 'differ', 'perfer', 'refer'].indexOf(pr) !== -1) pr += 'e';
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + _('o_'),
+								second: pr.slice(0, -1) + 'is',
+								third: pr.slice(0, -1) + 'it'
+							},
+							plural: {
+								first: pr.slice(0, -1) + 'imus',
+								second: pr.slice(0, -1) + 'itis',
+								third: pr.slice(0, -1) + 'unt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + _('i_'),
+								second: pf + _('isti_'),
+								third: pf + 'it'
+							},
+							plural: {
+								first: pf + 'imus',
+								second: pf + 'istis',
+								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -1) + _('e_') + 'bam',
+								second: pr.slice(0, -1) + _('e_') + _('ba_s'),
+								third: pr.slice(0, -1) + _('e_') + 'bat'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('e_') + _('ba_mus'),
+								second: pr.slice(0, -1) + _('e_') + _('ba_tis'),
+								third: pr.slice(0, -1) + _('e_') + 'bant'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'eram',
+								second: pf + _('era_s'),
+								third: pf + 'erat'
+							},
+							plural: {
+								first: pf + _('era_mus'),
+								second: pf + _('era_tis'),
+								third: pf + 'erant'
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -1) + 'am',
+								second: pr.slice(0, -1) + _('e_') + 's',
+								third: pr + 't'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('e_') + 'mus',
+								second: pr.slice(0, -1) + _('e_') + 'tis',
+								third: pr + 'nt'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pf + _('ero_'),
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'or',
+								second: pr.slice(0, -1) + 'eris' + ' / ' + pr.slice(0, -1) + 'ere',
+								third: pr.slice(0, -1) + 'itur'
+							},
+							plural: {
+								first: pr.slice(0, -1) + 'imur',
+								second: pr.slice(0, -1) + _('imini_'),
+								third: pr.slice(0, -1) + 'untur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -1) + _('e_') + 'bar',
+								second: pr.slice(0, -1) + _('e_') + _('ba_ris') + ' / ' + pr.slice(0, -1) + _('e_') + _('ba_re'),
+								third: pr.slice(0, -1) + _('e_') + _('ba_tur')
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('e_') + _('ba_mur'),
+								second: pr.slice(0, -1) + _('e_') + _('ba_mini_'),
+								third: pr.slice(0, -1) + _('e_') + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -1) + 'ar',
+								second: pr.slice(0, -1) + _('e_') + 'ris' + ' / ' + pr.slice(0, -1) + _('e_') + 're',
+								third: pr.slice(0, -1) + _('e_') + 'tur'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('e_') + 'mur',
+								second: pr.slice(0, -1) + _('e_') + _('mini_'),
+								third: pr + 'ntur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr.slice(0, -1) + 'ite',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr.slice(0, -1) + _('imini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'am',
+								second: pr.slice(0, -1) + _('a_s'),
+								third: pr.slice(0, -1) + 'at'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('a_mus'),
+								second: pr.slice(0, -1) + _('a_tis'),
+								third: pr.slice(0, -1) + 'ant'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'm',
+								second: _(st[1]) + _('_s'),
+								third: _(st[1]) + 't'
+							},
+							plural: {
+								first: _(st[1]) + _('_mus'),
+								second: _(st[1]) + _('_tis'),
+								third: _(st[1]) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + 'erim',
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'issem',
+								second: pf + _('isse_s'),
+								third: pf + 'isset'
+							},
+							plural: {
+								first: pf + _('isse_mus'),
+								second: pf + _('isse_tis'),
+								third: pf + 'issent'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'ar',
+								second: pr.slice(0, -1) + _('a_ris') + ' / ' + pr.slice(0, -1) + _('a_re'),
+								third: pr.slice(0, -1) + _('a_tur')
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('a_mur'),
+								second: pr.slice(0, -1) + _('a_mini_'),
+								third: pr.slice(0, -1) + 'antur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'r',
+								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
+								third: _(st[1]) + _('_tur')
+							},
+							plural: {
+								first: _(st[1]) + _('_mur'),
+								second: _(st[1]) + _('_mini_'),
+								third: _(st[1]) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: pr + 're',
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: pr.slice(0, -1) + _('i_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr + _('_ns, ') + pr + 'ntis',
+						perfect: '-',
+						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
+						future: pr + 'ndus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 3Dep':
+			var pr = _(st[1].slice(0, -2)) + 'e',
+			    pfp = _(st[2].slice(0, -4)),
+			    sbji = pr + 're';
+			conjugation = {
+				indicative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'or',
+								second: pr.slice(0, -1) + 'eris' + ' / ' + pr.slice(0, -1) + 'ere',
+								third: pr.slice(0, -1) + 'itur'
+							},
+							plural: {
+								first: pr.slice(0, -1) + 'imur',
+								second: pr.slice(0, -1) + _('imini_'),
+								third: pr.slice(0, -1) + 'untur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -1) + _('e_') + 'bar',
+								second: pr.slice(0, -1) + _('e_') + _('ba_ris') + ' / ' + pr.slice(0, -1) + _('e_') + _('ba_re'),
+								third: pr.slice(0, -1) + _('e_') + _('ba_tur')
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('e_') + _('ba_mur'),
+								second: pr.slice(0, -1) + _('e_') + _('ba_mini_'),
+								third: pr.slice(0, -1) + _('e_') + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -1) + 'ar',
+								second: pr.slice(0, -1) + _('e_') + 'ris' + ' / ' + pr.slice(0, -1) + _('e_') + 're',
+								third: pr.slice(0, -1) + _('e_') + 'tur'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('e_') + 'mur',
+								second: pr.slice(0, -1) + _('e_') + _('mini_'),
+								third: pr + 'ntur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr.slice(0, -1) + _('imini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'ar',
+								second: pr.slice(0, -1) + _('a_ris') + ' / ' + pr.slice(0, -1) + _('a_re'),
+								third: pr.slice(0, -1) + _('a_tur')
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('a_mur'),
+								second: pr.slice(0, -1) + _('a_mini_'),
+								third: pr.slice(0, -1) + 'antur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: sbji + 'r',
+								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
+								third: sbji + _('_tur')
+							},
+							plural: {
+								first: sbji + _('_mur'),
+								second: sbji + _('_mini_'),
+								third: sbji + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					passive: {
+						present: pr + 're',
+						perfect: '-',
+						future: '-'
+					},
+					active: {
+						present: pr.slice(0, -1) + _('i_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr + _('_ns, ') + pr + 'ntis',
+						perfect: '-',
+						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: pfp + ', -a, -um',
+						future: pr + 'ndus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 3i':
+			var pr = _(st[1].slice(0, -2)),
+			    pf = _(st[2].slice(0, -2)),
+			    pfp = _(st[3]);
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + _('io_'),
+								second: pr.slice(0, -1) + 'is',
+								third: pr.slice(0, -1) + 'it'
+							},
+							plural: {
+								first: pr.slice(0, -1) + 'imus',
+								second: pr.slice(0, -1) + 'itis',
+								third: pr.slice(0, -1) + 'iunt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + _('i_'),
+								second: pf + _('isti_'),
+								third: pf + 'it'
+							},
+							plural: {
+								first: pf + 'imus',
+								second: pf + 'istis',
+								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -1) + _('ie_') + 'bam',
+								second: pr.slice(0, -1) + _('ie_') + _('ba_s'),
+								third: pr.slice(0, -1) + _('ie_') + 'bat'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ie_') + _('ba_mus'),
+								second: pr.slice(0, -1) + _('ie_') + _('ba_tis'),
+								third: pr.slice(0, -1) + _('ie_') + 'bant'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'eram',
+								second: pf + _('era_s'),
+								third: pf + 'erat'
+							},
+							plural: {
+								first: pf + _('era_mus'),
+								second: pf + _('era_tis'),
+								third: pf + 'erant'
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -1) + 'iam',
+								second: pr.slice(0, -1) + _('ie_') + 's',
+								third: pr.slice(0, -1) + 'iet'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ie_') + 'mus',
+								second: pr.slice(0, -1) + _('ie_') + 'tis',
+								third: pr.slice(0, -1) + 'ient'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pf + _('ero_'),
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'ior',
+								second: pr.slice(0, -1) + 'eris' + ' / ' + pr.slice(0, -1) + 'ere',
+								third: pr.slice(0, -1) + 'itur'
+							},
+							plural: {
+								first: pr.slice(0, -1) + 'imur',
+								second: pr.slice(0, -1) + _('imini_'),
+								third: pr.slice(0, -1) + 'iuntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -1) + _('ie_') + 'bar',
+								second: pr.slice(0, -1) + _('ie_') + _('ba_ris') + ' / ' + pr.slice(0, -1) + _('ie_') + _('ba_re'),
+								third: pr.slice(0, -1) + _('ie_') + _('ba_tur')
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ie_') + _('ba_mur'),
+								second: pr.slice(0, -1) + _('ie_') + _('ba_mini_'),
+								third: pr.slice(0, -1) + _('ie_') + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -1) + 'iar',
+								second: pr.slice(0, -1) + _('ie_') + 'ris' + ' / ' + pr.slice(0, -1) + _('ie_') + 're',
+								third: pr.slice(0, -1) + _('ie_') + 'tur'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ie_') + 'mur',
+								second: pr.slice(0, -1) + _('ie_') + _('mini_'),
+								third: pr.slice(0, -1) + 'ientur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr.slice(0, -1) + 'ite',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr.slice(0, -1) + _('imini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'iam',
+								second: pr.slice(0, -1) + _('ia_s'),
+								third: pr.slice(0, -1) + 'iat'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ia_mus'),
+								second: pr.slice(0, -1) + _('ia_tis'),
+								third: pr.slice(0, -1) + 'iant'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'm',
+								second: _(st[1]) + _('_s'),
+								third: _(st[1]) + 't'
+							},
+							plural: {
+								first: _(st[1]) + _('_mus'),
+								second: _(st[1]) + _('_tis'),
+								third: _(st[1]) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + 'erim',
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'issem',
+								second: pf + _('isse_s'),
+								third: pf + 'isset'
+							},
+							plural: {
+								first: pf + _('isse_mus'),
+								second: pf + _('isse_tis'),
+								third: pf + 'issent'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'iar',
+								second: pr.slice(0, -1) + _('ia_ris') + ' / ' + pr.slice(0, -1) + _('ia_re'),
+								third: pr.slice(0, -1) + _('ia_tur')
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ia_mur'),
+								second: pr.slice(0, -1) + _('ia_mini_'),
+								third: pr.slice(0, -1) + 'iantur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'r',
+								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
+								third: _(st[1]) + _('_tur')
+							},
+							plural: {
+								first: _(st[1]) + _('_mur'),
+								second: _(st[1]) + _('_mini_'),
+								third: _(st[1]) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: pr + 're',
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: pr.slice(0, -1) + _('i_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr.slice(0, -1) + _('ie_ns, ') + pr.slice(0, -1) + 'ientis',
+						perfect: '-',
+						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
+						future: pr.slice(0, -1) + 'iendus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 3iDep':
+			var pr = _(st[1].slice(0, -2)) + 'e',
+			    pfp = _(st[2].slice(0, -4)),
+			    sbji = pr + 're';
+			conjugation = {
+				indicative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'ior',
+								second: pr.slice(0, -1) + 'eris' + ' / ' + pr.slice(0, -1) + 'ere',
+								third: pr.slice(0, -1) + 'itur'
+							},
+							plural: {
+								first: pr.slice(0, -1) + 'imur',
+								second: pr.slice(0, -1) + _('imini_'),
+								third: pr.slice(0, -1) + 'iuntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -1) + _('ie_') + 'bar',
+								second: pr.slice(0, -1) + _('ie_') + _('ba_ris') + ' / ' + pr.slice(0, -1) + _('ie_') + _('ba_re'),
+								third: pr.slice(0, -1) + _('ie_') + _('ba_tur')
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ie_') + _('ba_mur'),
+								second: pr.slice(0, -1) + _('ie_') + _('ba_mini_'),
+								third: pr.slice(0, -1) + _('ie_') + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -1) + 'iar',
+								second: pr.slice(0, -1) + _('ie_') + 'ris' + ' / ' + pr.slice(0, -1) + _('ie_') + 're',
+								third: pr.slice(0, -1) + _('ie_') + 'tur'
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ie_') + 'mur',
+								second: pr.slice(0, -1) + _('ie_') + _('mini_'),
+								third: pr.slice(0, -1) + 'ientur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr.slice(0, -1) + _('imini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -1) + 'iar',
+								second: pr.slice(0, -1) + _('ia_ris') + ' / ' + pr.slice(0, -1) + _('ia_re'),
+								third: pr.slice(0, -1) + _('ia_tur')
+							},
+							plural: {
+								first: pr.slice(0, -1) + _('ia_mur'),
+								second: pr.slice(0, -1) + _('ia_mini_'),
+								third: pr.slice(0, -1) + 'iantur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: sbji + 'r',
+								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
+								third: sbji + _('_tur')
+							},
+							plural: {
+								first: sbji + _('_mur'),
+								second: sbji + _('_mini_'),
+								third: sbji + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					passive: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					},
+					active: {
+						present: pr.slice(0, -1) + _('i_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: pr.slice(0, -1) + _('ie_ns, ') + pr.slice(0, -1) + 'ientis',
+						perfect: '-',
+						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: pfp + ', -a, -um',
+						future: pr.slice(0, -1) + 'iendus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 4':
+			var pr = _(st[1].slice(0, -2)),
+			    pf = _(st[2].slice(0, -2)),
+			    pfp = _(st[3]);
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + _('io_'),
+								second: pr + 's',
+								third: pr.slice(0, -2) + 'it'
+							},
+							plural: {
+								first: pr + 'mus',
+								second: pr + 'tis',
+								third: pr.slice(0, -2) + 'iunt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + _('i_'),
+								second: pf + _('isti_'),
+								third: pf + 'it'
+							},
+							plural: {
+								first: pf + 'imus',
+								second: pf + 'istis',
+								third: pf + _('e_runt') + ' / ' + pf + _('e_re')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -2) + _('ie_') + 'bam',
+								second: pr.slice(0, -2) + _('ie_') + _('ba_s'),
+								third: pr.slice(0, -2) + _('ie_') + 'bat'
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ie_') + _('ba_mus'),
+								second: pr.slice(0, -2) + _('ie_') + _('ba_tis'),
+								third: pr.slice(0, -2) + _('ie_') + 'bant'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'eram',
+								second: pf + _('era_s'),
+								third: pf + 'erat'
+							},
+							plural: {
+								first: pf + _('era_mus'),
+								second: pf + _('era_tis'),
+								third: pf + 'erant'
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -2) + 'iam',
+								second: pr.slice(0, -2) + _('ie_') + 's',
+								third: pr.slice(0, -2) + 'iet'
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ie_') + 'mus',
+								second: pr.slice(0, -2) + _('ie_') + 'tis',
+								third: pr.slice(0, -2) + 'ient'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pf + _('ero_'),
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'ior',
+								second: pr + 'ris' + ' / ' + pr + 're',
+								third: pr + 'tur'
+							},
+							plural: {
+								first: pr + 'mur',
+								second: pr + _('mini_'),
+								third: pr.slice(0, -2) + 'iuntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -2) + _('ie_') + 'bar',
+								second: pr.slice(0, -2) + _('ie_') + _('ba_ris') + ' / ' + pr.slice(0, -2) + _('ie_') + _('ba_re'),
+								third: pr.slice(0, -2) + _('ie_') + _('ba_tur')
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ie_') + _('ba_mur'),
+								second: pr.slice(0, -2) + _('ie_') + _('ba_mini_'),
+								third: pr.slice(0, -2) + _('ie_') + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -2) + 'iar',
+								second: pr.slice(0, -2) + _('ie_') + 'ris' + ' / ' + pr.slice(0, -2) + _('ie_') + 're',
+								third: pr.slice(0, -2) + _('ie_') + 'tur'
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ie_') + 'mur',
+								second: pr.slice(0, -2) + _('ie_') + _('mini_'),
+								third: pr.slice(0, -2) + 'ientur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + 'te',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + _('mini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'iam',
+								second: pr.slice(0, -2) + _('ia_s'),
+								third: pr.slice(0, -2) + 'iat'
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ia_mus'),
+								second: pr.slice(0, -2) + _('ia_tis'),
+								third: pr.slice(0, -2) + 'iant'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'm',
+								second: _(st[1]) + _('_s'),
+								third: _(st[1]) + 't'
+							},
+							plural: {
+								first: _(st[1]) + _('_mus'),
+								second: _(st[1]) + _('_tis'),
+								third: _(st[1]) + 'nt'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pf + 'erim',
+								second: pf + 'eris',
+								third: pf + 'erit'
+							},
+							plural: {
+								first: pf + 'erimus',
+								second: pf + 'eritis',
+								third: pf + 'erint'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pf + 'issem',
+								second: pf + _('isse_s'),
+								third: pf + 'isset'
+							},
+							plural: {
+								first: pf + _('isse_mus'),
+								second: pf + _('isse_tis'),
+								third: pf + 'issent'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'iar',
+								second: pr.slice(0, -2) + _('ia_ris') + ' / ' + pr.slice(0, -2) + _('ia_re'),
+								third: pr.slice(0, -2) + _('ia_tur')
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ia_mur'),
+								second: pr.slice(0, -2) + _('ia_mini_'),
+								third: pr.slice(0, -2) + 'iantur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: _(st[1]) + 'r',
+								second: _(st[1]) + _('_ris') + ' / ' + _(st[1]) + _('_re'),
+								third: _(st[1]) + _('_tur')
+							},
+							plural: {
+								first: _(st[1]) + _('_mur'),
+								second: _(st[1]) + _('_mini_'),
+								third: _(st[1]) + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: pr + 're',
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: pr + _('ri_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: _(st[1].slice(0, -3)) + _('e_ns, ') + _(st[1].slice(0, -3)) + 'entis',
+						perfect: '-',
+						future: _(st[3].slice(0, _(st[3].slice(0, -5)) === _('u_rus') ? -5 : -2)) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: _(st[3].slice(0, -5)) === _('u_rus') ? '-' : pfp + ', -a, -um',
+						future: _(st[1].slice(0, -3)) + 'endus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb 4Dep':
+			var pr = _(st[1].slice(0, -3)),
+			    pfp = _(st[2].slice(0, -4)),
+			    sbji = pr + 're';
+			conjugation = {
+				indicative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'ior',
+								second: pr + 'ris' + ' / ' + pr + 're',
+								third: pr + 'tur'
+							},
+							plural: {
+								first: pr + 'mur',
+								second: pr + _('mini_'),
+								third: pr.slice(0, -2) + 'iuntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sum',
+								second: pfp + ', -a, -um es',
+								third: pfp + ', -a, -um est'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a sumus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a estis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sunt')
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr.slice(0, -2) + _('ie_') + 'bar',
+								second: pr.slice(0, -2) + _('ie_') + _('ba_ris') + ' / ' + pr.slice(0, -2) + _('ie_') + _('ba_re'),
+								third: pr.slice(0, -2) + _('ie_') + _('ba_tur')
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ie_') + _('ba_mur'),
+								second: pr.slice(0, -2) + _('ie_') + _('ba_mini_'),
+								third: pr.slice(0, -2) + _('ie_') + 'bantur'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um eram',
+								second: pfp + _(', -a, -um era_s'),
+								third: pfp + ', -a, -um erat'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a era_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a era_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erant')
+							}
+						},
+						future: {
+							singular: {
+								first: pr.slice(0, -2) + 'iar',
+								second: pr.slice(0, -2) + _('ie_') + 'ris' + ' / ' + pr.slice(0, -2) + _('ie_') + 're',
+								third: pr.slice(0, -2) + _('ie_') + 'tur'
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ie_') + 'mur',
+								second: pr.slice(0, -2) + _('ie_') + _('mini_'),
+								third: pr.slice(0, -2) + 'ientur'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: pfp + _(', -a, -um ero_'),
+								second: pfp + ', -a, -um eris',
+								third: pfp + ', -a, -um erit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a erimus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a eritis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a erunt')
+							}
+						}
+					}
+				},
+				imperative: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: pr + 're',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: pr + _('mini_'),
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					active: {
+						present: {
+							singular: {
+								first: pr.slice(0, -2) + 'iar',
+								second: pr.slice(0, -2) + _('ia_ris') + ' / ' + pr.slice(0, -2) + _('ia_re'),
+								third: pr.slice(0, -2) + _('ia_tur')
+							},
+							plural: {
+								first: pr.slice(0, -2) + _('ia_mur'),
+								second: pr.slice(0, -2) + _('ia_mini_'),
+								third: pr.slice(0, -2) + 'iantur'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: sbji + 'r',
+								second: sbji + _('_ris') + ' / ' + sbji + _('_re'),
+								third: sbji + _('_tur')
+							},
+							plural: {
+								first: sbji + _('_mur'),
+								second: sbji + _('_mini_'),
+								third: sbji + 'ntur'
+							}
+						},
+						perfect: {
+							singular: {
+								first: pfp + ', -a, -um sim',
+								second: pfp + _(', -a, -um si_s'),
+								third: pfp + ', -a, -um sit'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a si_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a si_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a sint')
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: pfp + ', -a, -um essem',
+								second: pfp + _(', -a, -um esse_s'),
+								third: pfp + ', -a, -um esset'
+							},
+							plural: {
+								first: pfp.slice(0, -2) + _('i_, -ae, -a esse_mus'),
+								second: pfp.slice(0, -2) + _('i_, -ae, -a esse_tis'),
+								third: pfp.slice(0, -2) + _('i_, -ae, -a essent')
+							}
+						}
+					}
+				},
+				infinitive: {
+					passive: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					},
+					active: {
+						present: pr + _('ri_'),
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: _(st[1].slice(0, -4)) + _('e_ns, ') + _(st[1].slice(0, -4)) + 'entis',
+						perfect: '-',
+						future: pfp.slice(0, -2) + _('u_rus, -a, -um')
+					},
+					passive: {
+						present: '-',
+						perfect: pfp + ', -a, -um',
+						future: _(st[1].slice(0, -4)) + 'endus, -a, -um'
+					}
+				}
+			};
+			break;
+
+		case 'verb Irr':
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: syn.indicative.active.present.singular.first,
+								second: syn.indicative.active.present.singular.second,
+								third: syn.indicative.active.present.singular.third
+							},
+							plural: {
+								first: syn.indicative.active.present.plural.first,
+								second: syn.indicative.active.present.plural.second,
+								third: syn.indicative.active.present.plural.third
+							}
+						},
+						perfect: {
+							singular: {
+								first: syn.indicative.active.perfect.singular.first,
+								second: syn.indicative.active.perfect.singular.second,
+								third: syn.indicative.active.perfect.singular.third
+							},
+							plural: {
+								first: syn.indicative.active.perfect.plural.first,
+								second: syn.indicative.active.perfect.plural.second,
+								third: syn.indicative.active.perfect.plural.third
+							}
+						},
+						imperfect: {
+							singular: {
+								first: syn.indicative.active.imperfect.singular.first,
+								second: syn.indicative.active.imperfect.singular.second,
+								third: syn.indicative.active.imperfect.singular.third
+							},
+							plural: {
+								first: syn.indicative.active.imperfect.plural.first,
+								second: syn.indicative.active.imperfect.plural.second,
+								third: syn.indicative.active.imperfect.plural.third
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: syn.indicative.active.pluperfect.singular.first,
+								second: syn.indicative.active.pluperfect.singular.second,
+								third: syn.indicative.active.pluperfect.singular.third
+							},
+							plural: {
+								first: syn.indicative.active.pluperfect.plural.first,
+								second: syn.indicative.active.pluperfect.plural.second,
+								third: syn.indicative.active.pluperfect.plural.third
+							}
+						},
+						future: {
+							singular: {
+								first: syn.indicative.active.future.singular.first,
+								second: syn.indicative.active.future.singular.second,
+								third: syn.indicative.active.future.singular.third
+							},
+							plural: {
+								first: syn.indicative.active.future.plural.first,
+								second: syn.indicative.active.future.plural.second,
+								third: syn.indicative.active.future.plural.third
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: syn.indicative.active.futureperfect.singular.first,
+								second: syn.indicative.active.futureperfect.singular.second,
+								third: syn.indicative.active.futureperfect.singular.third
+							},
+							plural: {
+								first: syn.indicative.active.futureperfect.plural.first,
+								second: syn.indicative.active.futureperfect.plural.second,
+								third: syn.indicative.active.futureperfect.plural.third
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: syn.indicative.passive.present.singular.first,
+								second: syn.indicative.passive.present.singular.second,
+								third: syn.indicative.passive.present.singular.third
+							},
+							plural: {
+								first: syn.indicative.passive.present.plural.first,
+								second: syn.indicative.passive.present.plural.second,
+								third: syn.indicative.passive.present.plural.third
+							}
+						},
+						perfect: {
+							singular: {
+								first: syn.indicative.passive.perfect.singular.first,
+								second: syn.indicative.passive.perfect.singular.second,
+								third: syn.indicative.passive.perfect.singular.third
+							},
+							plural: {
+								first: syn.indicative.passive.perfect.plural.first,
+								second: syn.indicative.passive.perfect.plural.second,
+								third: syn.indicative.passive.perfect.plural.third
+							}
+						},
+						imperfect: {
+							singular: {
+								first: syn.indicative.passive.imperfect.singular.first,
+								second: syn.indicative.passive.imperfect.singular.second,
+								third: syn.indicative.passive.imperfect.singular.third
+							},
+							plural: {
+								first: syn.indicative.passive.imperfect.plural.first,
+								second: syn.indicative.passive.imperfect.plural.second,
+								third: syn.indicative.passive.imperfect.plural.third
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: syn.indicative.passive.pluperfect.singular.first,
+								second: syn.indicative.passive.pluperfect.singular.second,
+								third: syn.indicative.passive.pluperfect.singular.third
+							},
+							plural: {
+								first: syn.indicative.passive.pluperfect.plural.first,
+								second: syn.indicative.passive.pluperfect.plural.second,
+								third: syn.indicative.passive.pluperfect.plural.third
+							}
+						},
+						future: {
+							singular: {
+								first: syn.indicative.passive.future.singular.first,
+								second: syn.indicative.passive.future.singular.second,
+								third: syn.indicative.passive.future.singular.third
+							},
+							plural: {
+								first: syn.indicative.passive.future.plural.first,
+								second: syn.indicative.passive.future.plural.second,
+								third: syn.indicative.passive.future.plural.third
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: syn.indicative.passive.futureperfect.singular.first,
+								second: syn.indicative.passive.futureperfect.singular.second,
+								third: syn.indicative.passive.futureperfect.singular.third
+							},
+							plural: {
+								first: syn.indicative.passive.futureperfect.plural.first,
+								second: syn.indicative.passive.futureperfect.plural.second,
+								third: syn.indicative.passive.futureperfect.plural.third
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: syn.imperative.active.present.singular.second,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: syn.imperative.active.present.plural.second,
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: syn.imperative.passive.present.singular.second,
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: syn.imperative.passive.present.plural.second,
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: syn.subjunctive.active.present,
+								second: syn.subjunctive.active.present,
+								third: syn.subjunctive.active.present
+							},
+							plural: {
+								first: syn.subjunctive.active.present,
+								second: syn.subjunctive.active.present,
+								third: syn.subjunctive.active.present
+							}
+						},
+						imperfect: {
+							singular: {
+								first: syn.subjunctive.active.imperfect,
+								second: syn.subjunctive.active.imperfect,
+								third: syn.subjunctive.active.imperfect
+							},
+							plural: {
+								first: syn.subjunctive.active.imperfect,
+								second: syn.subjunctive.active.imperfect,
+								third: syn.subjunctive.active.imperfect
+							}
+						},
+						perfect: {
+							singular: {
+								first: syn.subjunctive.active.perfect,
+								second: syn.subjunctive.active.perfect,
+								third: syn.subjunctive.active.perfect
+							},
+							plural: {
+								first: syn.subjunctive.active.perfect,
+								second: syn.subjunctive.active.perfect,
+								third: syn.subjunctive.active.perfect
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: syn.subjunctive.active.pluperfect,
+								second: syn.subjunctive.active.pluperfect,
+								third: syn.subjunctive.active.pluperfect
+							},
+							plural: {
+								first: syn.subjunctive.active.pluperfect,
+								second: syn.subjunctive.active.pluperfect,
+								third: syn.subjunctive.active.pluperfect
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: syn.subjunctive.passive.present,
+								second: syn.subjunctive.passive.present,
+								third: syn.subjunctive.passive.present
+							},
+							plural: {
+								first: syn.subjunctive.passive.present,
+								second: syn.subjunctive.passive.present,
+								third: syn.subjunctive.passive.present
+							}
+						},
+						imperfect: {
+							singular: {
+								first: syn.subjunctive.passive.imperfect,
+								second: syn.subjunctive.passive.imperfect,
+								third: syn.subjunctive.passive.imperfect
+							},
+							plural: {
+								first: syn.subjunctive.passive.imperfect,
+								second: syn.subjunctive.passive.imperfect,
+								third: syn.subjunctive.passive.imperfect
+							}
+						},
+						perfect: {
+							singular: {
+								first: syn.subjunctive.passive.perfect,
+								second: syn.subjunctive.passive.perfect,
+								third: syn.subjunctive.passive.perfect
+							},
+							plural: {
+								first: syn.subjunctive.passive.perfect,
+								second: syn.subjunctive.passive.perfect,
+								third: syn.subjunctive.passive.perfect
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: syn.subjunctive.passive.pluperfect,
+								second: syn.subjunctive.passive.pluperfect,
+								third: syn.subjunctive.passive.pluperfect
+							},
+							plural: {
+								first: syn.subjunctive.passive.pluperfect,
+								second: syn.subjunctive.passive.pluperfect,
+								third: syn.subjunctive.passive.pluperfect
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: syn.infinitive.active.present,
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: syn.infinitive.passive.present,
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: syn.participle.active.present,
+						perfect: '-',
+						future: syn.participle.active.future
+					},
+					passive: {
+						present: '-',
+						perfect: syn.participle.passive.perfect,
+						future: syn.participle.passive.future
+					}
+				}
+			};
+			break;
+
+		case 'verb Def':
+			var pr = _(st[0].slice(0, -2));
+			conjugation = {
+				indicative: {
+					active: {
+						present: {
+							singular: {
+								first: pr + _('i_'),
+								second: pr + _('isti_'),
+								third: pr + 'it'
+							},
+							plural: {
+								first: pr + 'imus',
+								second: pr + 'istis',
+								third: pr + _('e_runt') + ' / ' + pr + _('e_re')
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: pr + 'eram',
+								second: pr + _('era_s'),
+								third: pr + 'erat'
+							},
+							plural: {
+								first: pr + _('era_mus'),
+								second: pr + _('era_tis'),
+								third: pr + 'erant'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: pr + _('ero_'),
+								second: pr + 'eris',
+								third: pr + 'erit'
+							},
+							plural: {
+								first: pr + 'erimus',
+								second: pr + 'eritis',
+								third: pr + 'erint'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						future: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						futureperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				subjunctive: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						imperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						perfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						},
+						pluperfect: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				imperative: {
+					active: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					},
+					passive: {
+						present: {
+							singular: {
+								first: '-',
+								second: '-',
+								third: '-'
+							},
+							plural: {
+								first: '-',
+								second: '-',
+								third: '-'
+							}
+						}
+					}
+				},
+				infinitive: {
+					active: {
+						present: _(st[1]),
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					}
+				},
+				participle: {
+					active: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					},
+					passive: {
+						present: '-',
+						perfect: '-',
+						future: '-'
+					}
+				}
+
+			};
+			break;
+
+		default:
+			console.log('ERROR: Unexpected verb type.');
+			return null;
+	}
+
+	// edit conjugation with special syntax
+	if (syn && word.type !== 'verb Irr') {
+		if (syn.indicative) {
+			for (var voice in syn.indicative) {
+				for (var tense in syn.indicative[voice]) {
+					for (var number in syn.indicative[voice][tense]) {
+						for (var person in syn.indicative[voice][tense][number]) {
+							if (syn.indicative[voice][tense][number][person]) conjugation.indicative[voice][tense][number][person] = syn.indicative[voice][tense][number][person];
+						}
+					}
+				}
+			}
+		}
+		if (syn.imperative) {
+			for (var voice in syn.imperative) {
+				for (var tense in syn.imperative[voice]) {
+					for (var number in syn.imperative[voice][tense]) {
+						// if (syn.imperative[voice][tense][number])
+						for (var person in syn.imperative[voice][tense][number]) if (syn.imperative[voice][tense][number][person]) conjugation.imperative[voice][tense][number][person] = syn.imperative[voice][tense][number][person];
+					}
+				}
+			}
+		}
+		if (syn.infinitive) {
+			for (var voice in syn.infinitive) {
+				for (var tense in syn.infinitive[voice]) {
+					if (syn.infinitive[voice][tense]) {
+						conjugation.infinitive[voice][tense] = syn.infinitive[voice][tense];
+					}
+				}
+			}
+		}
+	}
+
+	// return conjugation
+	syn = null;
+	return conjugation;
+};
+
+// Decline Word
+function decline(word) {
+
+	var declension;
+
+	// decline word
+	var st = word.statement.split(', ');
+	switch (word.type) {
+
+		case 'noun indeclinable':
+		case 'adjective indeclinable':
+			break;
+
+		case 'noun 1':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: s + 'a',
+					plural: s + 'ae'
+				},
+				genitive: {
+					singular: s + 'ae',
+					plural: s + _('a_rum')
+				},
+				dative: {
+					singular: s + 'ae',
+					plural: s + _('i_s')
+				},
+				accusative: {
+					singular: s + 'am',
+					plural: s + _('a_s')
+				},
+				ablative: {
+					singular: s + _('a_'),
+					plural: s + _('i_s')
+				},
+				vocative: {
+					singular: s + 'a',
+					plural: s + 'ae'
+				}
+			};
+			break;
+
+		case 'noun 1Pl':
+			var s = _(st[1].slice(0, -5));
+			declension = {
+				nominative: {
+					singular: '-',
+					plural: s + 'ae'
+				},
+				genitive: {
+					singular: '-',
+					plural: s + _('a_rum')
+				},
+				dative: {
+					singular: '-',
+					plural: s + _('i_s')
+				},
+				accusative: {
+					singular: '-',
+					plural: s + _('a_s')
+				},
+				ablative: {
+					singular: '-',
+					plural: s + _('i_s')
+				},
+				vocative: {
+					singular: '-',
+					plural: s + 'ae'
+				}
+			};
+			break;
+
+		case 'noun 2':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: st[0].slice(-2) === 'us' ? s + 'us' : _(st[0]),
+					plural: s + _('i_')
+				},
+				genitive: {
+					singular: s + _('i_'),
+					plural: s + _('o_rum')
+				},
+				dative: {
+					singular: s + _('o_'),
+					plural: s + _('i_s')
+				},
+				accusative: {
+					singular: s + 'um',
+					plural: s + _('o_s')
+				},
+				ablative: {
+					singular: s + _('o_'),
+					plural: s + _('i_s')
+				},
+				vocative: {
+					singular: st[0].slice(-2) === 'us' ? s + 'e' : _(st[0]),
+					plural: s + _('i_')
+				}
+			};
+			break;
+
+		case 'noun 2Pl':
+			var s = _(st[1].slice(0, -5));
+			declension = {
+				nominative: {
+					singular: '-',
+					plural: s + 'i_'
+				},
+				genitive: {
+					singular: '-',
+					plural: s + _('o_rum')
+				},
+				dative: {
+					singular: '-',
+					plural: s + _('i_s')
+				},
+				accusative: {
+					singular: '-',
+					plural: s + _('o_s')
+				},
+				ablative: {
+					singular: '-',
+					plural: s + _('i_s')
+				},
+				vocative: {
+					singular: '-',
+					plural: s + _('i_')
+				}
+			};
+			break;
+
+		case 'noun 2n':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: s + 'um',
+					plural: s + 'a'
+				},
+				genitive: {
+					singular: s + _('i_'),
+					plural: s + _('o_rum')
+				},
+				dative: {
+					singular: s + _('o_'),
+					plural: s + _('i_s')
+				},
+				accusative: {
+					singular: s + 'um',
+					plural: s + 'a'
+				},
+				ablative: {
+					singular: s + _('o_'),
+					plural: s + _('i_s')
+				},
+				vocative: {
+					singular: s + 'um',
+					plural: s + 'a'
+				}
+			};
+			break;
+
+		case 'noun 2nPl':
+			var s = _(st[1].slice(0, -5));
+			declension = {
+				nominative: {
+					singular: '-',
+					plural: s + 'a'
+				},
+				genitive: {
+					singular: '-',
+					plural: s + _('o_rum')
+				},
+				dative: {
+					singular: '-',
+					plural: s + _('i_s')
+				},
+				accusative: {
+					singular: '-',
+					plural: s + 'a'
+				},
+				ablative: {
+					singular: '-',
+					plural: s + _('i_s')
+				},
+				vocative: {
+					singular: '-',
+					plural: s + 'a'
+				}
+			};
+			break;
+
+		case 'noun 3':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: _(st[0]),
+					plural: s + _('e_s')
+				},
+				genitive: {
+					singular: s + 'is',
+					plural: s + 'um'
+				},
+				dative: {
+					singular: s + _('i_'),
+					plural: s + 'ibus'
+				},
+				accusative: {
+					singular: s + 'em',
+					plural: s + _('e_s')
+				},
+				ablative: {
+					singular: s + 'e',
+					plural: s + 'ibus'
+				},
+				vocative: {
+					singular: _(st[0]),
+					plural: s + _('e_s')
+				}
+			};
+			break;
+
+		case 'noun 3Pl':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: '-',
+					plural: s + _('e_s')
+				},
+				genitive: {
+					singular: '-',
+					plural: s + 'um'
+				},
+				dative: {
+					singular: '-',
+					plural: s + 'ibus'
+				},
+				accusative: {
+					singular: '-',
+					plural: s + _('e_s')
+				},
+				ablative: {
+					singular: '-',
+					plural: s + 'ibus'
+				},
+				vocative: {
+					singular: '-',
+					plural: s + _('e_s')
+				}
+			};
+			break;
+
+		case 'noun 3n':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: _(st[0]),
+					plural: s + 'a'
+				},
+				genitive: {
+					singular: s + 'is',
+					plural: s + 'um'
+				},
+				dative: {
+					singular: s + _('i_'),
+					plural: s + 'ibus'
+				},
+				accusative: {
+					singular: _(st[0]),
+					plural: s + 'a'
+				},
+				ablative: {
+					singular: s + 'e',
+					plural: s + 'ibus'
+				},
+				vocative: {
+					singular: _(st[0]),
+					plural: s + 'a'
+				}
+			};
+			break;
+
+		case 'noun 3i':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: _(st[0]),
+					plural: s + _('e_s')
+				},
+				genitive: {
+					singular: s + 'is',
+					plural: s + 'ium'
+				},
+				dative: {
+					singular: s + _('i_'),
+					plural: s + 'ibus'
+				},
+				accusative: {
+					singular: s + 'em',
+					plural: s + _('e_s') + ' / ' + s + _('i_s')
+				},
+				ablative: {
+					singular: s + 'e',
+					plural: s + 'ibus'
+				},
+				vocative: {
+					singular: _(st[0]),
+					plural: s + _('e_s')
+				}
+			};
+			break;
+
+		case 'noun 3in':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: _(st[0]),
+					plural: s + 'ia'
+				},
+				genitive: {
+					singular: s + 'is',
+					plural: s + 'ium'
+				},
+				dative: {
+					singular: s + _('i_'),
+					plural: s + 'ibus'
+				},
+				accusative: {
+					singular: _(st[0]),
+					plural: s + 'ia'
+				},
+				ablative: {
+					singular: s + _('i_'),
+					plural: s + 'ibus'
+				},
+				vocative: {
+					singular: _(st[0]),
+					plural: s + 'ia'
+				}
+			};
+			break;
+
+		case 'noun 3nPl':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: '-',
+					plural: s + 'a'
+				},
+				genitive: {
+					singular: '-',
+					plural: s + 'um'
+				},
+				dative: {
+					singular: '-',
+					plural: s + 'ibus'
+				},
+				accusative: {
+					singular: '-',
+					plural: s + 'a'
+				},
+				ablative: {
+					singular: '-',
+					plural: s + 'ibus'
+				},
+				vocative: {
+					singular: '-',
+					plural: s + 'a'
+				}
+			};
+			break;
+
+		case 'noun 3inPl':
+			var s = _(st[1].slice(0, -3));
+			declension = {
+				nominative: {
+					singular: '-',
+					plural: s + 'ia'
+				},
+				genitive: {
+					singular: '-',
+					plural: s + 'ium'
+				},
+				dative: {
+					singular: '-',
+					plural: s + 'ibus'
+				},
+				accusative: {
+					singular: '-',
+					plural: s + 'ia'
+				},
+				ablative: {
+					singular: '-',
+					plural: s + 'ibus'
+				},
+				vocative: {
+					singular: '-',
+					plural: s + 'ia'
+				}
+			};
+			break;
+
+		case 'noun 4':
+			var s = _(st[1].slice(0, -3));
+			declension = {
+				nominative: {
+					singular: s + 'us',
+					plural: s + _('u_s')
+				},
+				genitive: {
+					singular: s + _('u_s'),
+					plural: s + 'uum'
+				},
+				dative: {
+					singular: s + _('ui_') + ' / ' + s + _('u_'),
+					plural: s + 'ibus'
+				},
+				accusative: {
+					singular: s + 'um',
+					plural: s + _('u_s')
+				},
+				ablative: {
+					singular: s + _('u_'),
+					plural: s + 'ibus'
+				},
+				vocative: {
+					singular: s + 'us',
+					plural: s + _('u_s')
+				}
+			};
+			break;
+
+		case 'noun 5':
+			var s = st[1][st[1].length - 3] === '_' ? _(st[1].slice(0, st[1].length - 4)) : _(st[1].slice(0, st[1].length - 3));
+			declension = {
+				nominative: {
+					singular: s + _('e_s'),
+					plural: s + _('e_s')
+				},
+				genitive: {
+					singular: s === _(st[1].slice(0, st[1].length - 4)) ? s + _('e_i_') : s + _('ei_'),
+					plural: s + _('e_rum')
+				},
+				dative: {
+					singular: s === _(st[1].slice(0, st[1].length - 4)) ? s + _('e_i_') : s + _('ei_'),
+					plural: s + _('e_bus')
+				},
+				accusative: {
+					singular: s + 'em',
+					plural: s + _('e_s')
+				},
+				ablative: {
+					singular: s + _('e_'),
+					plural: s + _('e_bus')
+				},
+				vocative: {
+					singular: s + _('e_s'),
+					plural: s + _('e_s')
+				}
+			};
+			break;
+
+		case 'pronoun personal':
+			if (st[0] === 'ego_') {
+				declension = {
+					nominative: {
+						singular: _('ego_'),
+						plural: _('no_s')
+					},
+					genitive: {
+						singular: _('mei_'),
+						plural: _('nostrum / nostri_')
+					},
+					dative: {
+						singular: 'mihi',
+						plural: _('no_bi_s')
+					},
+					accusative: {
+						singular: _('me_'),
+						plural: _('no_s')
+					},
+					ablative: {
+						singular: _('me_'),
+						plural: _('no_bi_s')
+					},
+					vocative: {
+						singular: '-',
+						plural: '-'
+					}
+				};
+			} else if (st[0] === 'tu_') {
+				declension = {
+					nominative: {
+						singular: _('tu_'),
+						plural: _('vo_s')
+					},
+					genitive: {
+						singular: _('tui_'),
+						plural: _('vestrum / vestri_')
+					},
+					dative: {
+						singular: 'tibi',
+						plural: _('vo_bi_s')
+					},
+					accusative: {
+						singular: _('te_'),
+						plural: _('vo_s')
+					},
+					ablative: {
+						singular: _('te_'),
+						plural: _('vo_bi_s')
+					},
+					vocative: {
+						singular: '-',
+						plural: '-'
+					}
+				};
+			} else if (st[0] === 'is') {
+				declension = {
+					nominative: {
+						singular: 'is',
+						plural: _('ei_ / ii_')
+					},
+					genitive: {
+						singular: 'eius',
+						plural: _('eo_rum')
+					},
+					dative: {
+						singular: _('ei_'),
+						plural: _('ei_s / ii_s')
+					},
+					accusative: {
+						singular: 'eum',
+						plural: _('eo_s')
+					},
+					ablative: {
+						singular: _('eo_'),
+						plural: _('ei_s / ii_s')
+					},
+					vocative: {
+						singular: '-',
+						plural: '-'
+					}
+				};
+			} else if (st[0] === 'ea') {
+				declension = {
+					nominative: {
+						singular: 'ea',
+						plural: 'eae'
+					},
+					genitive: {
+						singular: 'eius',
+						plural: _('ea_rum')
+					},
+					dative: {
+						singular: _('ei_'),
+						plural: _('ei_s / ii_s')
+					},
+					accusative: {
+						singular: 'eam',
+						plural: _('ea_s')
+					},
+					ablative: {
+						singular: _('ea_'),
+						plural: _('ei_s / ii_s')
+					},
+					vocative: {
+						singular: '-',
+						plural: '-'
+					}
+				};
+			} else if (st[0] === 'id') {
+				declension = {
+					nominative: {
+						singular: 'id',
+						plural: 'ea'
+					},
+					genitive: {
+						singular: 'eius',
+						plural: _('eo_rum')
+					},
+					dative: {
+						singular: _('ei_'),
+						plural: _('ei_s / ii_s')
+					},
+					accusative: {
+						singular: 'id',
+						plural: 'ea'
+					},
+					ablative: {
+						singular: _('eo_'),
+						plural: _('ei_s / ii_s')
+					},
+					vocative: {
+						singular: '-',
+						plural: '-'
+					}
+				};
+			}
+			break;
+
+		case 'pronoun reflexive':
+			console.log(st);
+			if (st[1] === 'mei_; -') {
+				declension = {
+					nominative: {
+						singular: '-',
+						plural: '-'
+					},
+					genitive: {
+						singular: _('mei_'),
+						plural: _('nostrum / nostri_')
+					},
+					dative: {
+						singular: 'mihi',
+						plural: _('no_bi_s')
+					},
+					accusative: {
+						singular: _('me_'),
+						plural: _('no_s')
+					},
+					ablative: {
+						singular: _('me_'),
+						plural: _('no_bi_s')
+					},
+					vocative: {
+						singular: '-',
+						plural: '-'
+					}
+				};
+			} else if (st[1] === 'tui_; -') {
+				declension = {
+					nominative: {
+						singular: '-',
+						plural: '-'
+					},
+					genitive: {
+						singular: _('tui_'),
+						plural: _('vestrum / vestri_')
+					},
+					dative: {
+						singular: 'tibi',
+						plural: _('vo_bi_s')
+					},
+					accusative: {
+						singular: _('te_'),
+						plural: _('vo_s')
+					},
+					ablative: {
+						singular: _('te_'),
+						plural: _('vo_bi_s')
+					},
+					vocative: {
+						singular: '-',
+						plural: '-'
+					}
+				};
+			} else if (st[1] === 'sui_') {
+				declension = {
+					nominative: {
+						singular: '-',
+						plural: '-'
+					},
+					genitive: {
+						singular: _('sui_'),
+						plural: _('sui_')
+					},
+					dative: {
+						singular: 'sibi',
+						plural: 'sibi'
+					},
+					accusative: {
+						singular: _('se_, se_se_'),
+						plural: _('se_, se_se_')
+					},
+					ablative: {
+						singular: _('se_, se_se_'),
+						plural: _('se_, se_se_')
+					},
+					vocative: {
+						singular: '-',
+						plural: '-'
+					}
+				};
+			}
+			break;
+
+		case 'adjective 1,2':
+			var s = _(st[1].slice(0, -1));
+			declension = {
+				nominative: {
+					singular: {
+						masculine: st[0].slice(-2) === 'us' ? s + 'us' : _(st[0]),
+						feminine: s + 'a',
+						neuter: s + 'um'
+					},
+					plural: {
+						masculine: s + _('i_'),
+						feminine: s + 'ae',
+						neuter: s + 'a'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: s + _('i_'),
+						feminine: s + 'ae',
+						neuter: s + _('i_')
+					},
+					plural: {
+						masculine: s + _('o_rum'),
+						feminine: s + _('a_rum'),
+						neuter: s + _('o_rum')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: s + _('o_'),
+						feminine: s + 'ae',
+						neuter: s + _('o_')
+					},
+					plural: {
+						masculine: s + _('i_s'),
+						feminine: s + _('i_s'),
+						neuter: s + _('i_s')
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: s + 'um',
+						feminine: s + 'am',
+						neuter: s + 'um'
+					},
+					plural: {
+						masculine: s + _('o_s'),
+						feminine: s + _('a_s'),
+						neuter: s + 'a'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: s + _('o_'),
+						feminine: s + _('a_'),
+						neuter: s + _('o_')
+					},
+					plural: {
+						masculine: s + _('i_s'),
+						feminine: s + _('i_s'),
+						neuter: s + _('i_s')
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: st[0].slice(-2) === 'us' ? s + 'e' : _(st[0]),
+						feminine: s + 'a',
+						neuter: s + 'um'
+					},
+					plural: {
+						masculine: s + _('i_'),
+						feminine: s + 'ae',
+						neuter: s + _('i_')
+					}
+				},
+				adverb: s + _('e_')
+			};
+			break;
+
+		case 'adjective 1,2pl':
+			var s = _(st[1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: s + _('i_'),
+						feminine: s + 'ae',
+						neuter: s + 'a'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: s + _('o_rum'),
+						feminine: s + _('a_rum'),
+						neuter: s + _('o_rum')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: s + _('i_s'),
+						feminine: s + _('i_s'),
+						neuter: s + _('i_s')
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: s + _('o_s'),
+						feminine: s + _('a_s'),
+						neuter: s + 'a'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: s + _('i_s'),
+						feminine: s + _('i_s'),
+						neuter: s + _('i_s')
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: s + _('i_'),
+						feminine: s + 'ae',
+						neuter: s + _('i_')
+					}
+				},
+				adverb: s + _('e_')
+			};
+			break;
+
+		case 'adjective 3':
+			var numSingNoms = st[2] != null ? 3 : st[1][st[1].length - 1] == 'e' ? 2 : 1;
+			var s = _(st[numSingNoms == 2 ? 0 : 1].slice(0, -2));
+			declension = {
+				nominative: {
+					singular: {
+						masculine: _(st[0]),
+						feminine: _(st[numSingNoms == 3 ? 1 : 0]),
+						neuter: _(st[numSingNoms == 3 ? 2 : numSingNoms == 2 ? 1 : 0])
+					},
+					plural: {
+						masculine: s + _('e_s'),
+						feminine: s + _('e_s'),
+						neuter: s + 'ia'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: s + 'is',
+						feminine: s + 'is',
+						neuter: s + 'is'
+					},
+					plural: {
+						masculine: s + 'ium',
+						feminine: s + 'ium',
+						neuter: s + 'ium'
+					}
+				},
+				dative: {
+					singular: {
+						masculine: s + _('i_'),
+						feminine: s + _('i_'),
+						neuter: s + _('i_')
+					},
+					plural: {
+						masculine: s + 'ibus',
+						feminine: s + 'ibus',
+						neuter: s + 'ibus'
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: s + 'em',
+						feminine: s + 'em',
+						neuter: _(st[numSingNoms == 3 ? 2 : numSingNoms == 2 ? 1 : 0])
+					},
+					plural: {
+						masculine: s + _('e_s') + ' / ' + s + _('i_s'),
+						feminine: s + _('e_s') + ' / ' + s + _('i_s'),
+						neuter: s + 'ia'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: s + _('i_'),
+						feminine: s + _('i_'),
+						neuter: s + _('i_')
+					},
+					plural: {
+						masculine: s + 'ibus',
+						feminine: s + 'ibus',
+						neuter: s + 'ibus'
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: _(st[0]),
+						feminine: _(st[numSingNoms == 3 ? 1 : 0]),
+						neuter: _(st[numSingNoms == 3 ? 2 : numSingNoms == 2 ? 1 : 0])
+					},
+					plural: {
+						masculine: s + _('e_s'),
+						feminine: s + _('e_s'),
+						neuter: s + 'ia'
+					}
+				},
+				adverb: s + 'iter'
+			};
+			break;
+
+		case 'adjective pronominal':
+			var s = _(st[1].slice(0, -1));
+			declension = {
+				nominative: {
+					singular: {
+						masculine: _(st[0]),
+						feminine: s + 'a',
+						neuter: s + 'um'
+					},
+					plural: {
+						masculine: s + _('i_'),
+						feminine: s + 'ae',
+						neuter: s + 'a'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: s + _('i_us'),
+						feminine: s + _('i_us'),
+						neuter: s + _('i_us')
+					},
+					plural: {
+						masculine: s + _('o_rum'),
+						feminine: s + _('a_rum'),
+						neuter: s + _('o_rum')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: s + _('i_'),
+						feminine: s + _('i_'),
+						neuter: s + _('i_')
+					},
+					plural: {
+						masculine: s + _('i_s'),
+						feminine: s + _('i_s'),
+						neuter: s + _('i_s')
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: s + 'um',
+						feminine: s + 'am',
+						neuter: s + 'um'
+					},
+					plural: {
+						masculine: s + _('o_s'),
+						feminine: s + _('a_s'),
+						neuter: s + 'a'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: s + _('o_'),
+						feminine: s + _('a_'),
+						neuter: s + _('o_')
+					},
+					plural: {
+						masculine: s + _('i_s'),
+						feminine: s + _('i_s'),
+						neuter: s + _('i_s')
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: st[0].slice(-2) === 'us' ? s + 'e' : _(st[0]),
+						feminine: s + 'a',
+						neuter: s + 'um'
+					},
+					plural: {
+						masculine: s + _('i_'),
+						feminine: s + 'ae',
+						neuter: s + _('i_')
+					}
+				}
+			};
+			break;
+
+		case 'adjective demonstrative':
+		case 'pronoun demonstrative':
+			var s = st[0] === 'hic' ? 0 : st[0] === 'iste' ? 1 : st[1] === 'ille' ? 2 : 2;
+			declension = {
+				nominative: {
+					singular: {
+						masculine: s == 0 ? 'hic' : s == 1 ? 'iste' : 'ille',
+						feminine: s == 0 ? 'haec' : s == 1 ? 'ista' : 'illa',
+						neuter: s == 0 ? 'hoc' : s == 1 ? 'istud' : 'illud'
+					},
+					plural: {
+						masculine: s == 0 ? _('hi_') : s == 1 ? _('isti_') : _('illi_'),
+						feminine: s == 0 ? 'hae' : s == 1 ? 'istae' : 'illae',
+						neuter: s == 0 ? 'haec' : s == 1 ? 'ista' : 'illa'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: s == 0 ? 'huius' : s == 1 ? _('isti_us') : _('illi_us'),
+						feminine: s == 0 ? 'huius' : s == 1 ? _('isti_us') : _('illi_us'),
+						neuter: s == 0 ? 'huius' : s == 1 ? _('isti_us') : _('illi_us')
+					},
+					plural: {
+						masculine: s == 0 ? _('ho_rum') : s == 1 ? _('isto_rum') : _('illo_rum'),
+						feminine: s == 0 ? _('ha_rum') : s == 1 ? _('ista_rum') : _('illa_rum'),
+						neuter: s == 0 ? _('ho_rum') : s == 1 ? _('isto_rum') : _('illo_rum')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: s == 0 ? 'huic' : s == 1 ? _('isti_') : _('illi_'),
+						feminine: s == 0 ? 'huic' : s == 1 ? _('isti_') : _('illi_'),
+						neuter: s == 0 ? 'huic' : s == 1 ? _('isti_') : _('illi_')
+					},
+					plural: {
+						masculine: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s'),
+						feminine: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s'),
+						neuter: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s')
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: s == 0 ? 'hunc' : s == 1 ? 'istum' : 'illum',
+						feminine: s == 0 ? 'hanc' : s == 1 ? 'istam' : 'illam',
+						neuter: s == 0 ? 'hoc' : s == 1 ? 'istud' : 'illud'
+					},
+					plural: {
+						masculine: s == 0 ? _('ho_s') : s == 1 ? _('isto_s') : _('illo_s'),
+						feminine: s == 0 ? _('ha_s') : s == 1 ? _('ista_s') : _('illa_s'),
+						neuter: s == 0 ? 'haec' : s == 1 ? 'ista' : 'illa'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: s == 0 ? _('ho_c') : s == 1 ? _('isto_') : _('illo_'),
+						feminine: s == 0 ? _('ha_c') : s == 1 ? _('ista_') : _('illa_'),
+						neuter: s == 0 ? _('ho_c') : s == 1 ? _('isto_') : _('illo_')
+					},
+					plural: {
+						masculine: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s'),
+						feminine: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s'),
+						neuter: s == 0 ? _('hi_s') : s == 1 ? _('isti_s') : _('illi_s')
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					}
+				}
+			};
+			break;
+
+		case 'pronoun relative':
+		case 'adjective interrogative':
+			declension = {
+				nominative: {
+					singular: {
+						masculine: _('qui_'),
+						feminine: 'quae',
+						neuter: 'quod'
+					},
+					plural: {
+						masculine: _('qui_'),
+						feminine: 'quae',
+						neuter: 'quae'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: 'cuius',
+						feminine: 'cuius',
+						neuter: 'cuius'
+					},
+					plural: {
+						masculine: _('quo_rum'),
+						feminine: _('qua_rum'),
+						neuter: _('quo_rum')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: 'cui',
+						feminine: 'cui',
+						neuter: 'cui'
+					},
+					plural: {
+						masculine: 'quibus',
+						feminine: 'quibus',
+						neuter: 'quibus'
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: 'quem',
+						feminine: 'quam',
+						neuter: 'quod'
+					},
+					plural: {
+						masculine: _('quo_s'),
+						feminine: _('qua_s'),
+						neuter: 'quae'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: _('quo_'),
+						feminine: _('qua_'),
+						neuter: _('quo_')
+					},
+					plural: {
+						masculine: 'quibus',
+						feminine: 'quibus',
+						neuter: 'quibus'
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					}
+				}
+			};
+			break;
+
+		case 'pronoun interrogative':
+			declension = {
+				nominative: {
+					singular: {
+						masculine: 'quis',
+						feminine: 'quis',
+						neuter: 'quid'
+					},
+					plural: {
+						masculine: _('qui_'),
+						feminine: 'quae',
+						neuter: 'quae'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: 'cuius',
+						feminine: 'cuius',
+						neuter: 'cuius'
+					},
+					plural: {
+						masculine: _('quo_rum'),
+						feminine: _('qua_rum'),
+						neuter: _('quo_rum')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: 'cui',
+						feminine: 'cui',
+						neuter: 'cui'
+					},
+					plural: {
+						masculine: 'quibus',
+						feminine: 'quibus',
+						neuter: 'quibus'
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: 'quem',
+						feminine: 'quem',
+						neuter: 'quid'
+					},
+					plural: {
+						masculine: _('quo_s'),
+						feminine: _('qua_s'),
+						neuter: 'quae'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: _('quo_'),
+						feminine: _('quo_'),
+						neuter: _('quo_')
+					},
+					plural: {
+						masculine: 'quibus',
+						feminine: 'quibus',
+						neuter: 'quibus'
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					}
+				}
+			};
+			break;
+
+		case 'pronoun indefinite':
+			declension = {
+				nominative: {
+					singular: {
+						masculine: _('qui_dam'),
+						feminine: 'quaedam',
+						neuter: 'quiddam'
+					},
+					plural: {
+						masculine: _('qui_dam'),
+						feminine: 'quaedam',
+						neuter: 'quaedam'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: 'cuiusdam',
+						feminine: 'cuiusdam',
+						neuter: 'cuiusdam'
+					},
+					plural: {
+						masculine: _('quo_rundam'),
+						feminine: _('qua_rundam'),
+						neuter: _('quo_rundam')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: 'cuidam',
+						feminine: 'cuidam',
+						neuter: 'cuidam'
+					},
+					plural: {
+						masculine: 'quibusdam',
+						feminine: 'quibusdam',
+						neuter: 'quibusdam'
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: 'quendam',
+						feminine: 'quandam',
+						neuter: 'quiddam'
+					},
+					plural: {
+						masculine: _('quo_sdam'),
+						feminine: _('qua_sdam'),
+						neuter: 'quaedam'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: _('quo_dam'),
+						feminine: _('qua_dam'),
+						neuter: _('quo_dam')
+					},
+					plural: {
+						masculine: 'quibusdam',
+						feminine: 'quibusdam',
+						neuter: 'quibusdam'
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					}
+				}
+			};
+			break;
+
+		case 'adjective indefinite':
+			declension = {
+				nominative: {
+					singular: {
+						masculine: _('qui_dam'),
+						feminine: 'quaedam',
+						neuter: 'quoddam'
+					},
+					plural: {
+						masculine: _('qui_dam'),
+						feminine: 'quaedam',
+						neuter: 'quaedam'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: 'cuiusdam',
+						feminine: 'cuiusdam',
+						neuter: 'cuiusdam'
+					},
+					plural: {
+						masculine: _('quo_rundam'),
+						feminine: _('qua_rundam'),
+						neuter: _('quo_rundam')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: 'cuidam',
+						feminine: 'cuidam',
+						neuter: 'cuidam'
+					},
+					plural: {
+						masculine: 'quibusdam',
+						feminine: 'quibusdam',
+						neuter: 'quibusdam'
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: 'quendam',
+						feminine: 'quandam',
+						neuter: 'quoddam'
+					},
+					plural: {
+						masculine: _('quo_sdam'),
+						feminine: _('qua_sdam'),
+						neuter: 'quaedam'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: _('quo_dam'),
+						feminine: _('qua_dam'),
+						neuter: _('quo_dam')
+					},
+					plural: {
+						masculine: 'quibusdam',
+						feminine: 'quibusdam',
+						neuter: 'quibusdam'
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					}
+				}
+			};
+			break;
+
+		case 'adjective idem':
+			declension = {
+				nominative: {
+					singular: {
+						masculine: _('i_dem'),
+						feminine: 'eadem',
+						neuter: 'idem'
+					},
+					plural: {
+						masculine: _('i_dem / ei_dem'),
+						feminine: 'eaedem',
+						neuter: 'eadem'
+					}
+				},
+				genitive: {
+					singular: {
+						masculine: 'eiusdem',
+						feminine: 'eiusdem',
+						neuter: 'eiusdem'
+					},
+					plural: {
+						masculine: _('eo_rundem'),
+						feminine: _('ea_rundem'),
+						neuter: _('eo_rundem')
+					}
+				},
+				dative: {
+					singular: {
+						masculine: _('ei_dem'),
+						feminine: _('ei_dem'),
+						neuter: _('ei_dem')
+					},
+					plural: {
+						masculine: _('i_sdem / ei_sdem'),
+						feminine: _('i_sdem / ei_sdem'),
+						neuter: _('i_sdem / ei_sdem')
+					}
+				},
+				accusative: {
+					singular: {
+						masculine: 'eundem',
+						feminine: 'eandem',
+						neuter: 'idem'
+					},
+					plural: {
+						masculine: _('eo_sdem'),
+						feminine: _('ea_sdem'),
+						neuter: 'eadem'
+					}
+				},
+				ablative: {
+					singular: {
+						masculine: _('eo_dem'),
+						feminine: _('ea_dem'),
+						neuter: _('eo_dem')
+					},
+					plural: {
+						masculine: _('i_sdem / ei_sdem'),
+						feminine: _('i_sdem / ei_sdem'),
+						neuter: _('i_sdem / ei_sdem')
+					}
+				},
+				vocative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					}
+				}
+			};
+			break;
+
+		default:
+			console.log('ERROR: Unexpected noun type.');
+			return null;
+	}
+
+	// edit declension with specialSyntax
+	if (word.specialSyntax) {
+		for (var case_ in word.specialSyntax) {
+			if (case_ == 'adverb') {
+				declension.adverb = word.specialSyntax.adverb;
+				continue;
+			}
+			for (var number in word.specialSyntax[case_]) {
+				// if noun
+				if ((word.type.slice(0, 4) === 'noun' || word.type === 'pronoun personal' || word.type === 'pronoun reflexive') && word.specialSyntax[case_][number]) declension[case_][number] = word.specialSyntax[case_][number];
+				// if adjective
+				else if (word.type.slice(0, 9) === 'adjective') {
+						for (var gender in word.specialSyntax[case_][number]) {
+							if (word.specialSyntax[case_][number][gender]) declension[case_][number][gender] = word.specialSyntax[case_][number][gender];
+						}
+					}
+			}
+		}
+	}
+
+	// return declension
+	return declension;
 };
 
 // Morphology Table

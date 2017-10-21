@@ -12,6 +12,11 @@ module.exports = function(grunt) {
 				files: {
 					'bin/LatinWords.js': 'src/LatinWords.js'
 				}
+			},
+			spanishWords: {
+				files: {
+					'bin/SpanishWords.js': 'src/SpanishWords.js'
+				}
 			}
 		},
 
@@ -22,7 +27,14 @@ module.exports = function(grunt) {
 				options: {
 					spawn: false
 				}
-			}
+			},
+			spanishWords: {
+				files: ['src/SpanishWords.js'],
+				tasks: ['SpanishWords'],
+				options: {
+					spawn: false
+				}
+			},
 		}
 
 	});
@@ -35,4 +47,5 @@ module.exports = function(grunt) {
 	// grunt.registerTask('greekKeyboard', ['babel']);
 	// grunt.registerTask('LatinWords', ['babel:latinWords']);
   grunt.registerTask('LatinWords', ['babel']);
+  grunt.registerTask('SpanishWords', ['babel']);
 };

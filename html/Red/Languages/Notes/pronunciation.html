@@ -1,12 +1,18 @@
 <!doctype html>
 <html>
 <head>
+	<meta charset="utf-8"/>
   <style>
   	@font-face {
 			font-family: brill;
 			src: url('fonts/brill_roman_2.06_051.ttf');
 		}
+
 		.Latin {
+			font-family: brill;
+		}
+
+		.Spanish {
 			font-family: brill;
 		}
 
@@ -27,8 +33,12 @@
 </head>
 <body>
 	<h1>Pronunciation</h1>
+
+	<h4>
+		<a href="#Latin">Latin</a> <a href="#Spanish">Spanish</a>
+	</h4>
 	
-	<h2>Latin</h2>
+	<h2><a name="Latin"></a>Latin</h2>
 	
 	<h3>Vowels</h3>
 	<table>
@@ -54,7 +64,7 @@
 		</tr>
 		<tr>
 			<td class="Latin char_cell">i_</td>
-			<td class="pron_cell">f<u>ee</u>t</td>
+			<td class="pron_cell">s<u>ee</u></td>
 		</tr>
 		<tr>
 			<td class="Latin char_cell">o</td>
@@ -70,7 +80,7 @@
 		</tr>
 		<tr>
 			<td class="Latin char_cell">u_</td>
-			<td class="pron_cell">f<u>oo</u>l</td>
+			<td class="pron_cell">b<u>oo</u>t</td>
 		</tr>
 		<tr>
 			<td class="Latin char_cell">y</td>
@@ -193,37 +203,102 @@
 		<li>
 			While in English the letters <span class="Latin">c</span>, <span class="Latin">p</span>, and <span class="Latin">t</span> are aspirated (pronounced with a puff of air), in Latin they are not, and the pairs <span class="Latin">ch</span>, <span class="Latin">ph</span>, and <span class="Latin">th</span> are used to denote this aspiration - they are sounds introduced into Latin from Greek.
 		</li>
+		<li>
+			The combination <span class="Latin">gn</span> is pronounced as in "ha<u>ngn</u>ail", i.e. <span class="Latin">magnus</span> is pronounced "mangnus".
+		</li>
+		<li>
+			When double consonants occur, both consonants are pronounced, i.e. <span class="Latin">ille</span> is pronounced "il - le".
+		</li>
 	</ul>
 
 	<h3>Accentuation</h3>
 
 	<p>The last syllable of a Latin word is called the <u>ultima</u>, the second-last the <u>penult</u>, and the third-last the <u>antepenult</u>. Only the penult or the antepenult may be stressed. Thus, if a word has only two syllables, the penult is stressed. If a word has more than two syllables, then its stress accent is determined according to the <b>law of the penult</b>: If the penult is long, it is stressed. If the penult is short, the antepenult is stressed. A syllable is long if it contains a long vowel or a dipthong (long by nature), or a short vowel followed by two or more consonants not necessarily in the same syllable (long by position).</p>
 
-	<h2>Spanish</h2>
+	<h2><a name="Spanish"></a>Spanish</h2>
 
 	<h3>Vowels</h3>
 
 	<table>
 		<tr>
-			<td class="Latin char_cell"></td>
-			<td class="pron_cell"><u></u></td>
+			<td class="Spanish char_cell">a</td>
+			<td class="pron_cell">f<u>a</u>ther</td>
 		</tr>
 		<tr>
-			<td class="Latin char_cell"></td>
-			<td class="pron_cell"><u></u></td>
+			<td class="Spanish char_cell">e</td>
+			<td class="pron_cell">p<u>e</u>t</td>
 		</tr>
 		<tr>
-			<td class="Latin char_cell"></td>
-			<td class="pron_cell"><u></u></td>
+			<td class="Spanish char_cell">i</td>
+			<td class="pron_cell">s<u>ee</u></td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">y</td>
+			<td class="pron_cell">s<u>ee</u></td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">o</td>
+			<td class="pron_cell">h<u>o</u>pe</td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">u</td>
+			<td class="pron_cell">b<u>oo</u>t</td>
 		</tr>
 	</table>
 
-	<!-- replace _ with macrons in Latin Text -->
+	<ul>
+		<li>
+			Whether stressed or unstressed, the sounds of Spanish vowels are always clear, tense, and short. The stress doesn't change the sound of a vowel the way it does in English, e.g. in Spanish the three <span class="Spanish">a</span>'s of <span class="Spanish">Panama_'</span> all have the same sound.
+		</li>
+	</ul>
+
+	<h3>Diphthongs</h3>
+
+	<table>
+		<tr>
+			<td class="Spanish char_cell">ie</td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">io</td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">ai</td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">ei</td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">ay</td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">ue</td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">au</td>
+		</tr>
+		<tr>
+			<td class="Spanish char_cell">uy</td>
+		</tr>
+	</table>
+	
+	<ul>
+		<li>
+			Whenever the vowels <span class="Spanish">i, u</span> are unstressed and directly preceded or followed by another vowel, they are pronounced shorter, and form the "weak" part of the two-vowel combination that comprises a dipthong.
+		</li>
+	</ul>
+
+
+	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
+	<script src="../Applications/FlashCards/js/bin/SpanishWords.js"></script>
 	<script>
-		var _ = (str) => str.replace(/_/g, String.fromCharCode(0x304));
-  	var LatinElements = document.getElementsByClassName('Latin');
-  	for (var i = 0; i < LatinElements.length; i++)
-  		LatinElements[i].textContent = _(LatinElements[i].textContent);
+		// replace _ with macrons in Latin text 
+  	var latinElements = document.getElementsByClassName('Latin');
+  	for (var i = 0; i < latinElements.length; i++)
+  		latinElements[i].textContent = _(latinElements[i].textContent);
+  	// replace _ substrings with appropriate characters in Spanish text
+  	var spanishElements = document.getElementsByClassName('Spanish');
+  	for (var i = 0; i < spanishElements.length; i++)
+  		spanishElements[i].textContent = sp(spanishElements[i].textContent);
   </script>
 </body>
 </html>
