@@ -9,12 +9,14 @@
 		}
 		.Latin {
 			font-family: brill;
-			font-size: 14px;
+			font-weight: bold;
+			color: maroon;
 		}
 
 		.Spanish {
 			font-family: brill;
-			font-size: 14px;
+			font-weight: bold;
+			color: blue;
 		}
 
 		.char_cell {
@@ -29,6 +31,7 @@
 			border: 1px solid black;
 			font-family: brill;
 			font-size: 24px;
+			color: maroon;
 		}
 
 		.morphologyTable th {
@@ -43,29 +46,82 @@
 
 	<h2>Latin</h2>
 
+	<p>
+		Every Latin <b style="font-size: larger;">noun</b> has a
+		<ul>
+			<li>
+				<b>gender</b> (masculine, feminine, or neuter),
+			</li>
+				<li>
+					<b>number</b> (singular or plural), and
+				</li>
+			<li>
+				<b>case</b> (nominative, genitive, dative, accusative, ablative, vocative, or locative).
+			</li>
+		</ul>
+		The <b>gender</b> determines the gender of any adjectives that may modify the noun. The <b>number</b> denotes the quantity of the noun. The <b>case</b> is determined by the function of the noun in the sentence. 
+	</p>
+
+	<p>
+		There are five declensions of Latin nouns. To decline a noun, one removes the ending from the genitive singular form to obtain the noun's <i>stem</i>, to which the following endings are appended:
+	</p>
+
 	<h3>Declension I</h3>
 
-		<div id="declension_table_1"></div>
+		<p>Most nouns of the first declension are feminine, some are masculine, and none are neuter.</p>
+	
+		<h4>Endings</h4>
+
+		<div id="ending_table_1"></div>
+
+		<h4>Example</h4>
+
+		<p id="example_statement_1" class="Latin" style="font-size: 24px;"></p>
+
+		<div id="example_table_1"></div>
 
 	<h3>Declension II</h3>
 
-		<div id="declension_table_2"></div>
-		<div id="declension_table_2n"></div>
+		<p>Most nouns of the second declension are masculine, some are feminine, and many are neuter.</p>
+
+		<h4>Endings</h4>
+
+		<div id="ending_table_2" style="float: left;"></div>
+		<div id="ending_table_2n"></div>
+
+		<h4>Examples</h4>
+		
+		<p id="example_statement_2" class="Latin" style="font-size: 24px;"></p>
+		<div id="example_table_2"></div>
+		
+		<br>
+		
+		<p>Some Masculine/Feminine second declension nouns lack the <span class="Latin">-us</span> ending in their nominative singular form, and their vocative singular form is identical to their nominative singular form:</p>
+
+		<p id="example_statement_2A" class="Latin" style="font-size: 24px;"></p>
+		<div id="example_table_2A"></div>
+
+		<p id="example_statement_2n" class="Latin" style="font-size: 24px;"></p>
+		<div id="example_table_2n"></div>
+
+		<p>
+			Second declension nouns whose stems end in <span class="Latin">-i_</span> have two posible forms for the genitive singular, one a contraction of the other, e.g. <span class="Latin">gladius, gladii_</span> or <span class="Latin">gladi_, m.</span>
+		</p>
 
 	<h3>Declension III</h3>
 
-		<div id="declension_table_3"></div>
-		<div id="declension_table_3n"></div>
-		<div id="declension_table_3i"></div>
-		<div id="declension_table_3in"></div>
+		<div id="ending_table_3"></div>
+		<div id="ending_table_3n"></div>
+		<div id="ending_table_3i"></div>
+		<div id="ending_table_3in"></div>
 
 	<h3>Declension IV</h3>
 
-		<div id="declension_table_4"></div>
+		<div id="ending_table_4"></div>
 
 	<h3>Declension V</h3>
 
-		<div id="declension_table_5"></div>
+		<div id="ending_table_5"></div>
 
 	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
 	<script>
@@ -73,24 +129,70 @@
   	// ---
 
   	for (var i = 0; i < 5; i++)
-	  	document.getElementById('declension_table_' + (i + 1)).
+	  	document.getElementById('ending_table_' + (i + 1)).
 	  		innerHTML = MorphologyTable(V.nouns['-' + (i + 1)]);
-  	document.getElementById('declension_table_2n').
+  	document.getElementById('ending_table_2n').
   		innerHTML = MorphologyTable(V.nouns['-2n']);
-  	document.getElementById('declension_table_3n').
+  	document.getElementById('ending_table_3n').
   		innerHTML = MorphologyTable(V.nouns['-3n']);
-  	document.getElementById('declension_table_3i').
+  	document.getElementById('ending_table_3i').
   		innerHTML = MorphologyTable(V.nouns['-3i']);
-  		document.getElementById('declension_table_3in').
+  		document.getElementById('ending_table_3in').
   		innerHTML = MorphologyTable(V.nouns['-3in']);
+
+  	document.getElementById('example_statement_1').
+  		textContent = _(V.nouns.agricola.statement);
+  	document.getElementById('example_table_1').
+  		innerHTML = MorphologyTable(V.nouns.agricola);
+
+  	document.getElementById('example_statement_2').
+  		textContent = _(V.nouns.servus.statement);
+  	document.getElementById('example_table_2').
+  		innerHTML = MorphologyTable(V.nouns.servus);
+
+  	document.getElementById('example_statement_2A').
+  		textContent = _(V.nouns.puer.statement);
+  	document.getElementById('example_table_2A').
+  		innerHTML = MorphologyTable(V.nouns.puer);
+
+  	document.getElementById('example_statement_2n').
+  		textContent = _(V.nouns.verbum.statement);
+  	document.getElementById('example_table_2n').
+  		innerHTML = MorphologyTable(V.nouns.verbum);
 
   	// ---
 
   	// replace _ with macrons in Latin Text
-  	var LatinElements = document.getElementsByClassName('Latin');
+  	let LatinElements = document.getElementsByClassName('Latin');
   	for (var i = 0; i < LatinElements.length; i++)
   		LatinElements[i].textContent = _(LatinElements[i].textContent);
 
+  </script>
+  <script>
+  	let declensionStrings = [
+  		'ending_table_1',
+  		'ending_table_2',
+  		'ending_table_2n',
+  		'ending_table_3',
+  		'ending_table_3n',
+  		'ending_table_3i',
+  		'ending_table_3in',
+  		'ending_table_4',
+  		'ending_table_5'
+  	];
+  	let declensionTables = declensionStrings.
+  		map(str => document.getElementById(str).innerHTML);
+  	let backgroundColor = document.querySelector('#ending_table_1 th')
+  		.style.backgroundColor;
+  	for (let i = 0; i < declensionStrings.length; i++) {
+	  	document.getElementById(declensionStrings[i]).innerHTML = declensionTables[i].
+	  		slice(0, declensionTables[i].indexOf('>') + 1) 
+	  		+ `<tr><th colspan="3" style="background-color: ${backgroundColor};">`
+	  		+ ([2,4,6].includes(i) ? 'Neuter' : 'Masculine / Feminine')
+	  		+ '</th></tr>'
+	  		+ declensionTables[i].
+	  			slice(declensionTables[i].indexOf('>') + 1);
+	  }
   </script>
 </body>
 </html>

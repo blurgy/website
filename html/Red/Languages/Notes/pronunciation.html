@@ -10,10 +10,14 @@
 
 		.Latin {
 			font-family: brill;
+			font-weight: bold;
+			color: maroon;
 		}
 
 		.Spanish {
 			font-family: brill;
+			font-weight: bold;
+			color: blue;
 		}
 
 		table {
@@ -23,6 +27,14 @@
 		td {
 			border: 1px solid black;
 			padding: 2px 8px;
+		}
+
+		.pron_cell span.Spanish {
+			font-size: larger;
+		}
+
+		.pron_cell span.Latin {
+			font-size: larger;
 		}
 
 		.char_cell {
@@ -217,7 +229,13 @@
 
 	<p>The last syllable of a Latin word is called the <u>ultima</u>, the second-last the <u>penult</u>, and the third-last the <u>antepenult</u>. Only the penult or the antepenult may be stressed. Thus, if a word has only two syllables, the penult is stressed. If a word has more than two syllables, then its stress accent is determined according to the <b>law of the penult</b>: If the penult is long, it is stressed. If the penult is short, the antepenult is stressed. A syllable is long if it contains a long vowel or a dipthong (long by nature), or a short vowel followed by two or more consonants not necessarily in the same syllable (long by position).</p>
 
+	<hr>
+
 	<h2><a name="Spanish"></a>Spanish</h2>
+
+	<p>
+		In Spanish speech, all words between pauses are strung together in a 'breath group'. Within the breath group, certain consonants are softened (<span class="Spanish">b</span>, <span class="Spanish">d</span>, <span class="Spanish">g</span>), and when identical vowels or consonants are adjacent to each other, one of them is omitted.
+	</p>
 
 	<h3>Vowels</h3>
 
@@ -252,6 +270,9 @@
 		<li>
 			Whether stressed or unstressed, the sounds of Spanish vowels are always clear, tense, and short. The stress doesn't change the sound of a vowel the way it does in English, e.g. in Spanish the three <span class="Spanish">a</span>'s of <span class="Spanish">Panama_'</span> all have the same sound.
 		</li>
+		<li>
+			Avoid lengthening final vowels, as in the glided 'o' of the English 'no'. Vowel sounds in Spanish are always short.
+		</li>
 	</ul>
 
 	<h3>Diphthongs</h3>
@@ -285,11 +306,11 @@
 	
 	<ul>
 		<li>
-			Whenever the vowels <span class="Spanish">i, u</span> are unstressed and directly preceded or followed by another vowel, they are pronounced shorter, and form the "weak" part of the two-vowel combination that comprises a diphthong.
+			A diphthong occurs wherever the vowels <span class="Spanish">i, u</span> are unstressed and directly preceded or followed by another vowel. In this case they are pronounced shorter, and form the "weak" part of the two-vowel combination that comprises the diphthong.
 		</li>
 	</ul>
 
-    <h3>Consonants</h3>
+  <h3>Consonants</h3>
 
 	<table>
 		<tr>
@@ -300,7 +321,7 @@
             <td class="Spanish char_cell">c</td>
             <td class="pron_cell">
                 <ol>
-                    <li>When followed by <span class="Spanish">a</span>, <span class="Spanish">o</span>, <span class="Spanish">u</span>, <span class="Spanish">l</span>, or <span class="Spanish">r</span>, like <u>c</u>at. Never pronounced with the puff of air heard in English.</li>
+                    <li>When followed by <span class="Spanish">a</span>, <span class="Spanish">o</span>, <span class="Spanish">u</span>, <span class="Spanish">l</span>, or <span class="Spanish">r</span>, like <u>c</u>at.</li>
                     <li>When followed by <span class="Spanish">e</span> or <span class="Spanish">i</span>, like <u>s</u>ad. (Only in the Americas.)</li>
                 </ol>
 
@@ -337,7 +358,7 @@
         </tr>
         <tr>
             <td class="Spanish char_cell">l</td>
-            <td class="pron_cell">Always clear, high, and tense, with the tip of the tongue reaching the roof of the mouth.</td>
+            <td class="pron_cell">Always clear, high, and tense, with the tip of the tongue held high to the roof of the mouth.</td>
         </tr>
         <tr>
             <td class="Spanish char_cell">ll</td>
@@ -346,10 +367,6 @@
         <tr>
             <td class="Spanish char_cell">n_~</td>
             <td class="pron_cell">ca<u>ny</u>on</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">p</td>
-            <td class="pron_cell">Never pronounced with the puff of air heard in English.</td>
         </tr>
         <tr>
             <td class="Spanish char_cell">qu</td>
@@ -368,10 +385,6 @@
             <td class="pron_cell"><u>s</u>ad, when followed by <span class="Spanish">e</span> or <span class="Spanish">i</span></td>
         </tr>
         <tr>
-            <td class="Spanish char_cell">t</td>
-            <td class="pron_cell">Never pronounced with the puff of air heard in English.</td>
-        </tr>
-        <tr>
             <td class="Spanish char_cell">v</td>
             <td class="pron_cell"><u>b</u>oot, when at the beginning of a breath group, after a pause, or after a nasal sound. In other cases, like '<span class="Spanish">b</span>' pronounced softly, with a slight friction between the lower and upper lips.</td>
         </tr>
@@ -386,11 +399,17 @@
 
 	</table>
 
-    <ul>
-        <li>
-            The <span class="Spanish">u</span> in the combination <span class="Spanish">gu</span> is silent. When it is pronounced, it is written with a diaresis, as in <span class="Spanish">pingu_:ino</span>.
-        </li>
-    </ul>
+  <ul>
+      <li>
+          The <span class="Spanish">u</span> in the combination <span class="Spanish">gu</span> is silent. When it is pronounced, it is written with a diaresis, as in <span class="Spanish">pingu_:ino</span>.
+      </li>
+      <li>
+      	Consonants <span class="Spanish">b</span>, <span class="Spanish">d</span>, and <span class="Spanish">g</span> are pronounced very softly within a breath group.
+      </li>
+      <li>
+      	Consonants <span class="Spanish">c</span>, <span class="Spanish">p</span>, and <span class="Spanish">t</span> at the beginning of words, when pronounced, are never followed by the puff of air heard in English.
+      </li>
+  </ul>
 
 
 	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
