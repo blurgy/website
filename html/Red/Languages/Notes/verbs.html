@@ -9,7 +9,9 @@
 		}
 		.Latin {
 			font-family: brill;
-			font-size: 14px;
+			font-weight: bold;
+			color: maroon;
+			font-size: 24px;
 		}
 
 		.Spanish {
@@ -21,27 +23,89 @@
 			font-size: 24px;
 		}
 
-		.morphologyTable {
+		.morphologyTable,
+		#active_personal_endings_table table,
+		#passive_personal_endings_table table,
+		#perfect_active_personal_endings_table table,
+		.indicative_rule_table,
+		.imperative_rule_table
+		{
 			border: 1px solid black;
 		}
 
-		.morphologyTable td {
+		.morphologyTable,
+		.indicative_rule_table {
+			margin: 10px 100px 10px 50px;
+		}
+
+		.morphologyTable td, 
+		#active_personal_endings_table td,
+		#passive_personal_endings_table td,
+		#perfect_active_personal_endings_table td
+		{
 			border: 1px solid black;
 			font-family: brill;
 			font-size: 24px;
+			color: maroon;
+			padding: 5px;
+			text-align: center;
 		}
 
-		.morphologyTable th {
+		.indicative_rule_table td,
+		.imperative_rule_table td {
+			border: 1px solid black;
+			padding: 5px;
+		}
+
+		.morphologyTable th, 
+		#active_personal_endings_table th,
+		#passive_personal_endings_table th,
+		#perfect_active_personal_endings_table th,
+		.indicative_rule_table th,
+		.imperative_rule_table th
+		{
 			border: 1px solid black;
 			font-size: 14px;
+			padding: 5px;
+			text-align: center;
+		}
+
+		.indicative_rule_table th {
+			background-color: #c0cfe4;
+		}
+
+		.imperative_rule_table th {
+			background-color: #e4d4c0;
+		}
+
+		.tenseTable {
+			border-collapse: collapse;
+		}
+
+		.tenseTable td,
+		.tenseTable th
+		{
+			border: 1px solid black;
+			padding: 5px;
+			font-size: 14px;
+			text-align: center;
 		}
 		
   </style>
 </head>
 <body>
-	<h1>Verbs</h1>
+	<h1>Latin Verbs</h1>
 
-	<h2>Latin</h2>
+	<h4>
+		<a href="#indicative">Indicative Mood</a> |
+		<a href="#imperative">Imperative Mood</a> |
+		<a href="#subjunctive">Subjunctive Mood</a> |
+		<a href="#participles">Participles</a> |
+		<a href="#infinitives">Infinitives</a> |
+		<a href="#periphrastics">Periphrastics</a>
+	</h4>
+	
+	<hr>
 
 	<p>
 		Every Latin <b style="font-size: larger;">verb</b> has a
@@ -65,7 +129,113 @@
 		The <b>person</b> denotes the relation of the speaker to the subject - whether the speaker is discussing himself, the listener, or a third subject. The <b>number</b> denotes the quantity of the subject. The <b>tense</b> is determined by the combination of 1. The <i>time</i> at which the action occurs with respect to the time of the speaker (present, past, or future), and 2. The relation of the action to the passage of time (simple, progressive, repeated, or completed) (also called the <i>aspect</i> of the verb). All Latin noun tenses that express progressive aspect may also express repeated aspect. The <b>voice</b> denotes whether the verb's subject is performing or receiving the action of the verb. The <b>mood</b> denotes the speaker's attitude toward the factuality or likelihood of the verb's action.
 	</p>
 
-	<h3>The Indicative Mood</h3>
+	<p>
+		There are four <b>conjugations</b> of Latin verbs. To <i>conjugate</i> a verb is to write all the possible morphological forms the verb may take. The complete conjugation of any Latin verb relies upon its four <i>principal parts</i>:
+		<ul>
+			<li>first person singular present active indicative</li>
+			<li>present active infinitive</li>
+			<li>first person singular perfect active indicative</li>
+			<li>perfect passive participle</li>
+		</ul>
+
+		A given form of a verb is written by taking one of these principal parts and modifying it with the <i>rule</i> corresponding to the conjugation, person, number, tense, voice, and mood of the given form. These rules wil be detailed below, grouped by mood and conjugation. They rely upon the following pieces of information, written here for reference:
+
+	</p>
+
+	<h4>Active Personal Endings</h4>
+
+	<div id="active_personal_endings_table">
+		<table>
+			<tr>
+				<th colspan="3" style="background-color: #c0cfe4;">singular</th>
+				<th colspan="3" style="background-color: #c0cfe4;">plural</th>
+			</tr>
+			<tr>
+				<th style="background-color: #c0cfe4;">first</th>
+				<th style="background-color: #c0cfe4;">second</th>
+				<th style="background-color: #c0cfe4;">third</th>
+				<th style="background-color: #c0cfe4;">first</th>
+				<th style="background-color: #c0cfe4;">second</th>
+				<th style="background-color: #c0cfe4;">third</th>
+			</tr>
+			<tr>
+				<td class="Latin">-o, -m</td>
+				<td class="Latin">-s</td>
+				<td class="Latin">-t</td>
+				<td class="Latin">-mus</td>
+				<td class="Latin">-tis</td>
+				<td class="Latin">-nt</td>
+			</tr>
+		</table>
+	</div>
+
+	<h4>Passive Personal Endings</h4>
+
+	<div id="passive_personal_endings_table">
+		<table>
+			<tr>
+				<th colspan="3" style="background-color: #c0cfe4;">singular</th>
+				<th colspan="3" style="background-color: #c0cfe4;">plural</th>
+			</tr>
+			<tr>
+				<th style="background-color: #c0cfe4;">first</th>
+				<th style="background-color: #c0cfe4;">second</th>
+				<th style="background-color: #c0cfe4;">third</th>
+				<th style="background-color: #c0cfe4;">first</th>
+				<th style="background-color: #c0cfe4;">second</th>
+				<th style="background-color: #c0cfe4;">third</th>
+			</tr>
+			<tr>
+				<td class="Latin">-or, -r</td>
+				<td class="Latin">-ris / -re</td>
+				<td class="Latin">-tur</td>
+				<td class="Latin">-mur</td>
+				<td class="Latin">-mini_</td>
+				<td class="Latin">-ntur</td>
+			</tr>
+		</table>
+	</div>
+
+	<h4>Perfect Active Personal Endings</h4>
+
+	<div id="perfect_active_personal_endings_table">
+		<table>
+			<tr>
+				<th colspan="3" style="background-color: #c0cfe4;">singular</th>
+				<th colspan="3" style="background-color: #c0cfe4;">plural</th>
+			</tr>
+			<tr>
+				<th style="background-color: #c0cfe4;">first</th>
+				<th style="background-color: #c0cfe4;">second</th>
+				<th style="background-color: #c0cfe4;">third</th>
+				<th style="background-color: #c0cfe4;">first</th>
+				<th style="background-color: #c0cfe4;">second</th>
+				<th style="background-color: #c0cfe4;">third</th>
+			</tr>
+			<tr>
+				<td class="Latin">-i_</td>
+				<td class="Latin">-isti_</td>
+				<td class="Latin">-it</td>
+				<td class="Latin">-imus</td>
+				<td class="Latin">-istis</td>
+				<td class="Latin">-e_runt / -e_re</td>
+			</tr>
+		</table>
+	</div>
+
+	<h4>Stems</h4>
+	
+	<p>The <b>present stem</b> of a verb is found by removing the <span class="Latin">-re</span> from the end of the verb's present active infinitive. The vowel at the end of the present stem is called the <b>stem vowel</b> of the verb. All forms written by modifying the present stem of a verb are together called the <b>present system</b> of the verb.</p>
+		
+	<p>The <b>perfect active stem</b> of a verb is found by removing the <span class="Latin">-i_</span> from the end of the verb's first person singular perfect active indicative. All forms written by modifying the perfect active stem of a verb are together called the <b>perfect active system</b> of the verb.</p>
+
+	<h4>Long Vowel Rule</h4>
+
+	<p>Long vowels shorten before the endings <span class="Latin">-m</span>, <span class="Latin">-t</span>, <span class="Latin">-nt</span>, <span class="Latin">-r</span>, and <span class="Latin">-ntur</span>. <b>This rule is obeyed in any form of a Latin verb that uses one of these endings.</b></p>
+
+	<hr>
+ 
+	<h2><a name="indicative">The Indicative Mood</a></h2>
 
 	<p>
 		The indicative mood is used to represent something as factual, or to ask a question of fact. There are six tenses of the indicative mood:
@@ -91,16 +261,482 @@
 		</ul>
 	</p>
 
-	<h4>Conjugation I</h4>
+	<table class="tenseTable">
+		<tr>
+			<td rowspan="2" colspan="2" style="border: none;"></td>
+			<th colspan="3">Aspect</th>
+		</tr>
+		<tr>
+			<th>Simple</th>
+			<th>Progressive/Repeated</th>
+			<th>Completed</th>
+		</tr>
+		<tr>
+			<th rowspan="3">Time</th>
+			<th>Present</th>
+			<td colspan="2">Present</td>
+			<td>Perfect</td>
+		</tr>
+		<tr>
+			<th>Past</th>
+			<td>Perfect</td>
+			<td>Imperfect</td>
+			<td>Pluperfect</td>
+		</tr>
+		<tr>
+			<th>Future</th>
+			<td colspan="2">Future</td>
+			<td>Future Perfect</td>
+		</tr>
+	</table>
 
+	<h3 style="margin-top: 40px;">Conjugation I</h3>
+
+	<h4>Rules</h4>
+
+	<table class="indicative_rule_table">
+		<tr>
+			<th rowspan="6">active</th>
+			<th>present</th>
+			<td>Append the <u>active personal endings</u> to the <u>present stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it contracts with the stem vowel <span class="Latin">a_</span>.</td>
+		</tr>
+		<tr>
+			<th>imperfect</th>
+			<td>Append first <span class="Latin">-ba_-</span> and then the <u>active personal endings</u> to the <u>present stem</u>, using <span class="Latin">-m</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future</th>
+			<td>Append first <span class="Latin">-bi-</span> and then the <u>active personal endings</u> to the <u>present stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>. In the third person plural, the <span class="Latin">i</span> changes to <span class="Latin">u</span>.</td>
+		</tr>
+		<tr>
+			<th>perfect</th>
+			<td>Append the <u>perfect active personal endings</u> to the <u>perfect active stem</u>.</td>
+		</tr>
+		<tr>
+			<th>pluperfect</th>
+			<td>Append first <span class="Latin">-era_-</span> and then the <u>active personal endings</u> to the <u>perfect active stem</u>, using <span class="Latin">-m</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future perfect</th>
+			<td>Append first <span class="Latin">-eri-</span> and then the <u>active personal endings</u> to the <u>perfect active stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>.</td>
+		</tr>
+		<tr>
+			<th rowspan="6">passive</th>
+			<th>present</th>
+			<td>Append the <u>passive personal endings</u> to the <u>present stem</u>, using <span class="Latin">-or</span> for the first person singular, where it contracts with the stem vowel <span class="Latin">a_</span>.</td>
+		</tr>
+		<tr>
+			<th>imperfect</th>
+			<td>Append first <span class="Latin">-ba_-</span> and then the <u>passive personal endings</u> to the <u>present stem</u>, using <span class="Latin">-r</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future</th>
+			<td>Append first <span class="Latin">-bi-</span> and then the <u>passive personal endings</u> to the <u>present stem</u>, using <span class="Latin">-or</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>. In the third person plural, the <span class="Latin">i</span> changes to <span class="Latin">u</span>. In the second person singular, the <span class="Latin">i</span> changes to <span class="Latin">e</span>.</td>
+		</tr>
+		<tr>
+			<th>perfect</th>
+			<td>Write as a separate word the <u>present active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+		<tr>
+			<th>pluperfect</th>
+			<td>Write as a separate word the <u>imperfect active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+		<tr>
+			<th>future perfect</th>
+			<td>Write as a separate word the <u>future active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+	</table>
+
+	<h4>Example</h4>
+
+	<p id="indicative_example_statement_1" class="Latin" style="font-size: 24px;"></p>
+	<div id="indicative_example_table_1"></div>
+
+	<h3 style="margin-top: 40px;">Conjugation II</h3>
+
+	<h4>Rules</h4>
+
+	<table class="indicative_rule_table">
+		<tr>
+			<th rowspan="6">active</th>
+			<th>present</th>
+			<td>Append the <u>active personal endings</u> to the <u>present stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it shortens the stem vowel <span class="Latin">e_</span>.</td>
+		</tr>
+		<tr>
+			<th>imperfect</th>
+			<td>Append first <span class="Latin">-ba_-</span> and then the <u>active personal endings</u> to the <u>present stem</u>, using <span class="Latin">-m</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future</th>
+			<td>Append first <span class="Latin">-bi-</span> and then the <u>active personal endings</u> to the <u>present stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>. In the third person plural, the <span class="Latin">i</span> changes to <span class="Latin">u</span>.</td>
+		</tr>
+		<tr>
+			<th>perfect</th>
+			<td>Append the <u>perfect active personal endings</u> to the <u>perfect active stem</u>.</td>
+		</tr>
+		<tr>
+			<th>pluperfect</th>
+			<td>Append first <span class="Latin">-era_-</span> and then the <u>active personal endings</u> to the <u>perfect active stem</u>, using <span class="Latin">-m</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future perfect</th>
+			<td>Append first <span class="Latin">-eri-</span> and then the <u>active personal endings</u> to the <u>perfect active stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>.</td>
+		</tr>
+		<tr>
+			<th rowspan="6">passive</th>
+			<th>present</th>
+			<td>Append the <u>passive personal endings</u> to the <u>present stem</u>, using <span class="Latin">-or</span> for the first person singular, where it shortens the stem vowel <span class="Latin">e_</span>.</td>
+		</tr>
+		<tr>
+			<th>imperfect</th>
+			<td>Append first <span class="Latin">-ba_-</span> and then the <u>passive personal endings</u> to the <u>present stem</u>, using <span class="Latin">-r</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future</th>
+			<td>Append first <span class="Latin">-bi-</span> and then the <u>passive personal endings</u> to the <u>present stem</u>, using <span class="Latin">-or</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>. In the third person plural, the <span class="Latin">i</span> changes to <span class="Latin">u</span>. In the second person singular, the <span class="Latin">i</span> changes to <span class="Latin">e</span>.</td>
+		</tr>
+		<tr>
+			<th>perfect</th>
+			<td>Write as a separate word the <u>present active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+		<tr>
+			<th>pluperfect</th>
+			<td>Write as a separate word the <u>imperfect active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+		<tr>
+			<th>future perfect</th>
+			<td>Write as a separate word the <u>future active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+	</table>
+
+	<h4>Example</h4>
+
+	<p id="indicative_example_statement_2" class="Latin" style="font-size: 24px;"></p>
+	<div id="indicative_example_table_2"></div>
+
+	<h3 style="margin-top: 40px;">Conjugation III</h3>
+
+	<ul><li>A small subgroup of the third conjugation called the <b>third i-stem</b> cojugation is identified by the vowel <span class="Latin">i</span> before the <span class="Latin">-o_</span> ending of the present active indicative.</li></ul>
+
+	<h4>Rules</h4>
+	
+	<table class="indicative_rule_table">
+		<tr>
+			<th rowspan="6">active</th>
+			<th>present</th>
+			<td>Replace the stem vowel <span class="Latin">e</span> from the <u>present stem</u> with <span class="Latin">i</span> and append the <u>active personal endings</u>, using <span class="Latin">-o_</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>, or in the case of <i>i-stem</i> verbs, does not. In the third person plural, the <span class="Latin">i</span> changes to <span class="Latin">u</span>, or in the case of <i>i-stem</i> verbs, <span class="Latin">iu</span>.</td>
+		</tr>
+		<tr>
+			<th>imperfect</th>
+			<td>Replace the stem vowel <span class="Latin">e</span> from the <u> present stem</u> with <span class="Latin">-e_ba_-</span>, or in the case of <i>i-stem</i> verbs <span class="Latin">-ie_ba_-</span>, and append the <u>active personal endings</u>, using <span class="Latin">-m</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future</th>
+			<td>Replace the stem vowel <span class="Latin">e</span> from the <u> present stem</u> with <span class="Latin">-e_-</span>, or in the case of <i>i-stem</i> verbs <span class="Latin">-ie_-</span>, and append the <u>active personal endings</u>, using <span class="Latin">-m</span> for the first person singular, where the vowel <span class="Latin">-e_-</span> is first changed to <span class="Latin">-a_-</span>.</td>
+		</tr>
+		<tr>
+			<th>perfect</th>
+			<td>Append the <u>perfect active personal endings</u> to the <u>perfect active stem</u>.</td>
+		</tr>
+		<tr>
+			<th>pluperfect</th>
+			<td>Append first <span class="Latin">-era_-</span> and then the <u>active personal endings</u> to the <u>perfect active stem</u>, using <span class="Latin">-m</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future perfect</th>
+			<td>Append first <span class="Latin">-eri-</span> and then the <u>active personal endings</u> to the <u>perfect active stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>.</td>
+		</tr>
+		<tr>
+			<th rowspan="6">passive</th>
+			<th>present</th>
+			<td>Replace the stem vowel <span class="Latin">e</span> from the <u>present stem</u> with <span class="Latin">i</span> and append the <u>passive personal endings</u>, using <span class="Latin">-or</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>, or in the case of <i>i-stem</i> verbs, does not. In the third person plural, the <span class="Latin">i</span> changes to <span class="Latin">u</span>, or in the case of <i>i-stem</i> verbs, <span class="Latin">iu</span>. In the second person singular, the <span class="Latin">i</span> changes to <span class="Latin">e</span>.</td>
+		</tr>
+		<tr>
+			<th>imperfect</th>
+			<td>Replace the stem vowel <span class="Latin">e</span> from the <u> present stem</u> with <span class="Latin">-e_ba_-</span>, or in the case of <i>i-stem</i> verbs <span class="Latin">-ie_ba_-</span>, and append the <u>passive personal endings</u>, using <span class="Latin">-r</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future</th>
+			<td>Replace the stem vowel <span class="Latin">e</span> from the <u> present stem</u> with <span class="Latin">-e_-</span>, or in the case of <i>i-stem</i> verbs <span class="Latin">-ie_-</span>, and append the <u>passive personal endings</u>, using <span class="Latin">-r</span> for the first person singular, where the vowel <span class="Latin">-e_-</span> is first changed to <span class="Latin">-a_-</span>.</td>
+		</tr>
+		<tr>
+			<th>perfect</th>
+			<td>Write as a separate word the <u>present active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+		<tr>
+			<th>pluperfect</th>
+			<td>Write as a separate word the <u>imperfect active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+		<tr>
+			<th>future perfect</th>
+			<td>Write as a separate word the <u>future active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+	</table>
+
+	<h4>Example</h4>
+
+	<p id="indicative_example_statement_3" class="Latin" style="font-size: 24px;"></p>
+	<div id="indicative_example_table_3"></div>
+	<p id="indicative_example_statement_3i" class="Latin" style="font-size: 24px;"></p>
+	<div id="indicative_example_table_3i"></div>
+
+	<h3 style="margin-top: 40px;">Conjugation IV</h3>
+
+	<h4>Rules</h4>
+
+	<table class="indicative_rule_table">
+		<tr>
+			<th rowspan="6">active</th>
+			<th>present</th>
+			<td>Append the <u>active personal endings</u> to the <u>present stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it shortens the stem vowel <span class="Latin">i_</span>. In the third person plural, the <span class="Latin">i_</span> changes to <span class="Latin">iu</span>.</td>
+		</tr>
+		<tr>
+			<th>imperfect</th>
+			<td>Replace the stem vowel <span class="Latin">i_</span> from the <u> present stem</u> with <span class="Latin">-ie_ba_-</span>, and append the <u>active personal endings</u>, using <span class="Latin">-m</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future</th>
+			<td>Replace the stem vowel <span class="Latin">i_</span> from the <u> present stem</u> with <span class="Latin">-ie_-</span> and append the <u>active personal endings</u>, using <span class="Latin">-m</span> for the first person singular, where the vowel <span class="Latin">-e_-</span> is first changed to <span class="Latin">-a_-</span>.</td>
+		</tr>
+		<tr>
+			<th>perfect</th>
+			<td>Append the <u>perfect active personal endings</u> to the <u>perfect active stem</u>.</td>
+		</tr>
+		<tr>
+			<th>pluperfect</th>
+			<td>Append first <span class="Latin">-era_-</span> and then the <u>active personal endings</u> to the <u>perfect active stem</u>, using <span class="Latin">-m</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future perfect</th>
+			<td>Append first <span class="Latin">-eri-</span> and then the <u>active personal endings</u> to the <u>perfect active stem</u>, using <span class="Latin">-o_</span> for the first person singular, where it contracts with the vowel <span class="Latin">i</span>.</td>
+		</tr>
+		<tr>
+			<th rowspan="6">passive</th>
+			<th>present</th>
+			<td>Append the <u>passive personal endings</u> to the <u>present stem</u>, using <span class="Latin">-or</span> for the first person singular, where it shortens the stem vowel <span class="Latin">i_</span>. In the third person plural, the <span class="Latin">i_</span> changes to <span class="Latin">iu</span>.</td>
+		</tr>
+		<tr>
+			<th>imperfect</th>
+			<td>Replace the stem vowel <span class="Latin">i_</span> from the <u> present stem</u> with <span class="Latin">-ie_ba_-</span>, and append the <u>passive personal endings</u>, using <span class="Latin">-r</span> for the first person singular.</td>
+		</tr>
+		<tr>
+			<th>future</th>
+			<td>Replace the stem vowel <span class="Latin">i_</span> from the <u> present stem</u> with <span class="Latin">-ie_-</span> and append the <u>passive personal endings</u>, using <span class="Latin">-r</span> for the first person singular, where the vowel <span class="Latin">-e_-</span> is first changed to <span class="Latin">-a_-</span>.</td>
+		</tr>
+		<tr>
+			<th>perfect</th>
+			<td>Write as a separate word the <u>present active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+		<tr>
+			<th>pluperfect</th>
+			<td>Write as a separate word the <u>imperfect active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+		<tr>
+			<th>future perfect</th>
+			<td>Write as a separate word the <u>future active indicative</u> of <span class="Latin">sum</span> after the <u>perfect passive participle</u>, which agrees with the subject in gender and number, and is always in the nominative case.</td>
+		</tr>
+	</table>
+
+	<h4>Example</h4>
+
+	<p id="indicative_example_statement_4" class="Latin" style="font-size: 24px;"></p>
+	<div id="indicative_example_table_4"></div>
+
+	<h3>Notes</h3>
+
+	<ul>
+		<li>The pluperfect active indicative forms of all conjugations may be viewed as the perfect active stem plus the imperfect active indicative forms of <span class="Latin">sum</span>.</li>
+		<li>The future perfect active indicative forms of all conjugations may be viewed as the perfect active stem plus the future active indicative forms of <span class="Latin">sum</span> (except in the third person plural form).</li>
+	</ul>
+
+	<hr>
+ 
+	<h2><a name="imperative">The Imperative Mood</a></h2>
+
+	<p>The imperative mood is used to give a direct command. As such, it is always in the second person.</p>
+
+	<h3 style="margin-top: 40px;">Conjugation I</h3>
+
+	<h4>Rules</h4>
+
+	<table class="imperative_rule_table">
+		<tr>
+			<th colspan="2" rowspan="2">imperative</th>
+			<th>singular</th>
+			<th>plural</th>
+		</tr>
+		<tr>
+			<th>second</th>
+			<th>second</th>
+		</tr>
+		<tr>
+			<th rowspan="1">active</th>
+			<th>present</th>
+			<td>Use the <u>present stem</u>.</td>
+			<td>Append <span class="Latin">-te</span> to the <u>present stem</u>.</td>
+		</tr>
+		<tr>
+			<th rowspan="1">passive</th>
+			<th>present</th>
+			<td>Append <span class="Latin">-re</span> to the <u>present stem</u>.</td>
+			<td>Append <span class="Latin">-mini_</span> to the <u>present stem</u>.</td>
+		</tr>
+		
+	</table>
+
+	<h3>Examples</h4>
+
+	<p id="imperative_example_statement_1" class="Latin" style="font-size: 24px;"></p>
+	<div id="imperative_example_table_1"></div>
+
+	<h3 style="margin-top: 40px;">Conjugation II</h3>
+
+	<h4>Rules</h4>
+
+	<table class="imperative_rule_table">
+		<tr>
+			<th colspan="2" rowspan="2">imperative</th>
+			<th>singular</th>
+			<th>plural</th>
+		</tr>
+		<tr>
+			<th>second</th>
+			<th>second</th>
+		</tr>
+		<tr>
+			<th rowspan="1">active</th>
+			<th>present</th>
+			<td>Use the <u>present stem</u>.</td>
+			<td>Append <span class="Latin">-te</span> to the <u>present stem</u>.</td>
+		</tr>
+		<tr>
+			<th rowspan="1">passive</th>
+			<th>present</th>
+			<td>Append <span class="Latin">-re</span> to the <u>present stem</u>.</td>
+			<td>Append <span class="Latin">-mini_</span> to the <u>present stem</u>.</td>
+		</tr>
+		
+	</table>
+
+	<h3>Examples</h4>
+
+	<p id="imperative_example_statement_2" class="Latin" style="font-size: 24px;"></p>
+	<div id="imperative_example_table_2"></div>
+
+	<h3 style="margin-top: 40px;">Conjugation III</h3>
+
+	<h4>Rules</h4>
+
+	<table class="imperative_rule_table">
+		<tr>
+			<th colspan="2" rowspan="2">imperative</th>
+			<th>singular</th>
+			<th>plural</th>
+		</tr>
+		<tr>
+			<th>second</th>
+			<th>second</th>
+		</tr>
+		<tr>
+			<th rowspan="1">active</th>
+			<th>present</th>
+			<td>Use the <u>present stem</u>.</td>
+			<td>Replace the stem vowel <span class="Latin">e</span> from the <u>present stem</u> with <span class="Latin">i</span> and append <span class="Latin">-te</span>.</td>
+		</tr>
+		<tr>
+			<th rowspan="1">passive</th>
+			<th>present</th>
+			<td>Append <span class="Latin">-re</span> to the <u>present stem</u>.</td>
+			<td>Replace the stem vowel <span class="Latin">e</span> from the <u>present stem</u> with <span class="Latin">i</span> and append <span class="Latin">-mini_</span>.</td>
+		</tr>
+		
+	</table>
+
+	<h3>Examples</h4>
+
+	<p id="imperative_example_statement_3" class="Latin" style="font-size: 24px;"></p>
+	<div id="imperative_example_table_3"></div>
+	<p id="imperative_example_statement_3i" class="Latin" style="font-size: 24px;"></p>
+	<div id="imperative_example_table_3i"></div>
+
+	<h3 style="margin-top: 40px;">Conjugation IV</h3>
+
+	<h4>Rules</h4>
+
+	<table class="imperative_rule_table">
+		<tr>
+			<th colspan="2" rowspan="2">imperative</th>
+			<th>singular</th>
+			<th>plural</th>
+		</tr>
+		<tr>
+			<th>second</th>
+			<th>second</th>
+		</tr>
+		<tr>
+			<th rowspan="1">active</th>
+			<th>present</th>
+			<td>Use the <u>present stem</u>.</td>
+			<td>Append <span class="Latin">-te</span> to the <u>present stem</u>.</td>
+		</tr>
+		<tr>
+			<th rowspan="1">passive</th>
+			<th>present</th>
+			<td>Append <span class="Latin">-re</span> to the <u>present stem</u>.</td>
+			<td>Append <span class="Latin">-mini_</span> to the <u>present stem</u>.</td>
+		</tr>
+		
+	</table>
+
+	<h3>Examples</h4>
+
+	<p id="imperative_example_statement_4" class="Latin" style="font-size: 24px;"></p>
+	<div id="imperative_example_table_4"></div>
 
 
 	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
 	<script>
-		// replace _ with macrons in Latin Text
+  	// make conjugation example tables
+
+  	var exampleTables    = [],
+  			indicativeExampleTables = [],
+  			imperativeExampleTables = [],
+  			exampleVerbs     = ['voco', 'moveo', 'rego', 'capio', 'audio'],
+  			conjugations     = ['1', '2', '3', '3i', '4'];
+
+  	for (var i = 0; i < 5; i++) {
+  		indicativeExampleTables.push(MorphologyTable(V.verbs[exampleVerbs[i]], 'indicative'));
+  		imperativeExampleTables.push(MorphologyTable(V.verbs[exampleVerbs[i]], 'imperative'));
+
+
+  		document.getElementById('indicative_example_statement_' + conjugations[i]).
+  			innerHTML = _(V.verbs[exampleVerbs[i]].statement);
+  		document.getElementById('indicative_example_table_' + conjugations[i]).
+  			innerHTML = indicativeExampleTables[i];
+
+			document.getElementById('imperative_example_statement_' + conjugations[i]).
+				innerHTML = _(V.verbs[exampleVerbs[i]].statement);
+			document.getElementById('imperative_example_table_' + conjugations[i]).
+		  	innerHTML = imperativeExampleTables[i];
+
+  	}
+
+  	// replace _ with macrons in Latin Text
   	var LatinElements = document.getElementsByClassName('Latin');
   	for (var i = 0; i < LatinElements.length; i++)
   		LatinElements[i].textContent = _(LatinElements[i].textContent);
+
+  	// var exampleTable1 = MorphologyTable(V.verbs.voco),
+  	// 		indicative1;
+
+  	// indicative1 = exampleTable1.slice(0, exampleTable1.indexOf('subjunctive'));
+  	// indicative1 = indicative1.slice(0, indicative1.lastIndexOf('<tr'));
+  	// indicative1 += '</table>';
+  	
+  	// document.getElementById('indicative_example_statement_1').
+  	// 	innerHTML = _(V.verbs.voco.statement);
+  	// document.getElementById('indicative_example_table_1').
+  	// 	innerHTML = indicative1;
   </script>
 </body>
 </html>

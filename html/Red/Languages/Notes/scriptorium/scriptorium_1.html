@@ -1,32 +1,173 @@
 <!doctype html>
 <html>
 <head>
+	<meta charset="utf-8"/>
   <style>
   	@font-face {
 			font-family: brill;
 			src: url('../fonts/brill_roman_2.06_051.ttf');
 		}
 		.Latin {
-			/*font-family: brill;*/
+			font-family: brill;
+			font-weight: bold;
 			font-size: 24px;
+			color: maroon;
+		}
+
+		.Spanish {
+			font-family: brill;
+			font-weight: bold;
+			font-size: 24px;
+			color: blue;
+		}
+
+		.French {
+			font-family: brill;
+			font-weight: bold;
+			font-size: 24px;
+			color: purple;
 		}
 		.exercise {
 			margin-bottom: 10px;
 		}
-		.exercise>ul {
+		.exercises {
 			list-style-type: none;
 		}
   </style>
 </head>
 <body>
-	<h1>Scriptorium One</h1>
-	<ul class="Latin">
+	<h1>Scriptorium One - Familia</h1>
+	<ul class="exercises">
 		<li class="exercise">
 			<ul>
-				<li>Quid hoc est?</li>
-				<li>&#191;Qué es esto?</li>
+				<li class="Latin">puer</li>
+				<li class="Spanish">el nin_~o</li>
+				<li class="French">le garc_,on</li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin">puella</li>
+				<li class="Spanish">la nin_~a</li>
+				<li class="French">la fille</li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin">vir (homo_)</li>
+				<li class="Spanish">el hombre</li>
+				<li class="French">l'homme</li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin">fe_mina</li>
+				<li class="Spanish">la mujer</li>
+				<li class="French">la femme</li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin">(No_s) piscem comedimus.</li>
+				<li class="Spanish">(Nosotros) comemos pescado.</li>
+				<li class="French">Nous mangeons du poisson.</li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin">mala sunt rubra</li>
+				<li class="Spanish">Las manzanas son rojas.</li>
+				<li class="French">Les pommes sont rouges.</li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin">Anate_s habe_mus.</li>
+				<li class="Spanish">Nosotros tenemos (unos?) patos.</li>
+				<li class="French">Nous avons des canards.</li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
+			</ul>
+		</li>
+		<li class="exercise">
+			<ul>
+				<li class="Latin"></li>
+				<li class="Spanish"></li>
+				<li class="French"></li>
 			</ul>
 		</li>
 	</ul>
+
+	<script src="../../Applications/FlashCards/js/bin/LatinWords.js"></script>
+	<script src="../../Applications/FlashCards/js/bin/SpanishWords.js"></script>
+	<script src="../../Applications/FlashCards/js/bin/FrenchWords.js"></script>
+	<script>
+    // replace _ with macrons in Latin text 
+	var latinElements = document.getElementsByClassName('Latin');
+	for (var i = 0; i < latinElements.length; i++)
+		latinElements[i].textContent = _(latinElements[i].textContent);
+	// replace _ substrings with appropriate characters in Spanish text
+	var spanishElements = document.getElementsByClassName('Spanish');
+	for (var i = 0; i < spanishElements.length; i++)
+		spanishElements[i].textContent = sp(spanishElements[i].textContent);
+	// replace _ substrings with appropriate characters in French text
+	var frenchElements = document.getElementsByClassName('French');
+	for (var i = 0; i < frenchElements.length; i++)
+		frenchElements[i].textContent = fr(frenchElements[i].textContent);
+	</script>
 </body>
 </html>

@@ -18,6 +18,12 @@ module.exports = function(grunt) {
 					'bin/SpanishWords.js': 'src/SpanishWords.js'
 				}
 			}
+			,
+			frenchWords: {
+				files: {
+					'bin/FrenchWords.js': 'src/FrenchWords.js'
+				}
+			}
 		},
 
 		watch: {
@@ -35,6 +41,13 @@ module.exports = function(grunt) {
 					spawn: false
 				}
 			},
+			frenchWords: {
+				files: ['src/FrenchWords.js'],
+				tasks: ['FrenchWords'],
+				options: {
+					spawn: false
+				}
+			},
 		}
 
 	});
@@ -48,4 +61,5 @@ module.exports = function(grunt) {
 	// grunt.registerTask('LatinWords', ['babel:latinWords']);
   grunt.registerTask('LatinWords', ['babel']);
   grunt.registerTask('SpanishWords', ['babel']);
+  grunt.registerTask('FrenchWords', ['babel']);
 };

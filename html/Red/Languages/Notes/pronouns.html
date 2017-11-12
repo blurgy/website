@@ -9,30 +9,112 @@
 		}
 		.Latin {
 			font-family: brill;
-		}
-
-		table {
-			border-collapse: collapse;
-		}
-
-		td {
-			border: 1px solid black;
-			padding: 2px 8px;
+			font-weight: bold;
+			color: maroon;
 		}
 
 		.char_cell {
 			font-size: 24px;
 		}
+
+		.morphologyTable {
+			border: 1px solid black;
+		}
+
+		.morphologyTable td {
+			border: 1px solid black;
+			font-family: brill;
+			font-size: 24px;
+			color: maroon;
+			padding: 5px;
+		}
+
+		.morphologyTable th {
+			border: 1px solid black;
+			font-size: 14px;
+			padding: 5px;
+		}
 		
   </style>
 </head>
 <body>
-	<h1>Pronouns</h1>
+	<h1>Latin Pronouns</h1>
 
-	<h2>Latin</h2>
+	<h4>
+		<a href="#personal">Personal Pronouns</a> |
+		<a href="#reflexive">Reflexive Pronouns</a>
+	</h4>
+
+	<hr>
+
+	<p>A pronoun is a word used instead of a noun.</p>
+
+	<hr>
+
+	<h2><a name="personal">Personal Pronouns</a></h2>
+
+	<p>A <b>personal pronoun</b> represents the speaker (I, we), addressee (you), or a third person spoken about (he, she, it, they). Personal pronouns have different forms depending on whether the noun is first- second- or third-person in relation to the speaker.</p>
+
+	<h4>First Person - '<i>I, we</i>'</h4>
+		
+	<p id="ego_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="ego_table"></div>
+
+	<h4>Second Person - '<i>You</i>'</h4>
+		
+	<p id="tu_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="tu_table"></div>
+
+	<p>The genitive forms of the first- and second-person personal pronouns can be used as Partitive or Objective Genitives only. In the plural these functions of the genitive are distinguished by different endings: <span class="Latin">-um</span> = partitive, <span class="Latin">-i_</span> = objective.</p>
+
+	<h4>Third Person - '<i>He, they</i>'</h4>
+		
+	<p id="is_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="is_table"></div>
+
+	<h4>Third Person - '<i>She, they</i>'</h4>
+		
+	<p id="ea_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="ea_table"></div>
+
+	<h4>Third Person - '<i>It, they</i>'</h4>
+		
+	<p id="id_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="id_table"></div>
+
+	<p>The third person personal pronouns are in origin demonstrative adjectives (this, that, these, those), and retain this alternate usage.</p>
+
+	<hr>
+
+	<h2><a name="reflexive">Reflexive Pronouns</a></h2>
+
+	<p>When a pronoun refers to the subject of the sentence, it is called <b>reflexive</b>.</p>
+
+	<p>The declensions for the first- and second-person reflexive pronouns are identical to those for the personal pronouns, but without the nominative case. As with personal pronouns, the genitive forms can be used as Partitive or Objective Genitives only.</p>
+
+	<p>The declension for the third-person reflexive pronoun differs from the personal pronoun, and is identical in singular and plural, and across gender: </p>
+
+	<p id="sui__statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="sui__table"></div>
 
 	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
 	<script>
+		var personalPronouns = ['ego', 'tu', 'is', 'ea', 'id', 'sui_'];
+  	for (var i = 0; i < personalPronouns.length; i++) {
+  		document.getElementById(personalPronouns[i] + '_statement').
+  			textContent = _(V.pronouns[personalPronouns[i]].statement);
+  		document.getElementById(personalPronouns[i] + '_table').
+  			innerHTML = MorphologyTable(V.pronouns[personalPronouns[i]]);
+  	}
+
+		// ---
+
 		// replace _ with macrons in Latin Text
   	var LatinElements = document.getElementsByClassName('Latin');
   	for (var i = 0; i < LatinElements.length; i++)

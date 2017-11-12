@@ -1,6 +1,11 @@
-
- // --- Latin Vocabulary ---
-
+const PERSONS = ['first', 'second', 'third'],
+			NUMBERS = ['singular', 'plural'],
+			TENSES  = ['present', 'imperfect', 'future', 'perfect', 'pluperfect', 'future perfect'],
+			VOICES  = ['active', 'passive'],
+			MOODS   = ['indicative', 'subjunctive', 'imperative'/*, 'infinitive'*/],
+			GENDERS = ['masculine', 'feminine', 'neuter'],
+			CASES   = ['nominative', 'genitive', 'dative', 'accusative', 'ablative', 'vocative'];
+ 
 	var _ = (str) => str.replace(/_/g, String.fromCharCode(0x304));
 
 // Word Object Constructor
@@ -2019,6 +2024,14 @@
 		},
 
 		verbs: {
+
+			'-1': new Word({
+				statement: '-o_, -re, -i_, -us',
+				definition: 'call; summon; name',
+				notes: '<p>Means "call" both in the sense of "summon" and in the sense of "name". In the latter case, it regularly takes a direct object and another noun called a <b>Predicate Accusative</b>, e.g. <span class="Latin">'+_('Patriam i_nsulam voco_.')+'</span> - <i>I call the island (d.o.) (my) homeland (Predicate Accusative).</i></p>',
+				type: 'verb 1T',
+				specialSyntax: null
+			}),
 
 		// LTRL Ch.2
 			ambulo: new Word({
@@ -5021,6 +5034,14 @@
 
 		adjectives: {
 
+			'-1,2':	new Word({
+				statement:  '-us, -a, -um, f.',
+				definition: '-',
+				notes: null,
+				type: 'adjective 1,2',
+				specialSyntax: null
+			}),
+
 		// LTRL Ch.3
 			amicus: new Word({
 				statement: 'ami_cus, ami_ca, ami_cum',
@@ -6131,6 +6152,14 @@
 		},
 
 		adverbs: {
+
+			voco: new Word({
+				statement: 'voco_, voca_re, voca_vi_, voca_tus',
+				definition: 'call; summon; name',
+				notes: '<p>Means "call" both in the sense of "summon" and in the sense of "name". In the latter case, it regularly takes a direct object and another noun called a <b>Predicate Accusative</b>, e.g. <span class="Latin">'+_('Patriam i_nsulam voco_.')+'</span> - <i>I call the island (d.o.) (my) homeland (Predicate Accusative).</i></p>',
+				type: 'verb 1T',
+				specialSyntax: null
+			}),
 
 		// LTRL Ch.1
 			et: new Word({
@@ -7931,7 +7960,7 @@
 								singular: {
 									first:  pf + 'eram',
 									second: pf + _('era_s'),
-									third:  pf + 'eratt'
+									third:  pf + 'erat'
 								},
 								plural: {
 									first:  pf + _('era_mus'),
@@ -13870,15 +13899,7 @@
 	};
 
 // Morphology Table
-	function MorphologyTable(word) {
-
-		var persons = ['first', 'second', 'third'],
-				numbers = ['singular', 'plural'],
-				tenses  = ['present', 'imperfect', 'future', 'perfect', 'pluperfect', 'future perfect'],
-				voices  = ['active', 'passive'],
-				moods   = ['indicative', 'subjunctive', 'imperative'/*, 'infinitive'*/],
-				genders = ['masculine', 'feminine', 'neuter'],
-				cases   = ['nominative', 'genitive', 'dative', 'accusative', 'ablative', 'vocative'];
+	function MorphologyTable(word, section) {
 
 		var table = '<table class="morphologyTable">';
 
@@ -13892,16 +13913,16 @@
 			let backgroundColor = '#c0cfe4';
 
 			table += `<tr><td style="background-color: ${backgroundColor};" colspan="1"></td>`;
-			for (let n = 0; n < numbers.length; n++)
-				table += `<th style="background-color: ${backgroundColor};">${numbers[n]}</th>`;
+			for (let n = 0; n < NUMBERS.length; n++)
+				table += `<th style="background-color: ${backgroundColor};">${NUMBERS[n]}</th>`;
 			table += '</tr>';
 
-			for (var c = 0; c < cases.length; c++) {
+			for (var c = 0; c < CASES.length; c++) {
 				table += '<tr>';
-				table += `<th style="background-color: ${backgroundColor};">${cases[c]}</th>`;
-				for (let n = 0; n < numbers.length; n++) {
+				table += `<th style="background-color: ${backgroundColor};">${CASES[c]}</th>`;
+				for (let n = 0; n < NUMBERS.length; n++) {
 					// check for special syntax
-					let props = [cases[c], numbers[n]],
+					let props = [CASES[c], NUMBERS[n]],
 							ss    = specialSyntax(word, props);
 					if (ss)
 						table += `<td style="text-align: center; color: red; background-color: white;">`
@@ -13909,7 +13930,7 @@
 							+ '</td>';
 					else
 						table += '<td style="text-align: center; background-color: white;">'
-							+ declension[cases[c]][numbers[n]]
+							+ declension[CASES[c]][NUMBERS[n]]
 							+ '</td>';
 				}
 				table += '</tr>';
@@ -13928,22 +13949,22 @@
 			let backgroundColor       = '#c0cfe4',
 					adverbBackgroundColor = '#c0e4c0';
 			table += `<tr><td style="background-color: ${backgroundColor};" colspan="1" rowspan="2"></td>`;
-			for (let n = 0; n < numbers.length; n++)
-				table += `<th style="background-color: ${backgroundColor};" colspan="3">${numbers[n]}</th>`;
+			for (let n = 0; n < NUMBERS.length; n++)
+				table += `<th style="background-color: ${backgroundColor};" colspan="3">${NUMBERS[n]}</th>`;
 			table += '</tr>';
 
 			table += '<tr>';
-			for (let n = 0; n < numbers.length; n++)
-				for (let g = 0; g < genders.length; g++)
-					table += `<th style="background-color: ${backgroundColor};">${genders[g]}</th>`;
+			for (let n = 0; n < NUMBERS.length; n++)
+				for (let g = 0; g < GENDERS.length; g++)
+					table += `<th style="background-color: ${backgroundColor};">${GENDERS[g]}</th>`;
 			table += '</tr>';
-			for (let c = 0; c < cases.length; c++) {
+			for (let c = 0; c < CASES.length; c++) {
 				table += '<tr>';
-				table += `<th style="background-color: ${backgroundColor};">${cases[c]}</th>`;
-				for (let n = 0; n < numbers.length; n++) {
-					for (let g = 0; g < genders.length; g++) {
+				table += `<th style="background-color: ${backgroundColor};">${CASES[c]}</th>`;
+				for (let n = 0; n < NUMBERS.length; n++) {
+					for (let g = 0; g < GENDERS.length; g++) {
 						// check for special syntax
-						let props = [cases[c], numbers[n], genders[g]],
+						let props = [CASES[c], NUMBERS[n], GENDERS[g]],
 								ss    = specialSyntax(word, props);
 						if (ss)
 							table += `<td style="text-align: center; color: red; background-color: white;">`
@@ -13951,13 +13972,13 @@
 								+ '</td>';
 						else
 							table += '<td style="text-align: center; background-color: white;">'
-								+ declension[cases[c]][numbers[n]][genders[g]]
+								+ declension[CASES[c]][NUMBERS[n]][GENDERS[g]]
 								+ '</td>';
 					}
 				}
 				table += '</tr>';
 			}
-			if (word.type.slice(0,9) === 'adjective' && declension.adverb) {
+			if (word.type.slice(0,9) === 'adjective' && declension.adverb && section != 'noAdverb') {
 				table += `<tr><th style="background-color: ${adverbBackgroundColor};">adverb</th>`
 					+ `<td colspan="6" style="${word.specialSyntax && word.specialSyntax.adverb ? 'color: red; ' : ''}text-align: center; background-color: white;">`
 					+ declension.adverb
@@ -13972,84 +13993,104 @@
 
 			let conjugation = word.conjugation();
 
-			for (let m = 0; m < moods.length; m++) {
+			for (let m = 0; m < MOODS.length; m++) {
+				
+				if (section == undefined || section == MOODS[m]) {
 
-				let backgroundColor = m == 0 ? '#c0cfe4' : m == 1 ? '#c0e4c0' :
-															m == 2 ? '#e4d4c0' : '#e2e4c0';
-				let moodTenses = m == 0 ? tenses : m == 1 ? tenses.filter((t,i) => i % 3 != 2) :
-												 m == 2 ? tenses.slice(0,1) : tenses.slice(0,1);
+					let backgroundColor = m == 0 ? '#c0cfe4' : m == 1 ? '#c0e4c0' :
+																m == 2 ? '#e4d4c0' : '#e2e4c0';
+					let moodTenses = m == 0 ? TENSES : m == 1 ? TENSES.filter((t,i) => i % 3 != 2) :
+													 m == 2 ? TENSES.slice(0,1) : TENSES.slice(0,1);
 
-				table += '<tr>';
-				table += `<th colspan="2" rowspan="2" style="background-color: ${backgroundColor};">` + moods[m] +'</th>';
-				for (let n = 0; n < numbers.length; n++)
-					table += `<th colspan="3" style="background-color: ${backgroundColor};">` + numbers[n] +'</th>';
-				table += '</tr>';
+					table += '<tr>';
+					table += `<th colspan="2" rowspan="2" style="background-color: ${backgroundColor};">` + MOODS[m] +'</th>';
+					for (let n = 0; n < NUMBERS.length; n++)
+						table += `<th colspan="3" style="background-color: ${backgroundColor};">` + NUMBERS[n] +'</th>';
+					table += '</tr>';
 
-				table += '<tr>';
-				for (let n = 0; n < numbers.length; n++)
-					for (let p = 0; p < persons.length; p++)
-						table += `<th style="background-color: ${backgroundColor};">` + persons[p] + '</th>';
-				table += '</tr>';
+					table += '<tr>';
+					for (let n = 0; n < NUMBERS.length; n++) {
+						if (MOODS[m] == 'imperative')
+							table += `<th colspan="3" style="background-color: ${backgroundColor};">` + PERSONS[1] + '</th>';
+						else
+							for (let p = 0; p < PERSONS.length; p++)
+								table += `<th style="background-color: ${backgroundColor};">` + PERSONS[p] + '</th>';
+					}
+					table += '</tr>';
 
-				for (let v = 0; v < voices.length; v++) {
-					for (let t = 0; t < moodTenses.length; t++) {
-						let propertyTense = moodTenses[t].replace(/ /g,'');
-						table += '<tr>';
-						if (t == 0) table += `<th rowspan="${moodTenses.length}"style="background-color: ${backgroundColor};">` + voices[v] + '</th>'
-						table += `<th style="background-color: ${backgroundColor};">` + moodTenses[t] + `</th>`;
-						for (let n = 0; n < numbers.length; n++) {
-							for (let p = 0; p < persons.length; p++) {
-								// check for special syntax
-								let props = [moods[m], voices[v], propertyTense, numbers[n], persons[p]],
-										ss    = specialSyntax(word, props);
-								// if special syntax
-								if (ss)
-									table += `<td style="text-align: center; ${word.type == 'verb Irr' ? '' : 'color: red;'} background-color: white;">`
-										+ ss
-										+ '</td>';
-								// if no special syntax
-								else
-									table += '<td style="text-align: center; background-color: white;">'
-										+ conjugation[moods[m]][voices[v]][propertyTense][numbers[n]][persons[p]]
-										+ '</td>';
+					for (let v = 0; v < VOICES.length; v++) {
+						for (let t = 0; t < moodTenses.length; t++) {
+							let propertyTense = moodTenses[t].replace(/ /g,'');
+							table += '<tr>';
+							if (t == 0) table += `<th rowspan="${moodTenses.length}"style="background-color: ${backgroundColor};">` + VOICES[v] + '</th>'
+							table += `<th style="background-color: ${backgroundColor};">` + moodTenses[t] + `</th>`;
+							for (let n = 0; n < NUMBERS.length; n++) {
+								for (let p = 0; p < PERSONS.length; p++) {
+									if (MOODS[m] != 'imperative' || PERSONS[p] == 'second') {
+										// check for special syntax
+										let props = [MOODS[m], VOICES[v], propertyTense, NUMBERS[n], PERSONS[p]],
+												ss    = specialSyntax(word, props);
+										// if special syntax
+										if (ss) {
+											if (MOODS[m] == 'imperative' && PERSONS[p] == 'second')
+												table += `<td colspan="3" style="text-align: center; ${word.type == 'verb Irr' ? '' : 'color: red;'} background-color: white;">`;
+											else
+												table += `<td style="text-align: center; ${word.type == 'verb Irr' ? '' : 'color: red;'} background-color: white;">`;
+											table += ss + '</td>';
+										}
+										// if no special syntax
+										else {
+											if (MOODS[m] == 'imperative' && PERSONS[p] == 'second')
+												table += '<td colspan="3" style="text-align: center; background-color: white;">';
+											else
+												table += '<td style="text-align: center; background-color: white;">';
+											table += conjugation[MOODS[m]][VOICES[v]][propertyTense][NUMBERS[n]][PERSONS[p]] + '</td>';
+										}
+									}
+								}
 							}
+							table += '</tr>';
 						}
-						table += '</tr>';
 					}
 				}
-				// for (var v = 0; v < voices.length; v++)
+				
 			}
 
-			let backgroundColor = '#e2e4c0',
-					nonFiniteTenses = ['present', 'perfect', 'future'],
-					nonFiniteForms  = ['infinitive', 'participle'];
-			table += '<tr>';
-			table += `<th colspan="2" rowspan="2" style="background-color: ${backgroundColor};">non-finite forms</th>`;
-			for (let v = 0; v < voices.length; v++)
-				table += `<th colspan="3" style="background-color: ${backgroundColor};">` + voices[v] + '</th>'
-			table += '</tr>';
-			table += '<tr>';
-			for (let v = 0; v < voices.length; v++)
-				for (let t = 0; t < nonFiniteTenses.length; t++)
-					table += `<th style="background-color: ${backgroundColor};">` + nonFiniteTenses[t] + '</th>';
-			table += '</tr>';
-			for (let f = 0; f < nonFiniteForms.length; f++){
-				table += `<tr><th colspan="2" style="background-color: ${backgroundColor};">` + nonFiniteForms[f] + '</th>';
-				for (let v = 0; v < voices.length; v++) {
-					for (let t = 0; t < nonFiniteTenses.length; t++) {
-						if (word.specialSyntax && word.specialSyntax[nonFiniteForms[f]]
-							&& word.specialSyntax[nonFiniteForms[f]][voices[v]]
-							&& word.specialSyntax[nonFiniteForms[f]][voices[v]][nonFiniteTenses[t]])
-							table += `<td style="text-align: center; ${word.type == 'verb Irr' ? '' : 'color: red;'} background-color: white;">`
-								+ word.specialSyntax[nonFiniteForms[f]][voices[v]][nonFiniteTenses[t]]
-								+ '</td>';
-						else
-							table += '<td style="text-align: center; background-color: white;">'
-								+ conjugation[nonFiniteForms[f]][voices[v]][nonFiniteTenses[t]]
-								+ '</td>';
-					}
-				}
+			// NON-FINITE FORMS
+
+			if (section == undefined) {
+
+				let backgroundColor = '#e2e4c0',
+						nonFiniteTenses = ['present', 'perfect', 'future'],
+						nonFiniteForms  = ['infinitive', 'participle'];
+				table += '<tr>';
+				table += `<th colspan="2" rowspan="2" style="background-color: ${backgroundColor};">non-finite forms</th>`;
+				for (let v = 0; v < VOICES.length; v++)
+					table += `<th colspan="3" style="background-color: ${backgroundColor};">` + VOICES[v] + '</th>'
 				table += '</tr>';
+				table += '<tr>';
+				for (let v = 0; v < VOICES.length; v++)
+					for (let t = 0; t < nonFiniteTenses.length; t++)
+						table += `<th style="background-color: ${backgroundColor};">` + nonFiniteTenses[t] + '</th>';
+				table += '</tr>';
+				for (let f = 0; f < nonFiniteForms.length; f++){
+					table += `<tr><th colspan="2" style="background-color: ${backgroundColor};">` + nonFiniteForms[f] + '</th>';
+					for (let v = 0; v < VOICES.length; v++) {
+						for (let t = 0; t < nonFiniteTenses.length; t++) {
+							if (word.specialSyntax && word.specialSyntax[nonFiniteForms[f]]
+								&& word.specialSyntax[nonFiniteForms[f]][VOICES[v]]
+								&& word.specialSyntax[nonFiniteForms[f]][VOICES[v]][nonFiniteTenses[t]])
+								table += `<td style="text-align: center; ${word.type == 'verb Irr' ? '' : 'color: red;'} background-color: white;">`
+									+ word.specialSyntax[nonFiniteForms[f]][VOICES[v]][nonFiniteTenses[t]]
+									+ '</td>';
+							else
+								table += '<td style="text-align: center; background-color: white;">'
+									+ conjugation[nonFiniteForms[f]][VOICES[v]][nonFiniteTenses[t]]
+									+ '</td>';
+						}
+					}
+					table += '</tr>';
+				}
 			}
 		}
 

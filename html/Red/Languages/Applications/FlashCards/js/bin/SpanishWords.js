@@ -13,3 +13,13 @@ var sp = str => {
 	}
 	return str;
 };
+
+class SpanishWord {
+	constructor(params) {
+		this.statement = params.statement;
+		this.definition = params.definition;
+		this.notes = params.notes;
+		this.type = params.type;
+		this.specialSyntax = params.specialSyntax;
+	}
+}

@@ -9,30 +9,152 @@
 		}
 		.Latin {
 			font-family: brill;
+			font-weight: bold;
+			color: maroon;
 		}
 
-		table {
-			border-collapse: collapse;
-		}
-
-		td {
+		.morphologyTable {
 			border: 1px solid black;
-			padding: 2px 8px;
 		}
 
-		.char_cell {
+		.morphologyTable td {
+			border: 1px solid black;
+			font-family: brill;
 			font-size: 24px;
+			color: maroon;
+			padding: 5px;
+		}
+
+		.morphologyTable th {
+			border: 1px solid black;
+			font-size: 14px;
+			padding: 5px;
 		}
 		
   </style>
 </head>
 <body>
-	<h1>Adjectives</h1>
+	<h1>Latin Adjectives</h1>
 
-	<h2>Latin</h2>
+	<h4>
+		<a href="#possessive">Possessive Adjectives</a> |
+		<a href="#reflexive-possessive">Reflexive-Possessive Adjectives</a>
+	</h4>
+
+	<hr>
+
+	<p>
+		Every Latin <b style="font-size: larger;">adjective</b> has a
+		<ul>
+			<li>
+				<b>gender</b> (masculine, feminine, or neuter),
+			</li>
+				<li>
+					<b>number</b> (singular or plural), and
+				</li>
+			<li>
+				<b>case</b> (nominative, genitive, dative, accusative, ablative, vocative, or locative).
+			</li>
+		</ul>
+		The <b>gender</b> is determined by the gender of the noun the adjective modifies, the <b>number</b> by the quantity of the noun, and <b>case</b> by the function of the noun in the sentence. Hence the declension of a Latin adjective contains all genders. </p>
+	
+	<p>Latin adjectives usually come after the nouns they modify, but adjectives of size or quantity often preced their nouns.</p>
+
+	<p>There are two declensions of Latin adjectives: </p>
+
+	<h3>First-Second Declension</h3>
+
+	<p>To decline a first-second-declension Latin adjective, one removes the ending from the feminine singular nominative form to obtain the adjective's stem, to which the following endings are appended: </p>
+
+	<h4>Endings</h4>
+
+	<div id="ending_table_1,2"></div>
+
+	<p>Note that the masculine endings are identical to those used for second-declension nouns, the feminine to first-declension nouns, and the neuter to second-declension-neuter nouns.</p>
+
+	<h4>Examples</h4>
+
+	<p id="example_statement_1,2" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="example_table_1,2"></div>
+
+	<p id="example_statement_1,2A" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="example_table_1,2A"></div>
+
+	<hr>
+ 
+	<h2><a name="possessive">Possessive Adjectives</a></h2>
+
+
+	<p>
+		To denote an object's possessor in the first or second-person, a <b>possessive adjective</b> may be used to refer to the possessor, which differs depending on the quantity of person. All possessive adjectives belong to the first-second declension, and may precede <i>or</i> follow the nouns they modify:
+	</p>
+
+	<h4>First Person Singular - '<i>my</i>'</h4>
+		
+	<p id="meus_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="meus_table"></div>
+
+	<h4>First Person Plural - '<i>our</i>'</h4>
+
+	<p id="noster_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="noster_table"></div>
+
+	<h4>Second Person Singular - '<i>your</i>'</h4>
+
+	<p id="tuus_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="tuus_table"></div>
+
+	<h4>Second Person Plural - '<i>your</i>'</h4>
+
+	<p id="vester_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="vester_table"></div>
+
+	<p>When an object's possessor is in the third-person, the genitive of possession is used insead of a possessive adjective. There is no possessive adjective used to denote a third-person possessor, unless the possessor is the subject of the verb in the sentence. In this case, there is a <b>reflexive-posessive adjective</b> that may be used:
+
+	<hr>
+
+
+	<h2><a name="reflexive-possessive">Reflexive-Possessive Adjectives</a></h2>
+
+	<p>When an object's possessor is the subject of the sentence's verb, a <b>reflexive-possessive adjective</b> may be used to refer to the possessor. The first- and second-person singular and plural forms are identical to those of the possessive adjectives above. But unlike the possessive adjectives, there is a third-person form, identical in singular and plural:</p>
+
+	<h4>Third Person - '<i>his, her, its, their (own)</i>'</h4>
+
+	<p id="suus_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="suus_table"></div>
 
 	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
 	<script>
+		document.getElementById('ending_table_1,2').
+	  		innerHTML = MorphologyTable(V.adjectives['-1,2'], 'noAdverb');
+
+	  document.getElementById('example_statement_1,2').
+  		textContent = _(V.adjectives.bonus.statement);
+  	document.getElementById('example_table_1,2').
+  		innerHTML = MorphologyTable(V.adjectives.bonus, 'noAdverb');
+
+  	document.getElementById('example_statement_1,2A').
+  		textContent = _(V.adjectives.miser.statement);
+  	document.getElementById('example_table_1,2A').
+  		innerHTML = MorphologyTable(V.adjectives.miser, 'noAdverb');
+
+  	var possessiveAdjectives = ['meus', 'tuus', 'noster', 'vester', 'suus'];
+  	for (var i = 0; i < possessiveAdjectives.length; i++) {
+  		document.getElementById(possessiveAdjectives[i] + '_statement').
+  			textContent = _(V.adjectives[possessiveAdjectives[i]].statement);
+  		document.getElementById(possessiveAdjectives[i] + '_table').
+  			innerHTML = MorphologyTable(V.adjectives[possessiveAdjectives[i]], 'noAdverb');
+  	}
+
+		// ---
+
 		// replace _ with macrons in Latin Text
   	var LatinElements = document.getElementsByClassName('Latin');
   	for (var i = 0; i < LatinElements.length; i++)
