@@ -5183,6 +5183,18 @@ var V = {
 						feminine: _('ipsi_'),
 						neuter: _('ipsi_')
 					}
+				},
+				vocative: {
+					singular: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					},
+					plural: {
+						masculine: '-',
+						feminine: '-',
+						neuter: '-'
+					}
 				}
 			}
 		}),

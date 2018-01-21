@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+  	@font-face {
+			font-family: brill;
+			src: url('../fonts/brill_roman_2.06_051.ttf');
+		}
+		.Spanish {
+			font-family: brill;
+			font-size: 24px;
+		}
+		.English {
+			font-size: 16px;
+		}
+		.exercise {
+			margin-bottom: 10px;
+		}
+		.exercise>ul {
+			list-style-type: none;
+		}
+  </style>
+</head>
+<body>
+
+<h1>Coester's <i>A Spanish Grammar</i> Lesson 1</h1>
+
+<h2>Exercises</h2>
+
+<h3>B</h3>
+<ol class="exercises">
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">_?Que_' idioma habla Mari_'a?</li>
+			<li class="Spanish">Mari_'a habla espan_~ol.</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">_?Habla Carlos ingle_'s?</li>
+			<li class="Spanish">No, Carlos no habla ingle_'s, e_'l habla espan_~ol.</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">_?Vive usted en Inglaterra?</li>
+			<li class="Spanish">No, no vivo alli_', yo vivo en Ame_'rica</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">_?Do_'nde viven ustedes?</li>
+			<li class="Spanish">Vivimos en Nueva York./</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">_?Quie_'n compra papel?</li>
+			<li class="Spanish">Juan compra papel.</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">Que_' compran Juan y Carlos?</li>
+			<li class="Spanish">Juan y Carlos compran papel y tinta.</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">_?Escribe usted mucha en espan_~ol?</li>
+			<li class="Spanish">No, escribo poco en espan_~ol.</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">_?A quie_'n escribe usted?</li>
+			<li class="Spanish">Escribo a mi ti_'a.</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">_?Que_' lee usted?</li>
+			<li class="Spanish">Leo una carta.</li>
+		</ul>
+	</li>
+	<li class="exercise">
+		<ul>
+			<li class="Spanish">Do_'nde venden tinta?</li>
+			<li class="Spanish">Venden tinta en Inglaterra.</li>
+		</ul>
+	</li>
+</ol>
+
+<script src="../../Applications/FlashCards/js/bin/SpanishWords.js"></script>
+<script>
+	// replace substrings with appropriate characters in Spanish text
+	var spanishElements = document.getElementsByClassName('Spanish');
+	for (var i = 0; i < spanishElements.length; i++)
+		spanishElements[i].textContent = sp(spanishElements[i].textContent);
+</script>
+</body>
+</html>

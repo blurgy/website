@@ -38,7 +38,8 @@
 
 	<h4>
 		<a href="#possessive">Possessive Adjectives</a> |
-		<a href="#reflexive-possessive">Reflexive-Possessive Adjectives</a>
+		<a href="#reflexive-possessive">Reflexive-Possessive Adjectives</a> |
+		<a href="#intensive">Intensive Adjectives</a>
 	</h4>
 
 	<hr>
@@ -58,7 +59,7 @@
 		</ul>
 		The <b>gender</b> is determined by the gender of the noun the adjective modifies, the <b>number</b> by the quantity of the noun, and <b>case</b> by the function of the noun in the sentence. Hence the declension of a Latin adjective contains all genders. </p>
 	
-	<p>Latin adjectives usually come after the nouns they modify, but adjectives of size or quantity often preced their nouns.</p>
+	<p>Latin adjectives usually come after the nouns they modify, but adjectives of size or quantity often precede their nouns.</p>
 
 	<p>There are two declensions of Latin adjectives: </p>
 
@@ -119,7 +120,6 @@
 
 	<hr>
 
-
 	<h2><a name="reflexive-possessive">Reflexive-Possessive Adjectives</a></h2>
 
 	<p>When an object's possessor is the subject of the sentence's verb, a <b>reflexive-possessive adjective</b> may be used to refer to the possessor. The first- and second-person singular and plural forms are identical to those of the possessive adjectives above. But unlike the possessive adjectives, there is a third-person form, identical in singular and plural:</p>
@@ -130,27 +130,48 @@
 
 	<div id="suus_table"></div>
 
+	<hr>
+
+	<h2><a name="intensive">Intensive Adjectives</a></h2>
+
+	<p>An <b>intensive adjective</b> emphasizes or intensifies the noun in modifies.</p>
+
+	<p>The intensive adjective <span class="Latin">ipse</span> may be translated "himself," "herself," "itself," or "themselves." If modifying the unexpressed subject of a verb, it may be translated "I myself," "He himself," "She herself," or "They themselves." It may serve to identify something in particular, in which case it is translated "very."</p>
+
+	<p id="ipse_statement" class="Latin" style="font-size: 24px;"></p>
+
+	<div id="ipse_table"></div>
+
 	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
 	<script>
+		// 1, 2 
 		document.getElementById('ending_table_1,2').
 	  		innerHTML = MorphologyTable(V.adjectives['-1,2'], 'noAdverb');
-
 	  document.getElementById('example_statement_1,2').
   		textContent = _(V.adjectives.bonus.statement);
   	document.getElementById('example_table_1,2').
   		innerHTML = MorphologyTable(V.adjectives.bonus, 'noAdverb');
-
   	document.getElementById('example_statement_1,2A').
   		textContent = _(V.adjectives.miser.statement);
   	document.getElementById('example_table_1,2A').
   		innerHTML = MorphologyTable(V.adjectives.miser, 'noAdverb');
 
+  	// (reflexive) possessive
   	var possessiveAdjectives = ['meus', 'tuus', 'noster', 'vester', 'suus'];
   	for (var i = 0; i < possessiveAdjectives.length; i++) {
   		document.getElementById(possessiveAdjectives[i] + '_statement').
   			textContent = _(V.adjectives[possessiveAdjectives[i]].statement);
   		document.getElementById(possessiveAdjectives[i] + '_table').
   			innerHTML = MorphologyTable(V.adjectives[possessiveAdjectives[i]], 'noAdverb');
+  	}
+
+  	// intensive
+  	var intensiveAdjectives = ['ipse'];
+  	for (var i = 0; i < intensiveAdjectives.length; i++) {
+  		document.getElementById(intensiveAdjectives[i] + '_statement').
+  			textContent = _(V.adjectives[intensiveAdjectives[i]].statement);
+  		document.getElementById(intensiveAdjectives[i] + '_table').
+  			innerHTML = MorphologyTable(V.adjectives[intensiveAdjectives[i]], 'noAdverb');
   	}
 
 		// ---

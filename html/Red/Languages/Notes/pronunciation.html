@@ -2,21 +2,29 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
+  <link rel="stylesheet" href="../../../../js/node_modules/bootstrap/dist/css/bootstrap.css">
   <style>
-	@font-face {
+		@font-face {
 			font-family: brill;
 			src: url('fonts/brill_roman_2.06_051.ttf');
 		}
 
-		.Latin {
-			font-family: brill;
-			font-weight: bold;
-			color: maroon;
-		}
-
+		.Latin,
+		.Italian,
 		.Spanish {
 			font-family: brill;
 			font-weight: bold;
+		}
+
+		.Latin {
+			color: maroon;
+		}
+
+		.Italian {
+			color: purple;
+		}
+
+		.Spanish {
 			color: blue;
 		}
 
@@ -29,11 +37,9 @@
 			padding: 2px 8px;
 		}
 
+		.pron_cell span.Latin,
+		.pron_cell span.Italian,
 		.pron_cell span.Spanish {
-			font-size: larger;
-		}
-
-		.pron_cell span.Latin {
 			font-size: larger;
 		}
 
@@ -47,187 +53,355 @@
 	<h1>Pronunciation</h1>
 
 	<h4>
-		<a href="#Latin">Latin</a> <a href="#Spanish">Spanish</a>
+		<a href="#Latin">Latin</a>
+    &nbsp;
+		<a href="#Italian">Italian</a>
+    &nbsp;
+		<a href="#Spanish">Spanish</a>
+    &nbsp; 
+		<a href="#French">French</a>
+    &nbsp;
+    <a href="#Esperanto">Esperanto</a>
+    &nbsp;
+    <a href="#Greek">Greek</a>
+    &nbsp;
+		<a href="#German">German</a>
+    &nbsp; 
+    <a href="#Russian">Russian</a>
+    &nbsp; 
+		<a href="#Hebrew">Hebrew</a>
+    &nbsp; 
+		<a href="#Arabic">Arabic</a>
+    &nbsp; 
+		<a href="#Chinese">Chinese</a> 
 	</h4>
 
 	<hr>
 	
 	<h2><a name="Latin"></a>Latin</h2>
+	<div class="container">
+    <div class="row">
+      <div class="col-sm">
+
+      	<h3>Vowels</h3>  
+
+      	<table>
+      		<tr>
+      			<td class="Latin char_cell">a</td>
+      			<td class="pron_cell"><u>a</u>wait, c<u>u</u>p</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">a_</td>
+      			<td class="pron_cell">f<u>a</u>ther</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">e</td>
+      			<td class="pron_cell">p<u>e</u>t</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">e_</td>
+      			<td class="pron_cell">f<u>a</u>te</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">i</td>
+      			<td class="pron_cell">f<u>i</u>t</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">i_</td>
+      			<td class="pron_cell">s<u>ee</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">o</td>
+      			<td class="pron_cell">s<u>o</u>ft, c<u>au</u>ght</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">o_</td>
+      			<td class="pron_cell">h<u>o</u>pe</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">u</td>
+      			<td class="pron_cell">p<u>u</u>t</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">u_</td>
+      			<td class="pron_cell">b<u>oo</u>t</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">y</td>
+      			<td class="pron_cell">As the French '<u>u</u>ne'</td>
+      		</tr>
+      	</table>
+
+      	<ul>
+      		<li>
+      			Vowels marked with a macron <span class="Latin">_</span> are <i>long</i>, and take approximately twice as long to pronounce as the other, <i>short</i> vowels.
+      		</li>
+      		<li>
+      			<span class="Latin">y</span>, representing the Greek letter upsilon, may be long or short.
+      		</li>
+      	</ul>
+
+      </div>
+      <div class="col-sm">
+
+      	<h3>Diphthongs</h3>
+
+      	<table>
+      		<tr>
+      			<td class="Latin char_cell">ae</td>
+      			<td class="pron_cell">h<u>i</u>gh</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">oe</td>
+      			<td class="pron_cell">b<u>oy</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">ei</td>
+      			<td class="pron_cell">d<u>ay</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">ui</td>
+      			<td class="pron_cell">t<u>wi</u>n</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">au</td>
+      			<td class="pron_cell">h<u>ow</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">eu</td>
+      			<td class="pron_cell">e + u, kind of like Elmer Fudd's pronunciation of 'very' - v<u>ew</u>y</td>
+      		</tr>
+      	</table>
+
+      </div>
+      <div class="col-sm">
+
+       <h3>Accentuation</h3>
+
+       <p>The last syllable of a Latin word is called the <u>ultima</u>, the second-last the <u>penult</u>, and the third-last the <u>antepenult</u>. Only the penult or the antepenult may be stressed. Thus, if a word has only two syllables, the penult is stressed. If a word has more than two syllables, then its stress accent is determined according to the <b>law of the penult</b>: If the penult is long, it is stressed. If the penult is short, the antepenult is stressed. A syllable is long if it contains a long vowel or a dipthong (long by nature), or a short vowel followed by two or more consonants not necessarily in the same syllable (long by position).</p>
+      </div> 
+    </div>
+    <div class="row">
+      <div class="col-sm">
+
+      	<h3>Consonants</h3>
+
+      	<p>Most are identical in pronunciation to their English equivalents, with the following exceptions:</p>
+
+      	<table>
+      		<tr>
+      			<td class="Latin char_cell">bs</td>
+      			<td class="pron_cell">ta<u>ps</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">c</td>
+      			<td class="pron_cell">Always a <i>hard</i> c - <u>c</u>art</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">ch</td>
+      			<td class="pron_cell"><u>ch</u>aracter</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">g</td>
+      			<td class="pron_cell">Always a <i>hard</i> g - <u>g</u>et</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">gu</td>
+      			<td class="pron_cell">Counts as a single consonant - an<u>gu</u>ish</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">h</td>
+      			<td class="pron_cell">Never silent, always pronounced - <u>h</u>at </td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">i</td>
+      			<td class="pron_cell"><u>y</u>awn</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">ph</td>
+      			<td class="pron_cell"><u>p</u>eople</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">qu</td>
+      			<td class="pron_cell">Counts as a single consonant - <u>qu</u>it</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">r</td>
+      			<td class="pron_cell">Probably rolled</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">s</td>
+      			<td class="pron_cell">Always sibilant, never a 'z' sound - <u>s</u>erpent</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">su</td>
+      			<td class="pron_cell">Counts as a single consonant - per<u>su</u>ade</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">th</td>
+      			<td class="pron_cell"><u>t</u>ea</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">v</td>
+      			<td class="pron_cell">Consonantal <span class="Latin">u</span> - <u>w<u/>et</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">x</td>
+      			<td class="pron_cell">Counts as a double consonant (ks) - a<u>x</u>e</td>
+      		</tr>
+      		<tr>
+      			<td class="Latin char_cell">z</td>
+      			<td class="pron_cell">Counts as a double consonant (dz) - ga<u>dz</u>ooks</td>
+      		</tr>
+      	</table>
+
+      	<ul>
+      		<li>
+      			<span class="Latin">i</span> is consonantal at the beginning of a word when followed by a vowel (<span class="Latin">Iu_no_</span>), and in the middle of a word when it falls between two vowels (<span class="Latin">biiugis</span>). It may also be consonantal in the middle of a compound (a word made with a root word and a prefix - <span class="Latin">iniustus</span> = <span class="Latin">in-</span> + <span class="Latin">iustus</span>). An exception to this rule occurs in certain words borrowed from Greek, in which an initial <span class="Latin">i</span> is pronounced as a vowel - <span class="Latin">iambus</span>.
+      		</li>
+      		<li>
+      			While in English the letters <span class="Latin">c</span>, <span class="Latin">p</span>, and <span class="Latin">t</span> are aspirated (pronounced with a puff of air), in Latin they are not, and the pairs <span class="Latin">ch</span>, <span class="Latin">ph</span>, and <span class="Latin">th</span> are used to denote this aspiration - they are sounds introduced into Latin from Greek.
+      		</li>
+      		<li>
+      			The combination <span class="Latin">gn</span> is pronounced as in "ha<u>ngn</u>ail", i.e. <span class="Latin">magnus</span> is pronounced "mangnus".
+      		</li>
+      		<li>
+      			When double consonants occur, both consonants are pronounced, i.e. <span class="Latin">ille</span> is pronounced "il - le".
+      		</li>
+      	</ul>
+
+      </div>
+   </div>
+</div>
+
+	<hr>
 	
-	<h3>Vowels</h3>
-	<table>
-		<tr>
-			<td class="Latin char_cell">a</td>
-			<td class="pron_cell"><u>a</u>wait, c<u>u</u>p</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">a_</td>
-			<td class="pron_cell">f<u>a</u>ther</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">e</td>
-			<td class="pron_cell">p<u>e</u>t</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">e_</td>
-			<td class="pron_cell">f<u>a</u>te</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">i</td>
-			<td class="pron_cell">f<u>i</u>t</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">i_</td>
-			<td class="pron_cell">s<u>ee</u></td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">o</td>
-			<td class="pron_cell">s<u>o</u>ft, c<u>au</u>ght</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">o_</td>
-			<td class="pron_cell">h<u>o</u>pe</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">u</td>
-			<td class="pron_cell">p<u>u</u>t</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">u_</td>
-			<td class="pron_cell">b<u>oo</u>t</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">y</td>
-			<td class="pron_cell">As the French '<u>u</u>ne'</td>
-		</tr>
-	</table>
+	<h2><a name="Italian"></a>Italian</h2>
 
-	<ul>
-		<li>
-			Vowels marked with a macron <span class="Latin">_</span> are <i>long</i>, and take approximately twice as long to pronounce as the other, <i>short</i> vowels.
-		</li>
-		<li>
-			<span class="Latin">y</span>, representing the Greek letter upsilon, may be long or short.
-		</li>
-	</ul>
+	<p>Nearly all Italian words end in a vowel. Guttural and nasal sounds are not very strong in Italian. Most words are formed in the forward section of the mouth.</p>
 
-	<h3>Diphthongs</h3>
-	<table>
-		<tr>
-			<td class="Latin char_cell">ae</td>
-			<td class="pron_cell">h<u>i</u>gh</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">oe</td>
-			<td class="pron_cell">b<u>oy</u></td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">ei</td>
-			<td class="pron_cell">d<u>ay</u></td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">ui</td>
-			<td class="pron_cell">t<u>wi</u>n</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">au</td>
-			<td class="pron_cell">h<u>ow</u></td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">eu</td>
-			<td class="pron_cell">e + u, kind of like Elmer Fudd's pronunciation of 'very' - v<u>ew</u>y</td>
-		</tr>
-	</table>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
 
-	<h3>Consonants</h3>
+      	<h3>Vowels</h3>
 
-	<p>Most are identical in pronunciation to their English equivalents, with the following exceptions:</p>
+      	<table>
+      		<tr>
+      			<td class="Italian char_cell">a</td>
+      			<td class="pron_cell">f<u>a</u>ther</td>
+      		</tr>
+      		<tr>
+      			<td class="Italian char_cell">e</td>
+      			<td class="pron_cell">s<u>ay</u>; g<u>e</u>t</td>
+      		</tr>
+      		<tr>
+      			<td class="Italian char_cell">i</td>
+      			<td class="pron_cell">s<u>ee</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Italian char_cell">o</td>
+      			<td class="pron_cell">h<u>o</u>pe; g<u>o</u>t</td>
+      		</tr>
+      		<tr>
+      			<td class="Italian char_cell">u</td>
+      			<td class="pron_cell">b<u>oo</u>t</td>
+      		</tr>
+      	</table>	
 
-	<table>
-		<tr>
-			<td class="Latin char_cell">bs</td>
-			<td class="pron_cell">ta<u>ps</u></td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">c</td>
-			<td class="pron_cell">Always a <i>hard</i> c - <u>c</u>art</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">ch</td>
-			<td class="pron_cell"><u>ch</u>aracter</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">g</td>
-			<td class="pron_cell">Always a <i>hard</i> g - <u>g</u>et</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">gu</td>
-			<td class="pron_cell">Counts as a single consonant - an<u>gu</u>ish</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">h</td>
-			<td class="pron_cell">Never silent, always pronounced - <u>h</u>at </td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">i</td>
-			<td class="pron_cell"><u>y</u>awn</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">ph</td>
-			<td class="pron_cell"><u>p</u>eople</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">qu</td>
-			<td class="pron_cell">Counts as a single consonant - <u>qu</u>it</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">r</td>
-			<td class="pron_cell">Probably rolled</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">s</td>
-			<td class="pron_cell">Always sibilant, never a 'z' sound - <u>s</u>erpent</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">su</td>
-			<td class="pron_cell">Counts as a single consonant - per<u>su</u>ade</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">th</td>
-			<td class="pron_cell"><u>t</u>ea</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">v</td>
-			<td class="pron_cell">Consonantal <span class="Latin">u</span> - <u>w<u/>et</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">x</td>
-			<td class="pron_cell">Counts as a double consonant (ks) - a<u>x</u>e</td>
-		</tr>
-		<tr>
-			<td class="Latin char_cell">z</td>
-			<td class="pron_cell">Counts as a double consonant (dz) - ga<u>dz</u>ooks</td>
-		</tr>
-	</table>
+      </div>
+      <div class="col-sm">
+    
+        <h3>Accentuation</h3>
 
-	<ul>
-		<li>
-			<span class="Latin">i</span> is consonantal at the beginning of a word when followed by a vowel (<span class="Latin">Iu_no_</span>), and in the middle of a word when it falls between two vowels (<span class="Latin">biiugis</span>). It may also be consonantal in the middle of a compound (a word made with a root word and a prefix - <span class="Latin">iniustus</span> = <span class="Latin">in-</span> + <span class="Latin">iustus</span>). An exception to this rule occurs in certain words borrowed from Greek, in which an initial <span class="Latin">i</span> is pronounced as a vowel - <span class="Latin">iambus</span>.
-		</li>
-		<li>
-			While in English the letters <span class="Latin">c</span>, <span class="Latin">p</span>, and <span class="Latin">t</span> are aspirated (pronounced with a puff of air), in Latin they are not, and the pairs <span class="Latin">ch</span>, <span class="Latin">ph</span>, and <span class="Latin">th</span> are used to denote this aspiration - they are sounds introduced into Latin from Greek.
-		</li>
-		<li>
-			The combination <span class="Latin">gn</span> is pronounced as in "ha<u>ngn</u>ail", i.e. <span class="Latin">magnus</span> is pronounced "mangnus".
-		</li>
-		<li>
-			When double consonants occur, both consonants are pronounced, i.e. <span class="Latin">ille</span> is pronounced "il - le".
-		</li>
-	</ul>
+        <p>Most words are stressed on the penult. Many words are stressed on the antepenult. A few words are stressed on the ultima, which requires a written accent. Some words are stressed on the fourth-to-last syllable.</p>
 
-	<h3>Accentuation</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+      
+        <h3>Consonants</h3>
 
-	<p>The last syllable of a Latin word is called the <u>ultima</u>, the second-last the <u>penult</u>, and the third-last the <u>antepenult</u>. Only the penult or the antepenult may be stressed. Thus, if a word has only two syllables, the penult is stressed. If a word has more than two syllables, then its stress accent is determined according to the <b>law of the penult</b>: If the penult is long, it is stressed. If the penult is short, the antepenult is stressed. A syllable is long if it contains a long vowel or a dipthong (long by nature), or a short vowel followed by two or more consonants not necessarily in the same syllable (long by position).</p>
+          <table>
+            <tr>
+                <td class="Italian char_cell">c</td>
+                <td class="pron_cell">
+                    <ol>
+                        <li>When followed by <span class="Italian">e</span> or <span class="Italian">i</span>, like <u>ch</u>apel.</li>
+                        <li>Otherwise, like <u>c</u>at.</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">ch</td>
+                <td class="pron_cell">When followed by <span class="Italian">e</span> or <span class="Italian">i</span>, like <u>k</u>eep.</td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">g</td>
+                <td class="pron_cell">
+                    <ol>
+                        <li>When followed by <span class="Italian">e</span> or <span class="Italian">i</span>, like <u>g</u>eneral.</li>
+                        <li>Otherwise, like <u>g</u>oat.</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">gh</td>
+                <td class="pron_cell">When followed by <span class="Italian">e</span> or <span class="Italian">i</span>, like <u>g</u>et.</td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">gli</td>
+                <td class="pron_cell">mi<u>lli</u>on</td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">gn</td>
+                <td class="pron_cell">o<u>ni</u>on</td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">h</td>
+                <td class="pron_cell">never pronounceds</td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">r</td>
+                <td class="pron_cell">trilled</td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">rr</td>
+                <td class="pron_cell">trilled longer</td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">s</td>
+                <td class="pron_cell">
+                  <ol>
+                    <li>When between two vowels or followed by <span class="Italian">b</span>, <span class="Italian">d</span>, <span class="Italian">g</span>, <span class="Italian">l</span>, <span class="Italian">m</span>, <span class="Italian">n</span>, <span class="Italian">r</span> or <span class="Italian">v</span>, like ro<u>s</u>e.</li>
+                    <li>Otherwise, like <u>s</u>ea.</li>
+                  </ol>
+                </td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">sch</td>
+                <td class="pron_cell">When followed by <span class="Italian">e</span> or <span class="Italian">i</span>, like <u>sk</u>eptic.</td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">z</td>
+                <td class="pron_cell">
+                  <ol>
+                    <li>At the beginning of a word, like a<u>dz</u>e.</li>
+                    <li>When not at the beginning of a word and followed by <span class="Italian">ia</span>, <span class="Italian">ie</span>, or <span class="Italian">io</span>, like pe<u>ts</u>.</li>
+                    <li>Otherwise, sometimes like a<u>dz</u>e and sometimes like pe<u>ts</u>.</li>
+                  </ol>
+                </td>
+            </tr>
+            <tr>
+                <td class="Italian char_cell">zz</td>
+                <td class="pron_cell">Mostly like pe<u>ts</u>, sometimes like a<u>dz</u>e.</td>
+            </tr>
+          </table>
+    
+      </div>
+    </div>
+  </div>
 
 	<hr>
 
@@ -237,189 +411,234 @@
 		In Spanish speech, all words between pauses are strung together in a 'breath group'. Within the breath group, certain consonants are softened (<span class="Spanish">b</span>, <span class="Spanish">d</span>, <span class="Spanish">g</span>), and when identical vowels or consonants are adjacent to each other, one of them is omitted.
 	</p>
 
-	<h3>Vowels</h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+      	<h3>Vowels</h3>
 
-	<table>
-		<tr>
-			<td class="Spanish char_cell">a</td>
-			<td class="pron_cell">f<u>a</u>ther</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">e</td>
-			<td class="pron_cell">s<u>ay</u></td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">i</td>
-			<td class="pron_cell">s<u>ee</u></td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">y</td>
-			<td class="pron_cell">s<u>ee</u></td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">o</td>
-			<td class="pron_cell">h<u>o</u>pe</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">u</td>
-			<td class="pron_cell">b<u>oo</u>t</td>
-		</tr>
-	</table>
+      	<table>
+      		<tr>
+      			<td class="Spanish char_cell">a</td>
+      			<td class="pron_cell">f<u>a</u>ther</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">e</td>
+      			<td class="pron_cell">s<u>ay</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">i</td>
+      			<td class="pron_cell">s<u>ee</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">y</td>
+      			<td class="pron_cell">s<u>ee</u></td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">o</td>
+      			<td class="pron_cell">h<u>o</u>pe</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">u</td>
+      			<td class="pron_cell">b<u>oo</u>t</td>
+      		</tr>
+      	</table>
 
-	<ul>
-		<li>
-			Whether stressed or unstressed, the sounds of Spanish vowels are always clear, tense, and short. The stress doesn't change the sound of a vowel the way it does in English, e.g. in Spanish the three <span class="Spanish">a</span>'s of <span class="Spanish">Panama_'</span> all have the same sound.
-		</li>
-		<li>
-			Avoid lengthening final vowels, as in the glided 'o' of the English 'no'. Vowel sounds in Spanish are always short.
-		</li>
-	</ul>
+      	<ul>
+      		<li>
+      			Whether stressed or unstressed, the sounds of Spanish vowels are always clear, tense, and short. The stress doesn't change the sound of a vowel the way it does in English, e.g. in Spanish the three <span class="Spanish">a</span>'s of <span class="Spanish">Panama_'</span> all have the same sound.
+      		</li>
+      		<li>
+      			Avoid lengthening final vowels, as in the glided 'o' of the English 'no'. Vowel sounds in Spanish are always short.
+      		</li>
+      	</ul>
+      </div>
+      <div class="col-sm">
+      	<h3>Diphthongs</h3>
 
-	<h3>Diphthongs</h3>
+      	<table>
+      		<tr>
+      			<td class="Spanish char_cell">ie</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">io</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">ai</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">ei</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">ay</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">ue</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">au</td>
+      		</tr>
+      		<tr>
+      			<td class="Spanish char_cell">uy</td>
+      		</tr>
+      	</table>
+      	
+      	<ul>
+      		<li>
+      			A diphthong occurs wherever the vowels <span class="Spanish">i, u</span> are unstressed and directly preceded or followed by another vowel. In this case they are pronounced shorter, and form the "weak" part of the two-vowel combination that comprises the diphthong.
+      		</li>
+      	</ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <h3>Consonants</h3>
 
-	<table>
-		<tr>
-			<td class="Spanish char_cell">ie</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">io</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">ai</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">ei</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">ay</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">ue</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">au</td>
-		</tr>
-		<tr>
-			<td class="Spanish char_cell">uy</td>
-		</tr>
-	</table>
+      	<table>
+      		<tr>
+      			<td class="Spanish char_cell">b</td>
+      			<td class="pron_cell"><u>b</u>oot, when at the beginning of a breath group, after a pause, or after a nasal sound. In other cases, like '<span class="Spanish">b</span>' pronounced softly, with a slight friction between the lower and upper lips.</td>
+      		</tr>
+              <tr>
+                  <td class="Spanish char_cell">c</td>
+                  <td class="pron_cell">
+                      <ol>
+                          <li>When followed by <span class="Spanish">a</span>, <span class="Spanish">o</span>, <span class="Spanish">u</span>, <span class="Spanish">l</span>, or <span class="Spanish">r</span>, like <u>c</u>at.</li>
+                          <li>When followed by <span class="Spanish">e</span> or <span class="Spanish">i</span>, like <u>s</u>ad. (Only in the Americas.)</li>
+                      </ol>
+
+                  </td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">ch</td>
+                  <td class="pron_cell"><u>ch</u>urch</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">d</td>
+                  <td class="pron_cell">Pronounced with the tip of the tonue against the upper teeth (like English?), when at the beginning of a breath group or after an <span class="Spanish">n</span>. Pronounced like 'fa<u>th</u>er' (with less friction), when within a breath group.</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">g</td>
+                  <td class="pron_cell">
+                      <ol>
+                          <li>When followed by <span class="Spanish">a</span>, <span class="Spanish">o</span>, <span class="Spanish">u</span>, <span class="Spanish">l</span>, or <span class="Spanish">r</span>: Like <u>g</u>et when at the beginning of a breath group or after <span class="Spanish">n</span>. Otherwise, like 'su<u>g</u>ar' - softly, and with only a slight friction.</li>
+                          <li>When followed by <span class="Spanish">e</span> or <span class="Spanish">i</span>, like <u>h</u>at, but with more friction at the back of the mouth.</li>
+                      </ol>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">gu</td>
+                  <td class="pron_cell"><u>g</u>et, when followed by <span class="Spanish">e</span> or <span class="Spanish">i</span> and at the beginning of a breath group or after <span class="Spanish">n</span>. Otherwise, pronounced like 'su<u>g</u>ar' - softly, and with only a slight friction.</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">h</td>
+                  <td class="pron_cell">never pronounced</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">j</td>
+                  <td class="pron_cell"><u>h</u>at, but with more friction at the back of the mouth</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">l</td>
+                  <td class="pron_cell">Always clear, high, and tense, with the tip of the tongue held high to the roof of the mouth.</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">ll</td>
+                  <td class="pron_cell"><u>y</u>es, but with more friction</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">n_~</td>
+                  <td class="pron_cell">ca<u>ny</u>on</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">qu</td>
+                  <td class="pron_cell"><u>c</u>at, when followed by <span class="Spanish">e</span> or <span class="Spanish">i</span>. Never pronounced with the puff of air heard in English.</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">r</td>
+                  <td class="pron_cell">Trilled at the beginning of a word or after <span class="Spanish">n</span>, <span class="Spanish">l</span>, or <span class="Spanish">s</span>. Otherwise, like la<u>dd</u>er, ma<u>tt</u>er.</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">rr</td>
+                  <td class="pron_cell">trilled</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">sc</td>
+                  <td class="pron_cell"><u>s</u>ad, when followed by <span class="Spanish">e</span> or <span class="Spanish">i</span></td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">v</td>
+                  <td class="pron_cell"><u>b</u>oot, when at the beginning of a breath group, after a pause, or after a nasal sound. In other cases, like '<span class="Spanish">b</span>' pronounced softly, with a slight friction between the lower and upper lips.</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">y</td>
+                  <td class="pron_cell"><u>y</u>es, but with more friction</td>
+              </tr>
+              <tr>
+                  <td class="Spanish char_cell">z</td>
+                  <td class="pron_cell"><u>s</u>ad, when followed by <span class="Spanish">a</span>, <span class="Spanish">o</span>, or <span class="Spanish">u</span>, or at the end of a word. (Only in the Americas.)</td>
+              </tr>
+
+      	</table>
+
+        <ul>
+            <li>
+                The <span class="Spanish">u</span> in the combination <span class="Spanish">gu</span> is silent. When it is pronounced, it is written with a diaresis, as in <span class="Spanish">pingu_:ino</span>.
+            </li>
+            <li>
+            	Consonants <span class="Spanish">b</span>, <span class="Spanish">d</span>, and <span class="Spanish">g</span> are pronounced very softly within a breath group.
+            </li>
+            <li>
+            	Consonants <span class="Spanish">c</span>, <span class="Spanish">p</span>, and <span class="Spanish">t</span> at the beginning of words, when pronounced, are never followed by the puff of air heard in English.
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <hr>
 	
-	<ul>
-		<li>
-			A diphthong occurs wherever the vowels <span class="Spanish">i, u</span> are unstressed and directly preceded or followed by another vowel. In this case they are pronounced shorter, and form the "weak" part of the two-vowel combination that comprises the diphthong.
-		</li>
-	</ul>
+	<h2><a name="French"></a>French</h2>
 
-  <h3>Consonants</h3>
+  <hr>
+  
+  <h2><a name="Esperanto"></a>Esperanto</h2>
 
-	<table>
-		<tr>
-			<td class="Spanish char_cell">b</td>
-			<td class="pron_cell"><u>b</u>oot, when at the beginning of a breath group, after a pause, or after a nasal sound. In other cases, like '<span class="Spanish">b</span>' pronounced softly, with a slight friction between the lower and upper lips.</td>
-		</tr>
-        <tr>
-            <td class="Spanish char_cell">c</td>
-            <td class="pron_cell">
-                <ol>
-                    <li>When followed by <span class="Spanish">a</span>, <span class="Spanish">o</span>, <span class="Spanish">u</span>, <span class="Spanish">l</span>, or <span class="Spanish">r</span>, like <u>c</u>at.</li>
-                    <li>When followed by <span class="Spanish">e</span> or <span class="Spanish">i</span>, like <u>s</u>ad. (Only in the Americas.)</li>
-                </ol>
+  <hr>
+  
+  <h2><a name="Greek"></a>Greek</h2>
 
-            </td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">ch</td>
-            <td class="pron_cell"><u>ch</u>urch</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">d</td>
-            <td class="pron_cell">Pronounced with the tip of the tonue against the upper teeth (like English?), when at the beginning of a breath group or after an <span class="Spanish">n</span>. Pronounced like 'fa<u>th</u>er' (with less friction), when within a breath group.</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">g</td>
-            <td class="pron_cell">
-                <ol>
-                    <li>When followed by <span class="Spanish">a</span>, <span class="Spanish">o</span>, <span class="Spanish">u</span>, <span class="Spanish">l</span>, or <span class="Spanish">r</span>: Like <u>g</u>et when at the beginning of a breath group or after <span class="Spanish">n</span>. Otherwise, like 'su<u>g</u>ar' - softly, and with only a slight friction.</li>
-                    <li>When followed by <span class="Spanish">e</span> or <span class="Spanish">i</span>, like <u>h</u>at, but with more friction at the back of the mouth.</li>
-                </ol>
-            </td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">gu</td>
-            <td class="pron_cell"><u>g</u>et, when followed by <span class="Spanish">e</span> or <span class="Spanish">i</span> and at the beginning of a breath group or after <span class="Spanish">n</span>. Otherwise, pronounced like 'su<u>g</u>ar' - softly, and with only a slight friction.</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">h</td>
-            <td class="pron_cell">never pronounced</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">j</td>
-            <td class="pron_cell"><u>h</u>at, but with more friction at the back of the mouth</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">l</td>
-            <td class="pron_cell">Always clear, high, and tense, with the tip of the tongue held high to the roof of the mouth.</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">ll</td>
-            <td class="pron_cell"><u>y</u>es, but with more friction</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">n_~</td>
-            <td class="pron_cell">ca<u>ny</u>on</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">qu</td>
-            <td class="pron_cell"><u>c</u>at, when followed by <span class="Spanish">e</span> or <span class="Spanish">i</span>. Never pronounced with the puff of air heard in English.</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">r</td>
-            <td class="pron_cell">Like '<span class="Spanish">r</span>' in English, but trilled, when at the beginning of a word or after <span class="Spanish">n</span>, <span class="Spanish">l</span>, or <span class="Spanish">s</span>. Otherwise, like la<u>dd</u>er, ma<u>tt</u>er.</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">rr</td>
-            <td class="pron_cell">Like '<span class="Spanish">r</span>' in English, but trilled.</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">sc</td>
-            <td class="pron_cell"><u>s</u>ad, when followed by <span class="Spanish">e</span> or <span class="Spanish">i</span></td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">v</td>
-            <td class="pron_cell"><u>b</u>oot, when at the beginning of a breath group, after a pause, or after a nasal sound. In other cases, like '<span class="Spanish">b</span>' pronounced softly, with a slight friction between the lower and upper lips.</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">y</td>
-            <td class="pron_cell"><u>y</u>es, but with more friction</td>
-        </tr>
-        <tr>
-            <td class="Spanish char_cell">z</td>
-            <td class="pron_cell"><u>s</u>ad, when followed by <span class="Spanish">a</span>, <span class="Spanish">o</span>, or <span class="Spanish">u</span>, or at the end of a word. (Only in the Americas.)</td>
-        </tr>
+  <hr>
+  
+  <h2><a name="Greek"></a>German</h2>
 
-	</table>
+  <hr>
+  
+  <h2><a name="Greek"></a>Russian</h2>
 
-  <ul>
-      <li>
-          The <span class="Spanish">u</span> in the combination <span class="Spanish">gu</span> is silent. When it is pronounced, it is written with a diaresis, as in <span class="Spanish">pingu_:ino</span>.
-      </li>
-      <li>
-      	Consonants <span class="Spanish">b</span>, <span class="Spanish">d</span>, and <span class="Spanish">g</span> are pronounced very softly within a breath group.
-      </li>
-      <li>
-      	Consonants <span class="Spanish">c</span>, <span class="Spanish">p</span>, and <span class="Spanish">t</span> at the beginning of words, when pronounced, are never followed by the puff of air heard in English.
-      </li>
-  </ul>
+  <hr>
+  
+  <h2><a name="Greek"></a>Hebrew</h2>
+
+  <hr>
+  
+  <h2><a name="Greek"></a>Arabic</h2>
+
+  <hr>
+  
+  <h2><a name="Greek"></a>Chinese</h2>
 
 
 	<script src="../Applications/FlashCards/js/bin/LatinWords.js"></script>
 	<script src="../Applications/FlashCards/js/bin/SpanishWords.js"></script>
+  <script src="../../../../js/node_modules/jquery/dist/jquery.js"></script>
+  <script src="../../../../js/node_modules/popper.js/dist/popper.js"></script>
+  <script src="../../../../js/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 	<script>
     // replace _ with macrons in Latin text 
 	var latinElements = document.getElementsByClassName('Latin');
 	for (var i = 0; i < latinElements.length; i++)
 		latinElements[i].textContent = _(latinElements[i].textContent);
-	// replace _ substrings with appropriate characters in Spanish text
+	// replace substrings with appropriate characters in Spanish text
 	var spanishElements = document.getElementsByClassName('Spanish');
 	for (var i = 0; i < spanishElements.length; i++)
 		spanishElements[i].textContent = sp(spanishElements[i].textContent);
