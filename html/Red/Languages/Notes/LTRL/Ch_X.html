@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+  	@font-face {
+			font-family: brill;
+			src: url('../fonts/brill_roman_2.06_051.ttf');
+		}
+		.Latin {
+			font-family: brill;
+			font-size: 24px;
+		}
+		.English {
+			font-size: 16px;
+		}
+		.exercise {
+			margin-bottom: 10px;
+		}
+		.exercise>ul {
+			list-style-type: none;
+		}
+  </style>
+</head>
+<body>
+
+<h1><i>Learn to Read Latin</i> Chapter X</h1>
+
+<h2>Exercises</h2>
+
+<h3>A</h3>
+<ol class="exercises">
+	<li class="exercise">
+		<ul>
+			<li class="Latin"></li>
+			<li class="English"></li>
+		</ul>
+	</li>
+</ol>
+
+<h3>B</h3>
+<ol class="exercises">
+	<li class="exercise">
+		<ul>
+			<li class="English"></li>
+			<li class="Latin"></li>
+		</ul>
+	</li>
+</ol>
+
+<!-- replace _ with macrons in Latin Text -->
+	<script>
+		var _ = (str) => str.replace(/_/g, String.fromCharCode(0x304));
+  	var LatinElements = document.getElementsByClassName('Latin');
+  	for (var i = 0; i < LatinElements.length; i++)
+  		LatinElements[i].textContent = _(LatinElements[i].textContent);
+  </script>
+</body>
+</html>
